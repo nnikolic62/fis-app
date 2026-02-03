@@ -2,9 +2,20 @@ import Menu from "@repo/ui/menu";
 
 const menuItems = [
   {
-    id: "home",
-    label: "Home",
-    href: "/",
+    id: "evidencija",
+    label: "Maticna evidencija",
+    children: [
+      {
+        id: "home",
+        label: "Pocetna",
+        href: "/kadrovi",
+      },
+      {
+        id: "prijava",
+        label: "Prijava kadrova",
+        href: "/kadrovi/prijava",
+      }
+    ],
   },
 ];
 

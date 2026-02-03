@@ -65,49 +65,56 @@ function MenuItemComponent({
     }
   }
 
+  const classes = `
+    w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left
+    transition-all duration-150 group no-underline
+    ${depth > 0 ? "ml-4 pl-4 border-l-2 border-slate-100" : ""}
+    ${isActive 
+      ? "bg-blue-50 text-blue-700 font-medium" 
+      : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+    }
+  `;
+
+  const content = (
+    <>
+      {item.icon && (
+        <span className={`
+          shrink-0 w-5 h-5 flex items-center justify-center
+          ${isActive ? "text-blue-600" : "text-slate-400 group-hover:text-slate-600"}
+        `}>
+          {item.icon}
+        </span>
+      )}
+      {!collapsed && (
+        <>
+          <span className="flex-1 text-sm truncate">{item.label}</span>
+          {item.badge && (
+            <span className="px-2 py-0.5 text-xs font-medium bg-orange-100 text-orange-700 rounded-full">
+              {item.badge}
+            </span>
+          )}
+          {hasChildren && <ChevronIcon expanded={expanded} />}
+        </>
+      )}
+    </>
+  );
+
   return (
     <div>
-      <button
-        type="button"
-        onClick={handleClick}
-        className={`
-          w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left
-          transition-all duration-150 group
-          ${depth > 0 ? "ml-4 pl-4 border-l-2 border-slate-100" : ""}
-          ${isActive 
-            ? "bg-blue-50 text-blue-700 font-medium" 
-            : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-          }
-        `}
-        title={collapsed ? item.label : undefined}
-      >
-        {/* Icon */}
-        {item.icon && (
-          <span className={`
-            shrink-0 w-5 h-5 flex items-center justify-center
-            ${isActive ? "text-blue-600" : "text-slate-400 group-hover:text-slate-600"}
-          `}>
-            {item.icon}
-          </span>
-        )}
-
-        {/* Label */}
-        {!collapsed && (
-          <>
-            <span className="flex-1 text-sm truncate">{item.label}</span>
-
-            {/* Badge */}
-            {item.badge && (
-              <span className="px-2 py-0.5 text-xs font-medium bg-orange-100 text-orange-700 rounded-full">
-                {item.badge}
-              </span>
-            )}
-
-            {/* Chevron for expandable items */}
-            {hasChildren && <ChevronIcon expanded={expanded} />}
-          </>
-        )}
-      </button>
+      {item.href && !hasChildren ? (
+        <a href={item.href} className={classes}>
+          {content}
+        </a>
+      ) : (
+        <button
+          type="button"
+          onClick={handleClick}
+          className={classes}
+          title={collapsed ? item.label : undefined}
+        >
+          {content}
+        </button>
+      )}
 
       {/* Children */}
       {hasChildren && expanded && !collapsed && (
