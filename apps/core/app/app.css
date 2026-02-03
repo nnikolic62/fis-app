@@ -3,6 +3,8 @@
 
 /* Scan UI package for classes */
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
+/* Scan modules for classes */
+@source "../../../modules/**/*.{ts,tsx}";
 
 html,
 body {

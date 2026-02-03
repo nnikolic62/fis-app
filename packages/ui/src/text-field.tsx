@@ -41,7 +41,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     },
     ref
   ) => {
-    const inputId = id || `textfield-${React.useId()}`;
+    const generatedId = React.useId();
+    const inputId = id || `textfield-${generatedId}`;
     const hasError = !!error;
 
     // Size styles
