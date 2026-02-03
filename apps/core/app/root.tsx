@@ -11,7 +11,6 @@ import { initReactI18next } from "react-i18next";
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import { Header } from "./features/header";
 
 i18next.use(initReactI18next).init({
   lng: "en",
@@ -32,7 +31,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <title>FIS</title>
       </head>
       <body>
-        <Header />
+        {/* <Header /> */}
         {children}
         <ScrollRestoration />
         <Scripts />
