@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "main": "./index.js",
     "private": true,
-    "devDependencies": {
-      "tailwindcss": "^3.4.0"
+    "exports": {
+        "./theme.css": "./src/theme.css"
     }
   }

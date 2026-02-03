@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@import "@repo/tailwind-config/theme.css";
+
+/* Scan UI package for classes */
+@source "../../../packages/ui/src/**/*.{ts,tsx}";
+
+html,
+body {
+  @apply bg-white dark:bg-amber-50;
+
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
