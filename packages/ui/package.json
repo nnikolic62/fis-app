@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    ".": "./src/index.ts",
+    "./sidebar/*": "./src/sidebar/*.tsx",
     "./*": "./src/*.tsx"
   },
   "scripts": {
