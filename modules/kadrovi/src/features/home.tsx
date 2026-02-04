@@ -1,6 +1,7 @@
 import { Badge } from "@repo/ui/badge";
 import { Card } from "@repo/ui/card";
 import { Button } from "@repo/ui/button";
+import { CaretRightIcon } from "@phosphor-icons/react";
 
 import { QuickActionButton } from "../components/QuickActionButton";
 import { StatCard } from "../components/StatCard";
@@ -89,7 +90,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                {/* <ChevronRight size={16} className="text-slate-300 group-hover:text-slate-500" /> */}
+                <CaretRightIcon size={16} className="text-slate-300 group-hover:text-slate-500"/>
               </div>
             ))}
           </div>

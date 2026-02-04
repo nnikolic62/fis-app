@@ -2,6 +2,8 @@
 
 import { useMemo } from "react";
 import type { ReactNode } from "react";
+import { CaretRightIcon } from "@phosphor-icons/react/CaretRight";
+import { CaretDownIcon } from "@phosphor-icons/react/CaretDown";
 
 export type AppSidebarNavItem = {
   title: string;
@@ -22,18 +24,30 @@ export type SidebarItemProps = {
 };
 
 function normalizeChildren(children: AppSidebarNavItem["children"]) {
-  return children.map((child) => (typeof child === "string" ? { label: child } : child));
+  return children.map((child) =>
+    typeof child === "string" ? { label: child } : child,
+  );
 }
 
-export function SidebarItem({ item, isOpen, toggleOpen, onSelect }: SidebarItemProps) {
-  const children = useMemo(() => normalizeChildren(item.children), [item.children]);
+export function SidebarItem({
+  item,
+  isOpen,
+  toggleOpen,
+  onSelect,
+}: SidebarItemProps) {
+  const children = useMemo(
+    () => normalizeChildren(item.children),
+    [item.children],
+  );
 
   return (
     <div className="mb-1">
       <button
         onClick={toggleOpen}
         className={`cursor-pointer w-full flex items-center justify-between px-4 py-3 text-sm font-medium transition-colors rounded-lg ${
-          isOpen ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-100"
+          isOpen
+            ? "bg-blue-50 text-blue-700"
+            : "text-slate-600 hover:bg-slate-100"
         }`}
         type="button"
       >
@@ -41,9 +55,9 @@ export function SidebarItem({ item, isOpen, toggleOpen, onSelect }: SidebarItemP
           {item.icon}
           <span>{item.title}</span>
         </div>
+        {isOpen ? <CaretDownIcon size={16} /> : <CaretRightIcon size={16} />}
       </button>
-  
-      <div
+<div
         className={`
           grid transition-[grid-template-rows] duration-300 ease-in-out
           ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}
@@ -61,8 +75,7 @@ export function SidebarItem({ item, isOpen, toggleOpen, onSelect }: SidebarItemP
                 {child.label}
               </button>
             ))}
-          </div>
-        </div>
+          </div>        </div>
       </div>
     </div>
   );

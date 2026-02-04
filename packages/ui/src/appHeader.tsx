@@ -1,6 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { ListIcon } from "@phosphor-icons/react/List";
+import { Button } from "./button";
 
 export type AppHeaderProps = {
   appTitle: string;
@@ -31,27 +33,14 @@ export function AppHeader({
     <header className="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-6 shrink-0">
       <div className="flex items-center gap-4 min-w-0">
         {showSidebarToggle ? (
-          <button
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={onToggleSidebar}
-            className="lg:hidden p-2 text-slate-500 hover:bg-slate-100 rounded-md"
-            type="button"
-            aria-label="Toggle sidebar"
+            className="lg:hidden p-2"
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M4 6h16" />
-              <path d="M4 12h16" />
-              <path d="M4 18h16" />
-            </svg>
-          </button>
+            <ListIcon size={20} />
+          </Button>
         ) : null}
 
         <div className="flex items-center gap-3 shrink-0">
@@ -88,7 +77,9 @@ export function AppHeader({
         <div className="flex items-center gap-3 pl-4 border-l border-slate-200">
           <div className="text-right hidden sm:block">
             <p className="text-sm font-medium">{userName}</p>
-            {userRole ? <p className="text-xs text-slate-500">{userRole}</p> : null}
+            {userRole ? (
+              <p className="text-xs text-slate-500">{userRole}</p>
+            ) : null}
           </div>
           <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold border border-blue-200">
             {userInitials}
