@@ -11,7 +11,6 @@ export type AppSidebarProps = {
   topOffsetClassName?: string;
   className?: string;
   onNavigate?: SidebarItemOnSelect;
-  activeRouteId?: string;
 };
 
 export function AppSidebar({
@@ -20,7 +19,6 @@ export function AppSidebar({
   topOffsetClassName = "top-16",
   className = "",
   onNavigate,
-  activeRouteId,
 }: AppSidebarProps) {
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({});
 
@@ -43,7 +41,6 @@ export function AppSidebar({
               isOpen={Boolean(openMenus[item.id])}
               toggleOpen={() => toggleMenu(item.id)}
               onNavigate={onNavigate}
-              activeRouteId={activeRouteId}
             />
           ))}
         </div>
