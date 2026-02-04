@@ -57,10 +57,10 @@ export function SidebarItem({
         </div>
         {isOpen ? <CaretDownIcon size={16} /> : <CaretRightIcon size={16} />}
       </button>
-<div
+      <div
         className={`
           grid transition-[grid-template-rows] duration-300 ease-in-out
-          ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}
+          ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}
         `}
       >
         <div className="overflow-hidden">
@@ -70,12 +70,18 @@ export function SidebarItem({
                 key={child.id ?? child.label}
                 className="cursor-pointer block w-full text-left px-2 py-1.5 text-sm text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
                 type="button"
-                onClick={() => onSelect?.({ sectionTitle: item.title, itemLabel: child.label })}
+                onClick={() =>
+                  onSelect?.({
+                    sectionTitle: item.title,
+                    itemLabel: child.label,
+                  })
+                }
               >
                 {child.label}
               </button>
             ))}
-          </div>        </div>
+          </div>{" "}
+        </div>
       </div>
     </div>
   );
