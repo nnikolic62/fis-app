@@ -5,7 +5,7 @@ import { Button } from "@repo/ui/button";
 import { QuickActionButton } from "../components/QuickActionButton";
 import { StatCard } from "../components/StatCard";
 
-export default function Test() {
+export default function Home() {
   return (
     <div className="max-w-7xl mx-auto">
       <h1 className="text-2xl font-bold text-slate-800 mb-6">

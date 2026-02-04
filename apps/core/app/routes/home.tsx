@@ -1,5 +1,5 @@
 import { Button } from "@repo/ui/button";
-import { TextField } from "@repo/ui/text-field";
+import { Input } from "@repo/ui/input";
 import { PersonIcon } from "@repo/ui/icons";
 import { Link } from "react-router";
 
@@ -12,7 +12,7 @@ export default function Home() {
         <Link to="/kadrovi">Kadrovi</Link>
         <Button variant="secondary" size="lg">Home</Button>
       </div>
-      <TextField leftIcon={<PersonIcon />} label="Name" placeholder="Enter  your name" variant="default" />
+      <Input leftIcon={<PersonIcon />} label="Name" placeholder="Enter  your name" variant="default" />
     </div>
   );
 }

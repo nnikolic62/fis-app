@@ -10,12 +10,11 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
-    "@radix-ui/react-icons": "^1.3.2",
+    "@kadrovi/module": "*",
     "@react-router/fs-routes": "^7.13.0",
     "@react-router/node": "^7.13.0",
     "@react-router/serve": "^7.13.0",
     "@repo/tailwind-config": "*",
-    "@kadrovi/module": "*",
     "@tanstack/react-query": "^5.90.20",
     "@tanstack/react-table": "^8.21.3",
     "i18next": "^25.8.0",
@@ -25,8 +24,7 @@
     "react-dom": "^19.2.4",
     "react-hook-form": "^7.71.1",
     "react-i18next": "^16.5.4",
-    "react-router": "^7.13.0",
-    "zod": "^4.3.6"
+    "react-router": "^7.13.0"
   },
   "devDependencies": {
     "@react-router/dev": "^7.13.0",

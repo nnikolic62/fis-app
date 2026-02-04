@@ -1,33 +1,81 @@
-// --- 3. SELECT (PADAJUĆI MENI) ---
-interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+import * as SelectPrimitive from '@radix-ui/react-select';
+// import { Check, ChevronDown } from 'lucide-react';
+import React from 'react';
+import { CheckIcon, ChevronDownIcon } from './icons';
+
+interface SelectProps {
   label?: string;
-  options: string[];
+  options: Array<{ value: string; label: string }>;
   error?: string;
+  className?: string;
+  placeholder?: string;
+  value?: string;
+  onValueChange?: (value: string) => void;
+  disabled?: boolean;
 }
 
-export const Select: React.FC<SelectProps> = ({ label, options, error, className = '', ...props }) => {
+export const Select: React.FC<SelectProps> = ({ 
+  label, 
+  options, 
+  error, 
+  className = '', 
+  placeholder = 'Izaberite...',
+  value,
+  onValueChange,
+  disabled 
+}) => {
   return (
-    <div className={`space-y-1.5 w-full ${className}`}>
+    <div className={`space-y-1.5 ${className}`}>
       {label && (
-        <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+        <label className="text-xs w-full font-semibold text-slate-500 uppercase tracking-wide">
           {label}
         </label>
       )}
-      <div className="relative">
-        <select
+      
+      <SelectPrimitive.Root value={value} onValueChange={onValueChange} disabled={disabled}>
+        <SelectPrimitive.Trigger
           className={`
-            w-full px-3 py-2.5 bg-slate-50 border rounded-lg text-sm text-slate-900 appearance-none 
-            focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all
-            ${error ? 'border-red-500' : 'border-slate-200'}
+            input px-3 py-2.5 text-sm cursor-pointer
+            inline-flex items-center justify-between
+            ${error ? 'input-error' : ''}
+            ${disabled ? 'input-disabled' : ''}
           `}
-          {...props}
         >
-          {options.map((opt, idx) => (
-            <option key={idx} value={opt}>{opt}</option>
-          ))}
-        </select>
-        {/* <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" /> */}
-      </div>
+          <SelectPrimitive.Value placeholder={placeholder} />
+          <SelectPrimitive.Icon>
+            <ChevronDownIcon />
+          </SelectPrimitive.Icon>
+        </SelectPrimitive.Trigger>
+
+        <SelectPrimitive.Portal>
+          <SelectPrimitive.Content
+            className="select-content max-h-96 z-50"
+            position="popper"
+            sideOffset={5}
+          >
+            <SelectPrimitive.Viewport className="p-1">
+              {options.map((option) => (
+                <SelectPrimitive.Item
+                  key={option.value}
+                  value={option.value}
+                  className={`
+                    relative flex items-center px-8 py-2 text-sm text-slate-900 rounded
+                    cursor-pointer outline-none select-none
+                    data-highlighted:bg-brand-50 data-highlighted:text-brand-900
+                    data-disabled:opacity-50 data-disabled:pointer-events-none
+                  `}
+                >
+                  <SelectPrimitive.ItemIndicator className="absolute left-2">
+                    <CheckIcon />
+                  </SelectPrimitive.ItemIndicator>
+                  <SelectPrimitive.ItemText>{option.label}</SelectPrimitive.ItemText>
+                </SelectPrimitive.Item>
+              ))}
+            </SelectPrimitive.Viewport>
+          </SelectPrimitive.Content>
+        </SelectPrimitive.Portal>
+      </SelectPrimitive.Root>
+
       {error && <p className="text-xs text-red-600 mt-1">{error}</p>}
     </div>
   );

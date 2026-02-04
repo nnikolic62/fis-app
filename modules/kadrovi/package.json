@@ -9,18 +9,21 @@
     "preview": "vite preview"
   },
   "exports": {
-    "./test": "./src/features/test.tsx",
+    "./home": "./src/features/home.tsx",
     "./root-layout": "./src/features/root-layout.tsx"
   },
   "dependencies": {
+    "@repo/tailwind-config": "*",
+    "@repo/ui": "*",
+    "@repo/types": "*",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "@repo/tailwind-config": "*",
-    "@repo/ui": "*"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
     "@eslint/js": "^9.39.1",
+    "@repo/eslint-config": "*",
+    "@repo/api-client": "*",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
