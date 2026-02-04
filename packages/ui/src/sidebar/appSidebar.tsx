@@ -2,15 +2,16 @@
 
 import { useState } from "react";
 
-import type { SidebarItemOnSelect } from "./sidebarItem";
-import { SidebarItem, type AppSidebarNavItem } from "./sidebarItem";
+import { SidebarItem } from "./sidebarItem";
+import type { AppSidebarNavItem, SidebarItemOnSelect } from "./types";
 
 export type AppSidebarProps = {
   items: AppSidebarNavItem[];
   open: boolean;
   topOffsetClassName?: string;
   className?: string;
-  onSelect?: SidebarItemOnSelect;
+  onNavigate?: SidebarItemOnSelect;
+  activeRouteId?: string;
 };
 
 export function AppSidebar({
@@ -18,12 +19,13 @@ export function AppSidebar({
   open,
   topOffsetClassName = "top-16",
   className = "",
-  onSelect,
+  onNavigate,
+  activeRouteId,
 }: AppSidebarProps) {
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({});
 
-  const toggleMenu = (title: string) => {
-    setOpenMenus((prev) => ({ ...prev, [title]: !prev[title] }));
+  const toggleMenu = (id: string) => {
+    setOpenMenus((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   return (
@@ -36,11 +38,12 @@ export function AppSidebar({
         <div className="mb-6">
           {items.map((item) => (
             <SidebarItem
-              key={item.title}
+              key={item.id}
               item={item}
-              isOpen={Boolean(openMenus[item.title])}
-              toggleOpen={() => toggleMenu(item.title)}
-              onSelect={onSelect}
+              isOpen={Boolean(openMenus[item.id])}
+              toggleOpen={() => toggleMenu(item.id)}
+              onNavigate={onNavigate}
+              activeRouteId={activeRouteId}
             />
           ))}
         </div>
@@ -49,4 +52,4 @@ export function AppSidebar({
   );
 }
 
-export type { AppSidebarNavItem };
+export type { AppSidebarNavItem, SidebarItemOnSelect };

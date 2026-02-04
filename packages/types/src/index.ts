@@ -16,4 +16,3 @@ export type PaginationResponse<T> = {
     hasPreviousPage: boolean;
     hasNextPage: boolean;
   }
-  
