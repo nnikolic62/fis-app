@@ -4,8 +4,10 @@ import {
   AppSidebar,
   type AppSidebarNavItem,
 } from "@repo/ui/sidebar/appSidebar";
+import { UsersIcon } from "@phosphor-icons/react/Users";
 import { AppHeader } from "@repo/ui/appHeader";
 import { NavRouteItem } from "@repo/ui/sidebar/types";
+import { GraduationCapIcon, FileTextIcon, ChartLineIcon, EyeIcon, DatabaseIcon, GitBranchIcon } from "@phosphor-icons/react";
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -18,6 +20,7 @@ export default function RootLayout({ children, onNavigate }: RootLayoutProps) {
       {
         id: "maticna-evidencija",
         label: "Matična Evidencija",
+        icon: <UsersIcon size={20}/>,
         children: [
           { id: "prijava", label: "Prijava/Odjava radnika", to: "/kadrovi/prijava" },
           { id: "podaci", label: "Podaci o radniku", to: "/kadrovi/podaci" },
@@ -29,6 +32,7 @@ export default function RootLayout({ children, onNavigate }: RootLayoutProps) {
       {
         id: "obrazovanje",
         label: "Obrazovanje",
+        icon: <GraduationCapIcon size={20}/>,
         children: [
           { id: "zavrsene-skole", label: "Završene škole", to: "/kadrovi/zavrsene-skole" },
           { id: "sertifikati", label: "Sertifikati i Kursevi", to: "/kadrovi/sertifikati" },
@@ -38,6 +42,7 @@ export default function RootLayout({ children, onNavigate }: RootLayoutProps) {
       {
         id: "sistematizacija",
         label: "Sistematizacija",
+        icon: <GitBranchIcon size={20}/>,
         children: [
           { id: "org-struktura", label: "Organizaciona struktura (Stablo)", to: "/kadrovi/org-struktura" },
           { id: "radna-mesta-oj", label: "Radna mesta po OJ", to: "/kadrovi/radna-mesta-oj" },
@@ -49,6 +54,7 @@ export default function RootLayout({ children, onNavigate }: RootLayoutProps) {
       {
         id: "resenja",
         label: "Rešenja",
+        icon: <FileTextIcon size={20}/>,
         children: [
           { id: "resenja-rasporedivanje", label: "Rešenja o raspoređivanju", to: "/kadrovi/resenja-rasporedivanje" },
           { id: "resenja-odsustvo", label: "Rešenja o odsustvu", to: "/kadrovi/resenja-odsustvo" },
@@ -59,6 +65,7 @@ export default function RootLayout({ children, onNavigate }: RootLayoutProps) {
       {
         id: "izvestaji",
         label: "Izveštaji",
+        icon: <ChartLineIcon size={20}/>,
         children: [
           { id: "maticna-knjiga", label: "Matična knjiga radnika", to: "/kadrovi/maticna-knjiga" },
           { id: "spiskovi-zaposlenih", label: "Spiskovi zaposlenih", to: "/kadrovi/spiskovi-zaposlenih" },
@@ -69,6 +76,7 @@ export default function RootLayout({ children, onNavigate }: RootLayoutProps) {
       {
         id: "pregledi",
         label: "Pregledi",
+        icon: <EyeIcon size={20}/>,
         children: [
           { id: "pregled-radnik", label: "Pregled po radniku", to: "/kadrovi/pregled-radnik" },
           { id: "pregled-oj", label: "Pregled po OJ", to: "/kadrovi/pregled-oj" },
@@ -78,6 +86,7 @@ export default function RootLayout({ children, onNavigate }: RootLayoutProps) {
       {
         id: "sifarnici",
         label: "Šifarnici",
+        icon: <DatabaseIcon size={20}/>,
         children: [
           { id: "sifarnik-skola", label: "Šifarnik škola", to: "/kadrovi/sifarnik-skola" },
           { id: "sifarnik-mesta", label: "Šifarnik mesta", to: "/kadrovi/sifarnik-mesta" },
