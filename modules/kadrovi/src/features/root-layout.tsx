@@ -1,11 +1,11 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
 
-import { AppHeader } from "@repo/ui/appHeader";
 import {
   AppSidebar,
   type AppSidebarNavItem,
 } from "@repo/ui/sidebar/appSidebar";
-import type { NavRouteItem } from "@repo/ui/sidebar/types";
+import { AppHeader } from "@repo/ui/appHeader";
+import { NavRouteItem } from "@repo/ui/sidebar/types";
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -89,36 +89,32 @@ export default function RootLayout({ children, onNavigate }: RootLayoutProps) {
     [],
   );
 
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  // const [activeRouteId, setActiveRouteId] = useState<string | undefined>();
-
   const handleNavigate = (item: NavRouteItem) => {
     // setActiveRouteId(item.id); 
     onNavigate(item.to);
   };
 
+
   return (
     <div className="h-screen bg-slate-50 font-sans text-slate-900 flex flex-col">
-      <AppHeader
-        appTitle="Kadrovska"
-        userName="Marko Marković"
-        userRole="Administrator"
-        userInitials="MM"
-        onToggleSidebar={() => setSidebarOpen((v) => !v)}
-        searchPlaceholder="Pretraži radnika, rešenje ili izveštaj (Ctrl+K)..."
-      />
 
-      <div className="flex flex-1 min-h-0">
-        <AppSidebar 
-          items={navigationItems} 
-          open={sidebarOpen}
-          onNavigate={handleNavigate}
-          // activeRouteId={activeRouteId}
+
+      <div className="h-screen bg-slate-50 font-sans text-slate-900 flex flex-col">
+        <AppHeader
+          appTitle="Kadrovska"
+          userName="Marko Marković"
+          userRole="Administrator"
+          userInitials="MM"
+          searchPlaceholder="Pretraži radnika, rešenje ili izveštaj (Ctrl+K)..."
         />
 
-        <main className="flex-1 overflow-y-auto p-6 lg:p-8 min-w-0">
-          {children}
-        </main>
+        <div className="flex flex-1 min-h-0">
+          <AppSidebar items={navigationItems} open={true} onNavigate={handleNavigate}/>
+
+          <main className="flex-1 overflow-y-auto p-6 lg:p-8 min-w-0">
+            {children}
+          </main>
+        </div>
       </div>
     </div>
   );

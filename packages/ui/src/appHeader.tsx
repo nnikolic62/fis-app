@@ -1,7 +1,6 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { ListIcon } from "@phosphor-icons/react/List";
 import { Button } from "./button";
 import { Input } from "./input";
 import { BellIcon } from "@phosphor-icons/react/Bell";
@@ -12,8 +11,6 @@ export type AppHeaderProps = {
   userName: string;
   userRole?: string;
   userInitials: string;
-  onToggleSidebar?: () => void;
-  showSidebarToggle?: boolean;
   showSearch?: boolean;
   searchPlaceholder?: string;
   leftSlot?: ReactNode;
@@ -25,8 +22,6 @@ export function AppHeader({
   userName,
   userRole,
   userInitials,
-  onToggleSidebar,
-  showSidebarToggle = true,
   showSearch = true,
   searchPlaceholder = "Pretraži...",
   leftSlot,
@@ -35,16 +30,6 @@ export function AppHeader({
   return (
     <header className="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-6 shrink-0">
       <div className="flex items-center gap-4 min-w-0">
-        {showSidebarToggle ? (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onToggleSidebar}
-            className="lg:hidden p-2"
-          >
-            <ListIcon size={20} />
-          </Button>
-        ) : null}
 
         <div className="flex items-center gap-3 shrink-0">
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">

@@ -8,9 +8,13 @@ import {
 } from "react-router";
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
+import { initApiClient } from "@repo/api-client";
 
 import type { Route } from "./+types/root";
 import "./app.css";
+
+// Initialize API client
+initApiClient(import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api");
 
 i18next.use(initReactI18next).init({
   lng: "en",
@@ -31,7 +35,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <title>FIS</title>
       </head>
       <body>
-        {/* <Header /> */}
         {children}
         <ScrollRestoration />
         <Scripts />
