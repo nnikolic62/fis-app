@@ -3,6 +3,9 @@
 import type { ReactNode } from "react";
 import { ListIcon } from "@phosphor-icons/react/List";
 import { Button } from "./button";
+import { Input } from "./input";
+import { BellIcon } from "@phosphor-icons/react/Bell";
+import { MagnifyingGlassIcon } from "@phosphor-icons/react/MagnifyingGlass";
 
 export type AppHeaderProps = {
   appTitle: string;
@@ -53,11 +56,12 @@ export function AppHeader({
         {leftSlot}
 
         {showSearch ? (
-          <div className="relative hidden md:block w-96 max-w-full">
-            <input
-              type="text"
+          <div className="hidden md:block w-xs max-w-full ml-15">
+            <Input
+              fullWidth
               placeholder={searchPlaceholder}
-              className="w-full pl-4 pr-4 py-2 bg-slate-100 border-none rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+              leftIcon={<MagnifyingGlassIcon size={18} />}
+              className="bg-slate-100 border-none focus:bg-white focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:border-blue-600"
             />
           </div>
         ) : null}
@@ -66,13 +70,14 @@ export function AppHeader({
       <div className="flex items-center gap-4">
         {rightSlot}
 
-        <button
-          className="relative p-2 text-slate-500 hover:bg-slate-100 rounded-full"
-          type="button"
-          aria-label="Notifications"
+        <Button
+          variant="ghost"
+          size="sm"
+          className="relative rounded-full w-10 h-10 p-0"
         >
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
-        </button>
+          <BellIcon size={20} />
+          <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full"></span>
+        </Button>
 
         <div className="flex items-center gap-3 pl-4 border-l border-slate-200">
           <div className="text-right hidden sm:block">

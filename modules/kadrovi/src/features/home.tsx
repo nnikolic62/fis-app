@@ -1,7 +1,7 @@
 import { Badge } from "@repo/ui/badge";
 import { Card } from "@repo/ui/card";
 import { Button } from "@repo/ui/button";
-import { CaretRightIcon } from "@phosphor-icons/react";
+import { BriefcaseIcon, CaretRightIcon, ChartBarIcon, ClockIcon, FileTextIcon, MagnifyingGlassIcon, PlusIcon, UsersIcon, WarningCircleIcon } from "@phosphor-icons/react";
 
 import { QuickActionButton } from "../components/QuickActionButton";
 import { StatCard } from "../components/StatCard";
@@ -19,11 +19,15 @@ export default function Home() {
           title="Ukupno Zaposlenih"
           value="1,248"
           badge={<Badge variant="success">+12 ovog meseca</Badge>}
+          icon={<UsersIcon size={24} />}
+          iconColorClass="bg-brand-50 text-brand-600"
         />
         <StatCard
           title="Ističe Ugovor (30 dana)"
           value="8"
           badge={<Badge variant="warning">Potrebna akcija</Badge>}
+          icon={<WarningCircleIcon size={24} />}
+          iconColorClass="bg-orange-50 text-orange-600"
         />
         <StatCard
           title="Na Odsustvu Danas"
@@ -33,6 +37,8 @@ export default function Home() {
               3 bolovanja, 39 odmora
             </span>
           }
+          icon={<BriefcaseIcon size={24} />}
+          iconColorClass="bg-purple-50 text-purple-600"
         />
         <StatCard
           title="Neproknjižena Rešenja"
@@ -42,17 +48,19 @@ export default function Home() {
               Pregledaj listu
             </span>
           }
+          icon={<FileTextIcon size={24} />}
+          iconColorClass="bg-red-50 text-red-600"
         />
       </div>
 
       {/* QUICK ACCESS (Tačka 8 - Opciono, ali najbitnije) */}
       <h2 className="text-lg font-semibold text-slate-700 mb-4">Brze Akcije</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-8">
-        <QuickActionButton label="Nova Prijava" accent="blue" />
-        <QuickActionButton label="Novo Rešenje" accent="emerald" />
-        <QuickActionButton label="Unos Odsustva" accent="purple" />
-        <QuickActionButton label="Izveštaj Stanja" accent="amber" />
-        <QuickActionButton label="Traži Radnika" accent="slate" />
+        <QuickActionButton icon={<PlusIcon size={20} />} label="Nova Prijava" accent="blue" />
+        <QuickActionButton icon={<FileTextIcon size={20} />} label="Novo Rešenje" accent="emerald" />
+        <QuickActionButton icon={<ClockIcon size={20} />} label="Unos Odsustva" accent="purple" />
+        <QuickActionButton icon={<ChartBarIcon size={20} />} label="Izveštaj Stanja" accent="amber" />
+        <QuickActionButton icon={<MagnifyingGlassIcon size={20} />} label="Traži Radnika" accent="slate" />
       </div>
 
       {/* TWO COLUMNS LAYOUT BELOW */}
@@ -90,7 +98,10 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <CaretRightIcon size={16} className="text-slate-300 group-hover:text-slate-500"/>
+                <CaretRightIcon
+                  size={16}
+                  className="text-slate-300 group-hover:text-slate-500"
+                />
               </div>
             ))}
           </div>
