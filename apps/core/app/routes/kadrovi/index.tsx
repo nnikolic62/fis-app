@@ -1,9 +1,2 @@
-import Home from "@kadrovi/module/home";
+export { default } from "@kadrovi/module/pages/index";
 
-export default function KadroviIndex() {
-  return (
-    <div className="p-6">
-      <Home />
-    </div>
-  );
-}

@@ -1,12 +1,8 @@
-import { type RouteConfig, route, index } from "@react-router/dev/routes";
-
-const kadroviRoutes = route("kadrovi", "routes/kadrovi/route.tsx", [
-    index("routes/kadrovi/index.tsx"),
-    route("prijava", "routes/kadrovi/prijava.tsx"),
-  ]);
+import { type RouteConfig, index, route } from "@react-router/dev/routes";
+import kadroviRoutes from "@kadrovi/module/routes";
 
 export default [
   index("routes/_index.tsx"),
   route("home", "routes/home.tsx"),
-  kadroviRoutes,
+  ...kadroviRoutes,
 ] satisfies RouteConfig;

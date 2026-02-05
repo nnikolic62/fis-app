@@ -1,39 +1,30 @@
 {
-  "name": "@kadrovi/module",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "exports": {
-    "./home": "./src/features/home.tsx",
-    "./root-layout": "./src/features/root-layout.tsx"
-  },
-  "dependencies": {
-    "@repo/tailwind-config": "*",
-    "@repo/ui": "*",
-    "@repo/types": "*",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "zod": "^4.3.6"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@repo/eslint-config": "*",
-    "@repo/api-client": "*",
-    "@types/node": "^24.10.1",
-    "@types/react": "^19.2.5",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react-swc": "^4.2.2",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "globals": "^16.5.0",
-    "typescript": "~5.9.3",
-    "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
-  }
+    "name": "@kadrovi/module",
+    "private": true,
+    "exports": {
+        "./root-layout": "./src/layouts/root-layout.tsx",
+        "./pages/index": "./src/pages/home.tsx",
+        "./pages/prijava": "./src/pages/prijava.tsx",
+        "./routes": "./src/routes.ts"
+    },
+    "peerDependencies": {
+        "react": "^19.2.4",
+        "react-dom": "^19.2.4",
+        "react-router": "^7.13.0"
+    },
+    "dependencies": {
+        "@repo/api-client": "*",
+        "@repo/tailwind-config": "*",
+        "@repo/types": "*",
+        "@repo/ui": "*",
+        "@phosphor-icons/react": "^2.1.10"
+    },
+    "devDependencies": {
+        "@repo/eslint-config": "*",
+        "@repo/typescript-config": "*",
+        "@types/node": "^22.15.3",
+        "@types/react": "19.2.2",
+        "@types/react-dom": "19.2.2",
+        "eslint": "^9.39.1"
+    }
 }

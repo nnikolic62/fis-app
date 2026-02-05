@@ -6,13 +6,9 @@ import {
 } from "@repo/ui/sidebar/appSidebar";
 import { AppHeader } from "@repo/ui/appHeader";
 import { NavRouteItem } from "@repo/ui/sidebar/types";
+import { Outlet, useLocation, useNavigate } from "react-router";
 
-type RootLayoutProps = {
-  children: ReactNode;
-  onNavigate: (url: string) => void;
-};
-
-export default function RootLayout({ children, onNavigate }: RootLayoutProps) {
+export default function RootLayout() {
   const navigationItems = useMemo<AppSidebarNavItem[]>(
     () => [
       {
@@ -88,10 +84,11 @@ export default function RootLayout({ children, onNavigate }: RootLayoutProps) {
     ],
     [],
   );
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleNavigate = (item: NavRouteItem) => {
-    // setActiveRouteId(item.id); 
-    onNavigate(item.to);
+    navigate(item.to, { replace: location.pathname === item.to });
   };
 
 
@@ -112,7 +109,8 @@ export default function RootLayout({ children, onNavigate }: RootLayoutProps) {
           <AppSidebar items={navigationItems} open={true} onNavigate={handleNavigate}/>
 
           <main className="flex-1 overflow-y-auto p-6 lg:p-8 min-w-0">
-            {children}
+            <Outlet />
+            {/* {children} */}
           </main>
         </div>
       </div>

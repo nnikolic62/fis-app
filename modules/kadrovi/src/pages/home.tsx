@@ -16,7 +16,7 @@ export default function Home() {
       {/* QUICK STATS */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <StatCard
-          title="Ukupno Zaposlenih"
+          title="Ukupno Zaposlenihs"
           value="1,248"
           badge={<Badge variant="success">+12 ovog meseca</Badge>}
           icon={<UsersIcon size={24} />}
