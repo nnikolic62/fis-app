@@ -1,0 +1,17 @@
+{
+  "name": "@repo/i18n-config",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./locales/*": "./src/locales/*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "i18next": "^25.8.0",
+    "react-i18next": "^16.5.4",
+    "i18next-browser-languagedetector": "^8.0.0"
+  }
+}

@@ -1,51 +1,73 @@
 import { Badge } from "@repo/ui/badge";
 import { Card } from "@repo/ui/card";
 import { Button } from "@repo/ui/button";
-import { BriefcaseIcon, CaretRightIcon, ChartBarIcon, ClockIcon, FileTextIcon, MagnifyingGlassIcon, PlusIcon, UsersIcon, WarningCircleIcon } from "@phosphor-icons/react";
+import { useTranslation } from "@repo/i18n-config";
+import {
+  BriefcaseIcon,
+  CaretRightIcon,
+  ChartBarIcon,
+  ClockIcon,
+  FileTextIcon,
+  MagnifyingGlassIcon,
+  PlusIcon,
+  UsersIcon,
+  WarningCircleIcon,
+} from "@phosphor-icons/react";
 
 import { QuickActionButton } from "../components/QuickActionButton";
 import { StatCard } from "../components/StatCard";
 
+// Initialize module translations
+import "../i18n";
+
 export default function Home() {
+  // Use both common namespace (from shared) and kadrovi namespace (module-specific)
+  const { t } = useTranslation("kadrovi");
+
   return (
     <div className="max-w-7xl mx-auto">
       <h1 className="text-2xl font-bold text-slate-800 mb-6">
-        Pregled sistema
+        {t("common:app.name")}
       </h1>
 
       {/* QUICK STATS */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <StatCard
-          title="Ukupno Zaposlenihs"
+          title={t("stats.totalEmployees")}
           value="1,248"
-          badge={<Badge variant="success">+12 ovog meseca</Badge>}
+          badge={
+            <Badge variant="success">
+              {t("stats.thisMonth", { count: 12 })}
+            </Badge>
+          }
           icon={<UsersIcon size={24} />}
           iconColorClass="bg-brand-50 text-brand-600"
         />
         <StatCard
-          title="Ističe Ugovor (30 dana)"
+          title={t("stats.contractExpires")}
           value="8"
-          badge={<Badge variant="warning">Potrebna akcija</Badge>}
+          badge={<Badge variant="warning">{t("stats.actionRequired")}</Badge>}
           icon={<WarningCircleIcon size={24} />}
           iconColorClass="bg-orange-50 text-orange-600"
         />
         <StatCard
-          title="Na Odsustvu Danas"
+          title={t("stats.onLeaveToday")}
           value="42"
           badge={
             <span className="text-xs text-slate-400">
-              3 bolovanja, 39 odmora
+              {t("stats.sickLeave", { count: 3 })},{" "}
+              {t("stats.vacation", { count: 39 })}
             </span>
           }
           icon={<BriefcaseIcon size={24} />}
           iconColorClass="bg-purple-50 text-purple-600"
         />
         <StatCard
-          title="Neproknjižena Rešenja"
+          title={t("stats.unpublishedDecisions")}
           value="15"
           badge={
             <span className="text-xs text-brand-600 cursor-pointer hover:underline">
-              Pregledaj listu
+              {t("stats.reviewList")}
             </span>
           }
           icon={<FileTextIcon size={24} />}
@@ -53,28 +75,50 @@ export default function Home() {
         />
       </div>
 
-      {/* QUICK ACCESS (Tačka 8 - Opciono, ali najbitnije) */}
-      <h2 className="text-lg font-semibold text-slate-700 mb-4">Brze Akcije</h2>
+      {/* QUICK ACCESS */}
+      <h2 className="text-lg font-semibold text-slate-700 mb-4">
+        {t("home.quickActions")}
+      </h2>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-8">
-        <QuickActionButton icon={<PlusIcon size={20} />} label="Nova Prijava" accent="blue" />
-        <QuickActionButton icon={<FileTextIcon size={20} />} label="Novo Rešenje" accent="emerald" />
-        <QuickActionButton icon={<ClockIcon size={20} />} label="Unos Odsustva" accent="purple" />
-        <QuickActionButton icon={<ChartBarIcon size={20} />} label="Izveštaj Stanja" accent="amber" />
-        <QuickActionButton icon={<MagnifyingGlassIcon size={20} />} label="Traži Radnika" accent="slate" />
+        <QuickActionButton
+          icon={<PlusIcon size={20} />}
+          label={t("quickActions.newRegistration")}
+          accent="blue"
+        />
+        <QuickActionButton
+          icon={<FileTextIcon size={20} />}
+          label={t("quickActions.newDecision")}
+          accent="emerald"
+        />
+        <QuickActionButton
+          icon={<ClockIcon size={20} />}
+          label={t("quickActions.enterLeave")}
+          accent="purple"
+        />
+        <QuickActionButton
+          icon={<ChartBarIcon size={20} />}
+          label={t("quickActions.statusReport")}
+          accent="amber"
+        />
+        <QuickActionButton
+          icon={<MagnifyingGlassIcon size={20} />}
+          label={t("quickActions.searchEmployee")}
+          accent="slate"
+        />
       </div>
 
       {/* TWO COLUMNS LAYOUT BELOW */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Recently Accessed */}
         <Card
-          title="Nedavno otvoreni radnici"
+          title={t("home.recentEmployees")}
           action={
             <Button
               variant="ghost"
               size="sm"
               className="text-brand-600 h-auto p-0 hover:bg-transparent hover:underline"
             >
-              Vidi sve
+              {t("home.viewAll")}
             </Button>
           }
           noPadding
@@ -108,7 +152,7 @@ export default function Home() {
         </Card>
 
         {/* Tasks / Notifications */}
-        <Card title="Zadaci i Obaveštenja">
+        <Card title={t("home.tasksNotifications")}>
           <div className="space-y-4">
             <div className="flex gap-3">
               <div className="mt-1 min-w-2 h-2 rounded-full bg-red-500"></div>

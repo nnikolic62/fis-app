@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { CaretRightIcon } from "@phosphor-icons/react/CaretRight";
 import { CaretDownIcon } from "@phosphor-icons/react/CaretDown";
 import type { AppSidebarNavItem, SidebarItemOnSelect } from "./types";
+import { useTranslation } from "@repo/i18n-config";
 
 export type SidebarItemProps = {
   item: AppSidebarNavItem;
@@ -20,6 +21,7 @@ export function SidebarItem({
   onNavigate,
 }: SidebarItemProps) {
   const hasChildren = useMemo(() => item.children && item.children.length > 0, [item.children]);
+  const { t } = useTranslation("kadrovi");
 
   return (
     <div className="mb-1">
@@ -34,12 +36,12 @@ export function SidebarItem({
         type="button"
       >
         <div className="flex items-center gap-3">
-          {item.icon && (
+          {item.icon && ( 
             <span className="w-5 h-5 flex items-center justify-center">
               {item.icon}
             </span>
           )}
-          <span>{item.label}</span>
+          <span>{t(item.labelKey)}</span>
         </div>
         {isOpen ? <CaretDownIcon size={16} /> : <CaretRightIcon size={16} />}
       </button>
@@ -61,7 +63,7 @@ export function SidebarItem({
                   onNavigate?.(child)
                 }
               >
-                {child.label}
+                {t(child.labelKey)}
               </button>
             ))}
           </div>

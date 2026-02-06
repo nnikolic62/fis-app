@@ -1,0 +1,90 @@
+{
+  "module": {
+    "name": "Kadrovi",
+    "description": "Upravljanje kadrovima"
+  },
+  "home": {
+    "title": "Pregled sistema",
+    "quickActions": "Brze Akcije",
+    "recentEmployees": "Nedavno otvoreni radnici",
+    "viewAll": "Vidi sve",
+    "tasksNotifications": "Zadaci i Obaveštenja"
+  },
+  "stats": {
+    "totalEmployees": "Ukupno Zaposlenih",
+    "thisMonth": "+{{count}} ovog meseca",
+    "contractExpires": "Ističe Ugovor (30 dana)",
+    "actionRequired": "Potrebna akcija",
+    "onLeaveToday": "Na Odsustvu Danas",
+    "sickLeave": "{{count}} bolovanja",
+    "vacation": "{{count}} odmora",
+    "unpublishedDecisions": "Neproknjižena Rešenja",
+    "reviewList": "Pregledaj listu"
+  },
+  "quickActions": {
+    "newRegistration": "Nova Prijava",
+    "newDecision": "Novo Rešenje",
+    "enterLeave": "Unos Odsustva",
+    "statusReport": "Izveštaj Stanja",
+    "searchEmployee": "Traži Radnika"
+  },
+  "employee": {
+    "name": "Ime i prezime",
+    "position": "Pozicija",
+    "department": "Organizaciona jedinica",
+    "status": "Status",
+    "active": "Aktivan",
+    "inactive": "Neaktivan"
+  },
+  "nav": {
+    "maticna-evidencija": {
+      "label": "Matična Evidencija",
+      "prijava": "Prijava/Odjava radnika",
+      "podaci": "Podaci o radniku",
+      "dokumenti": "Dokumenti i Imovina",
+      "radni-staz": "Radni staž (Prethodni/Priznati)",
+      "pregled-evidencije": "Pregled evidencije"
+    },
+    "obrazovanje": {
+      "label": "Obrazovanje",
+      "zavrsene-skole": "Završene škole",
+      "sertifikati": "Sertifikati i Kursevi",
+      "posebna-znanja": "Posebna znanja i veštine"
+    },
+    "sistematizacija": {
+      "label": "Sistematizacija",
+      "org-struktura": "Organizaciona struktura (Stablo)",
+      "radna-mesta-oj": "Radna mesta po OJ",
+      "struktura-radnih-mesta": "Struktura radnih mesta",
+      "opisi-poslova": "Opisi poslova i Uslovi",
+      "cost-centri": "Cost Centri"
+    },
+    "resenja": {
+      "label": "Rešenja",
+      "resenja-rasporedivanje": "Rešenja o raspoređivanju",
+      "resenja-odsustvo": "Rešenja o odsustvu",
+      "godisnji-odmori": "Godišnji odmori",
+      "masovni-unos": "Masovni unos rešenja"
+    },
+    "izvestaji": {
+      "label": "Izveštaji",
+      "maticna-knjiga": "Matična knjiga radnika",
+      "spiskovi-zaposlenih": "Spiskovi zaposlenih",
+      "izvestaj-odsustva": "Izveštaj o odsustvima",
+      "statistika-obrazovanja": "Statistika obrazovanja"
+    },
+    "pregledi": {
+      "label": "Pregledi",
+      "pregled-radnik": "Pregled po radniku",
+      "pregled-oj": "Pregled po OJ",
+      "istorija-promena": "Istorija promena"
+    },
+    "sifarnici": {
+      "label": "Šifarnici",
+      "sifarnik-skola": "Šifarnik škola",
+      "sifarnik-mesta": "Šifarnik mesta",
+      "banke": "Banke",
+      "vrste-odsustva": "Vrste odsustva"
+    }
+  }
+}

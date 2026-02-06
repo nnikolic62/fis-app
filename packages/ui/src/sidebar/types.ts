@@ -2,14 +2,14 @@ import { ReactNode } from "react";
 
 export type NavRouteItem = {
     id: string;
-    label: string;
+    labelKey: string;
     to: string;
     icon?: ReactNode;
   };
   
   export type AppSidebarNavItem = {
     id: string;
-    label: string;
+    labelKey: string;
     icon?: ReactNode;
     to?: string;
     children?: NavRouteItem[];

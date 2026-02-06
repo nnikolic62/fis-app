@@ -6,8 +6,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-import i18next from "i18next";
-import { initReactI18next } from "react-i18next";
+import { initI18n, LANGUAGES, i18n } from "@repo/i18n-config";
 import { initApiClient } from "@repo/api-client";
 
 import type { Route } from "./+types/root";
@@ -16,17 +15,12 @@ import "./app.css";
 // Initialize API client
 initApiClient(import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api");
 
-i18next.use(initReactI18next).init({
-  lng: "en",
-  fallbackLng: "en",
-  interpolation: {
-    escapeValue: false,
-  },
-});
+// Initialize i18n with Serbian Latin as default
+initI18n(LANGUAGES.SR_LATN);
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang={i18n.language}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

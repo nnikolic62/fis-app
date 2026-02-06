@@ -1,0 +1,90 @@
+{
+  "module": {
+    "name": "Кадрови",
+    "description": "Управљање кадровима"
+  },
+  "home": {
+    "title": "Преглед система",
+    "quickActions": "Брзе Акције",
+    "recentEmployees": "Недавно отворени радници",
+    "viewAll": "Види све",
+    "tasksNotifications": "Задаци и Обавештења"
+  },
+  "stats": {
+    "totalEmployees": "Укупно Запослених",
+    "thisMonth": "+{{count}} овог месеца",
+    "contractExpires": "Истиче Уговор (30 дана)",
+    "actionRequired": "Потребна акција",
+    "onLeaveToday": "На Одсуству Данас",
+    "sickLeave": "{{count}} боловања",
+    "vacation": "{{count}} одмора",
+    "unpublishedDecisions": "Непрокњижена Решења",
+    "reviewList": "Прегледај листу"
+  },
+  "quickActions": {
+    "newRegistration": "Нова Пријава",
+    "newDecision": "Ново Решење",
+    "enterLeave": "Унос Одсуства",
+    "statusReport": "Извештај Стања",
+    "searchEmployee": "Тражи Радника"
+  },
+  "employee": {
+    "name": "Име и презиме",
+    "position": "Позиција",
+    "department": "Организациона јединица",
+    "status": "Статус",
+    "active": "Активан",
+    "inactive": "Неактиван"
+  },
+  "nav": {
+    "maticna-evidencija": {
+      "label": "Матична Евиденција",
+      "prijava": "Пријава/Одјава радника",
+      "podaci": "Подаци о раднику",
+      "dokumenti": "Документи и Имовина",
+      "radni-staz": "Радни стаж (Претходни/Признати)",
+      "pregled-evidencije": "Преглед евиденције"
+    },
+    "obrazovanje": {
+      "label": "Образовање",
+      "zavrsene-skole": "Завршене школе",
+      "sertifikati": "Сертификати и Курсеви",
+      "posebna-znanja": "Посебна знања и вештине"
+    },
+    "sistematizacija": {
+      "label": "Систематизација",
+      "org-struktura": "Организациона структура (Стабло)",
+      "radna-mesta-oj": "Радна места по ОЈ",
+      "struktura-radnih-mesta": "Структура радних места",
+      "opisi-poslova": "Описи послова и Услови",
+      "cost-centri": "Cost Центри"
+    },
+    "resenja": {
+      "label": "Решења",
+      "resenja-rasporedivanje": "Решења о распоређивању",
+      "resenja-odsustvo": "Решења о одсуству",
+      "godisnji-odmori": "Годишњи одмори",
+      "masovni-unos": "Масовни унос решења"
+    },
+    "izvestaji": {
+      "label": "Извештаји",
+      "maticna-knjiga": "Матична књига радника",
+      "spiskovi-zaposlenih": "Спискови запослених",
+      "izvestaj-odsustva": "Извештај о одсуствима",
+      "statistika-obrazovanja": "Статистика образовања"
+    },
+    "pregledi": {
+      "label": "Прегледи",
+      "pregled-radnik": "Преглед по раднику",
+      "pregled-oj": "Преглед по ОЈ",
+      "istorija-promena": "Историја промена"
+    },
+    "sifarnici": {
+      "label": "Шифарници",
+      "sifarnik-skola": "Шифарник школа",
+      "sifarnik-mesta": "Шифарник места",
+      "banke": "Банке",
+      "vrste-odsustva": "Врсте одсуства"
+    }
+  }
+}

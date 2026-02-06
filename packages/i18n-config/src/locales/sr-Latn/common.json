@@ -1,0 +1,56 @@
+{
+  "app": {
+    "name": "FIS Aplikacija",
+    "loading": "Učitavanje...",
+    "error": "Greška"
+  },
+  "navigation": {
+    "home": "Početna",
+    "dashboard": "Kontrolna tabla",
+    "settings": "Podešavanja",
+    "profile": "Profil",
+    "logout": "Odjava"
+  },
+  "common": {
+    "save": "Sačuvaj",
+    "cancel": "Otkaži",
+    "delete": "Obriši",
+    "edit": "Izmeni",
+    "add": "Dodaj",
+    "search": "Pretraga",
+    "filter": "Filter",
+    "clear": "Obriši",
+    "confirm": "Potvrdi",
+    "back": "Nazad",
+    "next": "Dalje",
+    "previous": "Prethodno",
+    "submit": "Pošalji",
+    "reset": "Resetuj",
+    "close": "Zatvori",
+    "yes": "Da",
+    "no": "Ne",
+    "loading": "Učitavanje...",
+    "noData": "Nema podataka",
+    "actions": "Akcije"
+  },
+  "validation": {
+    "required": "Ovo polje je obavezno",
+    "email": "Unesite ispravnu e-mail adresu",
+    "minLength": "Minimalna dužina je {{min}} karaktera",
+    "maxLength": "Maksimalna dužina je {{max}} karaktera",
+    "invalid": "Neispravna vrednost"
+  },
+  "messages": {
+    "saveSuccess": "Uspešno sačuvano",
+    "saveError": "Greška pri čuvanju",
+    "deleteSuccess": "Uspešno obrisano",
+    "deleteError": "Greška pri brisanju",
+    "confirmDelete": "Da li ste sigurni da želite da obrišete?"
+  },
+  "language": {
+    "select": "Izaberite jezik",
+    "serbian_cyrillic": "Srpski (ćirilica)",
+    "serbian_latin": "Srpski (latinica)"
+  }
+}
+
