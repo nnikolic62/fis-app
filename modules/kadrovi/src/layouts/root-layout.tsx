@@ -1,24 +1,17 @@
-import { useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import { useState, type CSSProperties, type ReactNode } from "react";
 
 import {
   AppSidebar,
-  type AppSidebarNavItem,
 } from "@repo/ui/sidebar/appSidebar";
-import { UsersIcon } from "@phosphor-icons/react/Users";
 import { AppHeader } from "@repo/ui/appHeader";
 import { Button } from "@repo/ui/button";
 import { NavRouteItem } from "@repo/ui/sidebar/types";
 import {
   CaretLeftIcon,
   CaretRightIcon,
-  GraduationCapIcon,
-  FileTextIcon,
-  ChartLineIcon,
-  EyeIcon,
-  DatabaseIcon,
-  GitBranchIcon,
 } from "@phosphor-icons/react";
 import { navigationItems } from "../navigation/config";
+import "../i18n";
 
 type RootLayoutProps = {
   children: ReactNode;
