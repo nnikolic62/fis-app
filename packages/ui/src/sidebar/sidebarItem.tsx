@@ -8,27 +8,40 @@ import { useTranslation } from "@repo/i18n-config";
 
 export type SidebarItemProps = {
   item: AppSidebarNavItem;
+  collapsed: boolean;
   isOpen: boolean;
   toggleOpen: () => void;
+  onCollapsedOpen?: () => void;
   onNavigate?: SidebarItemOnSelect;
 };
 
 
 export function SidebarItem({
   item,
+  collapsed,
   isOpen,
   toggleOpen,
+  onCollapsedOpen,
   onNavigate,
 }: SidebarItemProps) {
   const hasChildren = useMemo(() => item.children && item.children.length > 0, [item.children]);
   const { t } = useTranslation("kadrovi");
-
+const handleClick = () => {
+    if (collapsed) {
+      onCollapsedOpen?.();
+      toggleOpen();
+      return;
+    }
+    toggleOpen();
+  };
   return (
     <div className="mb-1">
       {/* Section header - clickable to expand/collapse */}
       <button
-        onClick={toggleOpen}
-        className={`cursor-pointer w-full flex items-center justify-between px-4 py-3 text-sm font-medium transition-colors rounded-lg ${
+        onClick={handleClick}
+        className={`cursor-pointer w-full flex items-center py-3 text-sm font-medium transition-colors rounded-lg ${
+          collapsed ? "sm:justify-center sm:px-2" : "justify-between px-4"
+        } ${
           isOpen
             ? "bg-blue-50 text-blue-700"
             : "text-slate-600 hover:bg-slate-100"
@@ -41,11 +54,11 @@ export function SidebarItem({
               {item.icon}
             </span>
           )}
-          <span>{t(item.labelKey)}</span>
+          {!collapsed && <span className="whitespace-nowrap truncate">{t(item.labelKey)}</span>}
         </div>
-        {isOpen ? <CaretDownIcon size={16} /> : <CaretRightIcon size={16} />}
+        {!collapsed && (isOpen ? <CaretDownIcon size={16} /> : <CaretRightIcon size={16} />)}
       </button>
-      {hasChildren && (
+      {hasChildren && !collapsed && (
       <div
         className={`
           grid transition-[grid-template-rows] duration-300 ease-in-out
@@ -57,7 +70,7 @@ export function SidebarItem({
             {item.children!.map((child) => (
               <button
                 key={child.id}
-                className="cursor-pointer block w-full text-left px-2 py-1.5 text-sm text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                className="cursor-pointer block w-full text-left px-2 py-1.5 text-sm text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors whitespace-nowrap overflow-hidden text-ellipsis"
                 type="button"
                 onClick={() =>
                   onNavigate?.(child)

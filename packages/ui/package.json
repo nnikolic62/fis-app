@@ -4,7 +4,9 @@
   "type": "module",
   "private": true,
   "exports": {
-    "./sidebar/types": "./src/sidebar/types.ts",
+     "./sidebar/types": "./src/sidebar/types.ts",
+     "./pageHeader/*": "./src/pageHeader/*.tsx",
+      "./newComponents/*": "./src/newComponents/*.tsx",
     "./*": "./src/*.tsx"
   },
   "scripts": {

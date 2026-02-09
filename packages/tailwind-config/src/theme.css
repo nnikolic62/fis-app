@@ -218,7 +218,7 @@
   }
 
   .select-content {
-    @apply overflow-hidden bg-white rounded-lg border border-slate-300 shadow-lg;
+    @apply overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl ring-1 ring-slate-900/5;
   }
 
   .container {

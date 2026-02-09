@@ -2,27 +2,23 @@
 
 import React, { forwardRef } from "react";
 import * as LabelPrimitive from "@radix-ui/react-label";
+import { CalendarBlankIcon } from "@phosphor-icons/react/CalendarBlank";
 
-type InputSize = "sm" | "md" | "lg";
-type InputVariant = "default" | "new" | "filled" | "flushed";
+type DatePickerSize = "sm" | "md" | "lg";
+type DatePickerVariant = "default" | "new" | "filled" | "flushed";
 
-interface InputProps extends Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  "size"
-> {
+interface DatePickerProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
   label?: string;
   helperText?: string;
   error?: string;
-  size?: InputSize;
-  variant?: InputVariant;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
+  size?: DatePickerSize;
+  variant?: DatePickerVariant;
   fullWidth?: boolean;
   wrapperClassName?: string;
   inputClassName?: string;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
+export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   (
     {
       label,
@@ -30,8 +26,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       error,
       size = "md",
       variant = "default",
-      leftIcon,
-      rightIcon,
       fullWidth = false,
       wrapperClassName = "",
       inputClassName = "",
@@ -41,33 +35,33 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       className,
       ...rest
     },
-    ref,
+    ref
   ) => {
     const generatedId = React.useId();
-    const inputId = id || `textfield-${generatedId}`;
+    const inputId = id || `datepicker-${generatedId}`;
     const hasError = !!error;
 
     // Size styles
-    const sizeStyles: Record<InputSize, string> = {
+    const sizeStyles: Record<DatePickerSize, string> = {
       sm: "px-3 py-1.5 text-xs",
       md: "px-4 py-2.5 text-sm",
       lg: "px-5 py-3.5 text-base",
     };
 
-    const iconSizeStyles: Record<InputSize, string> = {
-      sm: "w-3.5 h-3.5",
-      md: "w-4 h-4",
-      lg: "w-5 h-5",
+    const iconSizeStyles: Record<DatePickerSize, number> = {
+      sm: 14,
+      md: 16,
+      lg: 18,
     };
 
-    const labelSizeStyles: Record<InputSize, string> = {
+    const labelSizeStyles: Record<DatePickerSize, string> = {
       sm: "text-xs",
       md: "text-sm",
       lg: "text-base",
     };
 
-    // Variant styles (uses .input from theme.css as base)
-    const variantStyles: Record<InputVariant, string> = {
+    // Variant styles matching Input component
+    const variantStyles: Record<DatePickerVariant, string> = {
       default: "input",
       new: `input bg-slate-100 border-none focus:bg-white focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:border-blue-600 transition-all duration-200`,
       filled: `
@@ -82,18 +76,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       `,
     };
 
-    // Error styles override (uses .input-error from theme.css)
+    // Error styles
     const errorStyles = hasError ? "input-error" : "";
 
-    // Disabled styles (uses .input-disabled from theme.css)
+    // Disabled styles
     const disabledStyles = disabled ? "input-disabled" : "";
-
-    // Base input styles (already in .input class)
-    const baseInputStyles = "";
-
-    // Icon padding adjustments
-    const leftPadding = leftIcon ? "pl-10" : "";
-    const rightPadding = rightIcon ? "pr-10" : "";
 
     return (
       <div
@@ -122,26 +109,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           </LabelPrimitive.Root>
         )}
 
-        {/* Input wrapper for icons */}
+        {/* Input wrapper with icon */}
         <div className="relative">
-          {/* Left Icon */}
-          {leftIcon && (
-            <div
-              className={`
-                absolute left-3 top-1/2 -translate-y-1/2 
-                text-slate-400 pointer-events-none
-                ${iconSizeStyles[size]}
-                ${hasError ? "text-red-400" : ""}
-              `}
-            >
-              {leftIcon}
-            </div>
-          )}
-
-          {/* Input */}
           <input
             ref={ref}
             id={inputId}
+            type="date"
             disabled={disabled}
             required={required}
             aria-invalid={hasError}
@@ -153,39 +126,34 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                   : undefined
             }
             className={`
-              ${baseInputStyles}
               ${sizeStyles[size]}
               ${variantStyles[variant]}
               ${errorStyles}
               ${disabledStyles}
-              ${leftPadding}
-              ${rightPadding}
+              pr-10
               ${inputClassName}
               ${className || ""}
             `}
             {...rest}
           />
 
-          {/* Right Icon */}
-          {rightIcon && (
-            <div
-              className={`
-                absolute right-3 top-1/2 -translate-y-1/2 
-                text-slate-400 pointer-events-none
-                ${iconSizeStyles[size]}
-                ${hasError ? "text-red-400" : ""}
-              `}
-            >
-              {rightIcon}
-            </div>
-          )}
+          {/* Calendar Icon */}
+          <div
+            className={`
+              absolute right-3 top-1/2 -translate-y-1/2 
+              text-slate-400 pointer-events-none
+              ${hasError ? "text-red-400" : ""}
+            `}
+          >
+            <CalendarBlankIcon size={iconSizeStyles[size]} />
+          </div>
         </div>
 
         {/* Error Message */}
         {hasError && (
           <p
             id={`${inputId}-error`}
-            className="pl-1 text-xs text-red-600 flex items-center gap-1"
+            className="pl-1 text-xs text-red-600 flex items-center gap-1 mt-1"
             role="alert"
           >
             <svg
@@ -211,7 +179,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
       </div>
     );
-  },
+  }
 );
 
-Input.displayName = "Input";
+DatePicker.displayName = "DatePicker";

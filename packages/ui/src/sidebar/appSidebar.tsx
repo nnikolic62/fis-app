@@ -11,6 +11,7 @@ export type AppSidebarProps = {
   topOffsetClassName?: string;
   className?: string;
   onNavigate?: SidebarItemOnSelect;
+  onRequestOpen?: () => void;
 };
 
 export function AppSidebar({
@@ -19,8 +20,10 @@ export function AppSidebar({
   topOffsetClassName = "top-16",
   className = "",
   onNavigate,
+  onRequestOpen,
 }: AppSidebarProps) {
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({});
+  const isCollapsed = !open;
 
   const toggleMenu = (id: string) => {
     setOpenMenus((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -28,18 +31,20 @@ export function AppSidebar({
 
   return (
     <aside
-      className={`bg-white border-r border-slate-200 fixed left-0 ${topOffsetClassName} bottom-0 z-50 w-60 transition-transform duration-300 transform ${
+      className={`bg-white border-r border-slate-200 fixed left-0 ${topOffsetClassName} bottom-0 z-50 w-60 transition-transform sm:transition-[width,transform] duration-300 ease-in-out transform ${
         open ? "translate-x-0" : "-translate-x-full"
-      } lg:static lg:translate-x-0 overflow-y-auto shrink-0 ${className}`}
+      } sm:translate-x-0 ${open ? "sm:w-60" : "sm:w-16"} lg:static overflow-y-auto shrink-0 ${className}`}
     >
-      <nav className="p-4 space-y-1">
+      <nav className={`p-4 space-y-1 ${isCollapsed ? "sm:px-2" : ""}`}>
         <div className="mb-6">
           {items.map((item) => (
             <SidebarItem
               key={item.id}
               item={item}
+              collapsed={isCollapsed}
               isOpen={Boolean(openMenus[item.id])}
               toggleOpen={() => toggleMenu(item.id)}
+              onCollapsedOpen={onRequestOpen}
               onNavigate={onNavigate}
             />
           ))}
