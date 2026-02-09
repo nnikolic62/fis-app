@@ -117,6 +117,7 @@ export function FormDatePicker({
   disabled,
   min,
   max,
+  required,
   ...rest
 }: FormDatePickerProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -151,13 +152,26 @@ export function FormDatePicker({
   const formatInputValue = (rawValue: string) => {
     if (rawValue.includes(DATE_SEPARATOR)) {
       const sanitized = rawValue.replace(/[^\d.]/g, "");
-      const parts = sanitized
-        .split(".")
-        .slice(0, 3)
-        .map((part, index) => {
-          const limit = index < 2 ? 2 : 4;
-          return part.slice(0, limit);
-        });
+      const rawParts = sanitized.split(".");
+      const day = (rawParts[0] ?? "").slice(0, 2);
+      let month = (rawParts[1] ?? "").slice(0, 2);
+      let year = (rawParts[2] ?? "").slice(0, 4);
+
+      if (!rawParts[2] && (rawParts[1] ?? "").length > 2) {
+        month = (rawParts[1] ?? "").slice(0, 2);
+        year = (rawParts[1] ?? "").slice(2, 6);
+      }
+
+      const parts: string[] = [];
+      if (day) {
+        parts.push(day);
+      }
+      if (rawParts.length > 1) {
+        parts.push(month);
+      }
+      if (rawParts.length > 2 || year) {
+        parts.push(year);
+      }
 
       return parts.join(".");
     }
@@ -310,7 +324,13 @@ export function FormDatePicker({
   return (
     <div className={containerClassName} ref={containerRef}>
       {hasLabel ? (
-        <FormLabel label={label} htmlFor={inputId} />
+        <FormLabel
+          label={label}
+          htmlFor={inputId}
+          className={labelClassName}
+          required={Boolean(required)}
+          disabled={disabled}
+        />
       ) : null}
       <div className="relative" ref={triggerRef}>
         <input
