@@ -11,7 +11,7 @@ export interface PageHeaderProps {
 
 export const PageHeader: React.FC<PageHeaderProps> = ({ title, subtitle, actions, backAction }) => {
   return (
-    <header className="bg-white border-b border-slate-200 fixed top-16 left-0 right-0 sm:left-[var(--sidebar-offset)] z-40 px-6 py-4 shadow-sm">
+    <header className="bg-white border-b border-slate-200 fixed top-16 left-0 right-0 sm:left-(--sidebar-offset) z-40 px-6 py-4 shadow-sm">
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center gap-4">
           {backAction && (

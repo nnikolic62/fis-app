@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 
-export const RadnikSchema = z.object({
+export const radnikSchema = z.object({
     radBr: z.string().length(6, "Polje može imati maksimalno 6 karaktera.").min(1, "Obavezno"),
     organizacionaJedinica: z.string().length(12, "Polje može imati maksimalno 12 karaktera.").optional(),
     preizme: z.string().length(100, "Polje može imati maksimalno 100 karaktera.").min(1, "Obavezno"),
@@ -46,4 +46,4 @@ export const RadnikSchema = z.object({
 });
 
 
-export type Radnik = z.infer<typeof RadnikSchema>;
+export type Radnik = z.infer<typeof radnikSchema>;

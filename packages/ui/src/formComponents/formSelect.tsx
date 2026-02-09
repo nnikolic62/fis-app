@@ -4,6 +4,7 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { CaretDownIcon } from "@phosphor-icons/react/CaretDown";
 import { CheckIcon } from "@phosphor-icons/react/Check";
 import React from "react";
+import { FormLabel } from "./FormLabel";
 
 type FormSelectOption = {
   value: string;
@@ -38,20 +39,12 @@ export function FormSelect({
   const generatedId = React.useId();
   const selectId = id ?? `form-select-${generatedId}`;
   const hasLabel = label !== undefined;
-  const isBlankLabel = label === "";
   const selectSpacing = hasLabel ? "mt-1" : "";
 
   return (
     <div className={containerClassName}>
       {hasLabel ? (
-        <label
-          htmlFor={selectId}
-          className={`block text-sm font-medium text-gray-700 ${
-            isBlankLabel ? "invisible" : ""
-          } ${labelClassName}`}
-        >
-          {isBlankLabel ? " " : label}
-        </label>
+        <FormLabel label={label} htmlFor={selectId} />
       ) : null}
       <SelectPrimitive.Root
         value={value}

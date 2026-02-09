@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { useFormContext } from "react-hook-form";
+import { FormLabel } from "./FormLabel";
 
 type FormInputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -8,41 +10,70 @@ type FormInputProps = Omit<
 > & {
   label?: string;
   containerClassName?: string;
-  labelClassName?: string;
   inputClassName?: string;
+  disabled?: boolean;
+  required?: boolean;
 };
 
-export function FormInput({
-  label,
-  containerClassName = "",
-  labelClassName = "",
-  inputClassName = "",
-  id,
-  ...rest
-}: FormInputProps) {
+export const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
+  (
+    {
+      label,
+      containerClassName = "",
+      inputClassName = "",
+      id,
+      disabled = false,
+      required = false,
+      ...rest
+    },
+    ref
+  ) => {
   const generatedId = React.useId();
   const inputId = id ?? `form-input-${generatedId}`;
   const hasLabel = label !== undefined;
-  const isBlankLabel = label === "";
   const inputSpacing = hasLabel ? "mt-1" : "";
+  const { formState: { errors } } = useFormContext();
+  
+  const fieldName = rest.name;
+  const fieldError = fieldName && typeof fieldName === 'string' ? errors[fieldName] : undefined;
 
   return (
     <div className={containerClassName}>
       {hasLabel ? (
-        <label
+        <FormLabel
           htmlFor={inputId}
-          className={`block text-sm font-medium text-gray-700 ${
-            isBlankLabel ? "invisible" : ""
-          } ${labelClassName}`}
-        >
-          {isBlankLabel ? " " : label}
-        </label>
+          label={label}
+          required={required}
+          disabled={disabled}
+        />
       ) : null}
       <input
         id={inputId}
+        ref={ref}
         className={`${inputSpacing} block w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-0 placeholder:text-slate-400 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 ${inputClassName}`}
+        disabled={disabled}
         {...rest}
       />
+      {fieldError && (
+          <p
+            id={`${inputId}-error`}
+            className="pl-1 text-xs text-red-600 flex items-center gap-1"
+            role="alert"
+          >
+            <svg
+              className="w-3.5 h-3.5 shrink-0"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                clipRule="evenodd"
+              />
+            </svg>
+            {fieldError.message as string}
+          </p>
+        )}
     </div>
   );
-}
+});

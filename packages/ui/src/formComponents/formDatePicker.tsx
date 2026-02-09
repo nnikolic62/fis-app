@@ -11,6 +11,7 @@ import { createPortal } from "react-dom";
 import { CalendarBlankIcon } from "@phosphor-icons/react/CalendarBlank";
 import { CaretLeftIcon } from "@phosphor-icons/react/CaretLeft";
 import { CaretRightIcon } from "@phosphor-icons/react/CaretRight";
+import { FormLabel } from "./FormLabel";
 
 type FormDatePickerProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -304,20 +305,12 @@ export function FormDatePicker({
     a.getDate() === b.getDate();
 
   const hasLabel = label !== undefined;
-  const isBlankLabel = label === "";
   const inputSpacing = hasLabel ? "mt-1" : "";
 
   return (
     <div className={containerClassName} ref={containerRef}>
       {hasLabel ? (
-        <label
-          htmlFor={inputId}
-          className={`block text-sm font-medium text-gray-700 ${
-            isBlankLabel ? "invisible" : ""
-          } ${labelClassName}`}
-        >
-          {isBlankLabel ? " " : label}
-        </label>
+        <FormLabel label={label} htmlFor={inputId} />
       ) : null}
       <div className="relative" ref={triggerRef}>
         <input

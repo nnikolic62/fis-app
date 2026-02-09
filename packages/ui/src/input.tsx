@@ -50,7 +50,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     // Size styles
     const sizeStyles: Record<InputSize, string> = {
       sm: "px-3 py-1.5 text-xs",
-      md: "px-4 py-2.5 text-sm",
+      md: "px-4 py-2 text-sm",
       lg: "px-5 py-3.5 text-base",
     };
 
