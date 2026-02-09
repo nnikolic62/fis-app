@@ -15,7 +15,6 @@ export type SidebarItemProps = {
   onNavigate?: SidebarItemOnSelect;
 };
 
-
 export function SidebarItem({
   item,
   collapsed,
@@ -24,9 +23,12 @@ export function SidebarItem({
   onCollapsedOpen,
   onNavigate,
 }: SidebarItemProps) {
-  const hasChildren = useMemo(() => item.children && item.children.length > 0, [item.children]);
+  const hasChildren = useMemo(
+    () => item.children && item.children.length > 0,
+    [item.children],
+  );
   const { t } = useTranslation("kadrovi");
-const handleClick = () => {
+  const handleClick = () => {
     if (collapsed) {
       onCollapsedOpen?.();
       toggleOpen();
@@ -49,37 +51,40 @@ const handleClick = () => {
         type="button"
       >
         <div className="flex items-center gap-3">
-          {item.icon && ( 
+          {item.icon && (
             <span className="w-5 h-5 flex items-center justify-center">
               {item.icon}
             </span>
           )}
-          {!collapsed && <span className="whitespace-nowrap truncate">{t(item.labelKey)}</span>}
+          {!collapsed && (
+            <span className="whitespace-nowrap truncate">
+              {t(item.labelKey)}
+            </span>
+          )}
         </div>
-        {!collapsed && (isOpen ? <CaretDownIcon size={16} /> : <CaretRightIcon size={16} />)}
+        {!collapsed &&
+          (isOpen ? <CaretDownIcon size={16} /> : <CaretRightIcon size={16} />)}
       </button>
       {hasChildren && !collapsed && (
-      <div
-        className={`
+        <div
+          className={`
           grid transition-[grid-template-rows] duration-300 ease-in-out
           ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}
         `}
-      >
-        <div className="overflow-hidden">
-          <div className="pl-5 pr-2 py-1 space-y-1">
-            {item.children!.map((child) => (
-              <button
-                key={child.id}
-                className="cursor-pointer block w-full text-left px-2 py-1.5 text-sm text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors whitespace-nowrap overflow-hidden text-ellipsis"
-                type="button"
-                onClick={() =>
-                  onNavigate?.(child)
-                }
-              >
-                {t(child.labelKey)}
-              </button>
-            ))}
-          </div>
+        >
+          <div className="overflow-hidden">
+            <div className="pl-5 pr-2 py-1 space-y-1">
+              {item.children!.map((child) => (
+                <button
+                  key={child.id}
+                  className="cursor-pointer block w-full text-left px-2 py-1.5 text-sm text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors whitespace-nowrap overflow-hidden text-ellipsis"
+                  type="button"
+                  onClick={() => onNavigate?.(child)}
+                >
+                  {t(child.labelKey)}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}

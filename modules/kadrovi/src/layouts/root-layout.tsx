@@ -1,24 +1,51 @@
+import { useMemo, useState, type CSSProperties, type ReactNode } from "react";
+
 import {
   AppSidebar,
+  type AppSidebarNavItem,
 } from "@repo/ui/sidebar/appSidebar";
+import { UsersIcon } from "@phosphor-icons/react/Users";
 import { AppHeader } from "@repo/ui/appHeader";
+import { Button } from "@repo/ui/button";
 import { NavRouteItem } from "@repo/ui/sidebar/types";
-import { Outlet, useLocation, useNavigate } from "react-router";
+import {
+  CaretLeftIcon,
+  CaretRightIcon,
+  GraduationCapIcon,
+  FileTextIcon,
+  ChartLineIcon,
+  EyeIcon,
+  DatabaseIcon,
+  GitBranchIcon,
+} from "@phosphor-icons/react";
 import { navigationItems } from "../navigation/config";
 
-export default function RootLayout() {
-  const navigate = useNavigate();
-  const location = useLocation();
+type RootLayoutProps = {
+  children: ReactNode;
+  onNavigate: (url: string) => void;
+};
 
+export default function RootLayout({ children, onNavigate }: RootLayoutProps) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  
   const handleNavigate = (item: NavRouteItem) => {
-    navigate(item.to, { replace: location.pathname === item.to });
+    // setActiveRouteId(item.id);
+    onNavigate(item.to);
   };
 
+  const handleToggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
+
+  const sidebarOffsetStyle = {
+    "--sidebar-offset": isSidebarOpen ? "15rem" : "4rem",
+  } as CSSProperties;
 
   return (
-    <div className="h-screen bg-slate-50 font-sans text-slate-900 flex flex-col">
-
-
+    <div
+      className="h-screen bg-slate-50 font-sans text-slate-900 flex flex-col"
+      style={sidebarOffsetStyle}
+    >
       <div className="h-screen bg-slate-50 font-sans text-slate-900 flex flex-col">
         <AppHeader
           appTitle="Kadrovska"
@@ -26,13 +53,35 @@ export default function RootLayout() {
           userRole="Administrator"
           userInitials="MM"
           searchPlaceholder="Pretraži radnika, rešenje ili izveštaj (Ctrl+K)..."
+          leftSlot={
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="p-2 w-9 h-9"
+              onClick={handleToggleSidebar}
+              aria-label={isSidebarOpen ? "Zatvori sidebar" : "Otvori sidebar"}
+              title={isSidebarOpen ? "Zatvori sidebar" : "Otvori sidebar"}
+            >
+              {isSidebarOpen ? (
+                <CaretLeftIcon size={18} />
+              ) : (
+                <CaretRightIcon size={18} />
+              )}
+            </Button>
+          }
         />
 
         <div className="flex flex-1 min-h-0">
-          <AppSidebar items={navigationItems} open={true} onNavigate={handleNavigate}/>
+          <AppSidebar
+            items={navigationItems}
+            open={isSidebarOpen}
+            onRequestOpen={() => setIsSidebarOpen(true)}
+            onNavigate={handleNavigate}
+          />
 
           <main className="flex-1 overflow-y-auto p-6 lg:p-8 min-w-0">
-            <Outlet />
+            {children}
           </main>
         </div>
       </div>
