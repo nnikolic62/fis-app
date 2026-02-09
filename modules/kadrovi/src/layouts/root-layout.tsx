@@ -10,8 +10,8 @@ import {
   CaretLeftIcon,
   CaretRightIcon,
 } from "@phosphor-icons/react";
-import { navigationItems } from "../navigation/config";
-import "../i18n";
+import { navigationItems } from "../navigation/nav-items";
+import "../config/i18n";
 
 type RootLayoutProps = {
   children: ReactNode;

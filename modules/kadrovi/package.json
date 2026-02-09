@@ -3,9 +3,9 @@
     "private": true,
     "exports": {
         "./root-layout": "./src/layouts/root-layout.tsx",
-        "./pages/index": "./src/pages/home.tsx",
-        "./pages/prijava": "./src/pages/prijava.tsx",
-        "./routes": "./src/routes.ts"
+        "./pages/index": "./src/features/dashboard/page.tsx",
+        "./pages/prijava": "./src/features/prijava/page.tsx",
+        "./routes": "./src/config/routes.ts"
     },
     "peerDependencies": {
         "react": "^19.2.4",
@@ -18,7 +18,8 @@
         "@repo/tailwind-config": "*",
         "@repo/types": "*",
         "@repo/ui": "*",
-        "@phosphor-icons/react": "^2.1.10"
+        "@phosphor-icons/react": "^2.1.10",
+        "zod": "^4.3.6"
     },
     "devDependencies": {
         "@repo/eslint-config": "*",

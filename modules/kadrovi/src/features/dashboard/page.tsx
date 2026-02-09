@@ -14,11 +14,10 @@ import {
   WarningCircleIcon,
 } from "@phosphor-icons/react";
 
-import { QuickActionButton } from "../components/QuickActionButton";
-import { StatCard } from "../components/StatCard";
-
+import { QuickActionButton } from "./components/QuickActionButton";
+import { StatCard } from "./components/StatCard";
 // Initialize module translations
-import "../i18n";
+import "../../config/i18n";
 
 export default function Home() {
   // Use both common namespace (from shared) and kadrovi namespace (module-specific)

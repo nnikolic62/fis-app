@@ -6,7 +6,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-import { initI18n, LANGUAGES, i18n } from "@repo/i18n-config";
+import { initI18n, LANGUAGES } from "@repo/i18n-config";
 import { initApiClient } from "@repo/api-client";
 
 import type { Route } from "./+types/root";
@@ -20,7 +20,7 @@ initI18n(LANGUAGES.SR_LATN);
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={i18n.language}>
+    <html lang={LANGUAGES.SR_LATN}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
