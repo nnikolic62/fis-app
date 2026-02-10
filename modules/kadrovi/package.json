@@ -5,6 +5,7 @@
         "./root-layout": "./src/layouts/root-layout.tsx",
         "./pages/index": "./src/features/dashboard/page.tsx",
         "./pages/prijava": "./src/features/prijava/page.tsx",
+        "./pages/radnik-podaci": "./src/features/radnik-podaci/page.tsx",
         "./routes": "./src/config/routes.ts"
     },
     "peerDependencies": {

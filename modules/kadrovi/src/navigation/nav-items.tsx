@@ -14,7 +14,7 @@ export const navigationItems: AppSidebarNavItem[] = [
     icon: <UsersIcon size={20} />,
     children: [
       { id: "prijava", labelKey: "nav.maticna-evidencija.prijava", to: "/kadrovi/prijava" },
-      { id: "podaci", labelKey: "nav.maticna-evidencija.podaci", to: "/kadrovi/podaci" },
+      { id: "podaci", labelKey: "nav.maticna-evidencija.podaci", to: "/kadrovi/radnik-podaci" },
       { id: "dokumenti", labelKey: "nav.maticna-evidencija.dokumenti", to: "/kadrovi/dokumenti" },
       { id: "radni-staz", labelKey: "nav.maticna-evidencija.radni-staz", to: "/kadrovi/radni-staz" },
       { id: "pregled-evidencije", labelKey: "nav.maticna-evidencija.pregled-evidencije", to: "/kadrovi/pregled-evidencije" },

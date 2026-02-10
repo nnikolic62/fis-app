@@ -11,17 +11,17 @@ export interface PageHeaderProps {
 
 export const PageHeader: React.FC<PageHeaderProps> = ({ title, subtitle, actions, backAction }) => {
   return (
-    <header className="bg-white border-b border-slate-200 fixed top-16 left-0 right-0 sm:left-(--sidebar-offset) z-40 px-6 py-4 shadow-sm">
+    <header className="bg-white border-b border-slate-200 fixed top-16 left-0 right-0 sm:left-(--sidebar-offset) z-40 px-5 py-1 shadow-sm">
       <div className="w-full flex items-center justify-between">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           {backAction && (
-            <Button onClick={backAction} variant="ghost" className="p-2 hover:bg-slate-100 rounded-full text-slate-500 transition-colors">
+            <Button onClick={backAction} variant="ghost" className="p-1 hover:bg-slate-100 rounded-full text-slate-500 transition-colors">
               <ArrowLeftIcon size={20} />
             </Button>
           )}
           <div>
-            <h1 className="text-xl font-bold text-slate-800">{title}</h1>
-            {subtitle && <p className="text-xs text-slate-500">{subtitle}</p>}
+            <h1 className="text-lg font-bold text-slate-800 leading-tight">{title}</h1>
+            {subtitle && <p className="text-sm text-slate-500">{subtitle}</p>}
           </div>
         </div>
         {actions && <div className="flex items-center gap-3">{actions}</div>}

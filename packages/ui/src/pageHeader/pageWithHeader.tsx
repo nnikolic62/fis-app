@@ -21,7 +21,7 @@ export function PageWithHeader({
   const backAction = headerProps.backAction ?? (() => navigate(-1));
 
   return (
-    <div className={`min-h-screen pb-20 pt-16 ${className}`}>
+    <div className={`min-h-screen py-5 ${className}`}>
       <PageHeader {...headerProps} backAction={backAction} />
       <main className={`max-w-7xl mx-auto pt-3 lg:pt-5 ${contentClassName}`}>
         {children}
