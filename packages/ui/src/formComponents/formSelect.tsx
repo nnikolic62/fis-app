@@ -39,12 +39,12 @@ export function FormSelect({
   const generatedId = React.useId();
   const selectId = id ?? `form-select-${generatedId}`;
   const hasLabel = label !== undefined;
-  const selectSpacing = hasLabel ? "mt-1" : "";
+  const selectSpacing = hasLabel ? "mt-0.5" : "";
 
   return (
     <div className={containerClassName}>
       {hasLabel ? (
-        <FormLabel label={label} htmlFor={selectId} />
+        <FormLabel label={label} htmlFor={selectId} className={labelClassName} />
       ) : null}
       <SelectPrimitive.Root
         value={value}
