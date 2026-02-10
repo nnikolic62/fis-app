@@ -86,5 +86,35 @@
       "banke": "Banke",
       "vrste-odsustva": "Vrste odsustva"
     }
-  }
+  },
+    "pregled-radnika": {
+      "prezime": "Prezime",
+      "srednjeSlovo": "Srednje slovo",
+      "ime": "Ime",
+      "srodstvo": "Srodstvo",
+      "datumRodjenja": "Datum rođenja",
+      "licniBroj": "Lični broj",
+      "lbo": "LBO",
+      "devojackoPrezime": "Devojačko prezime",
+      "invalidnost": "Invalidnost",
+      "datumPrijaveNaRzzo": "Datum prijave na RZZO",
+      "statusClanaPorodice": "Status člana porodice",
+      "status": "Status"
+    },
+    "errors": {
+      "ogranicenjePolja": "Polje može imati maksimalno",
+      "karaktera": "karaktera.",
+      "obavezno": "Obavezno",
+      "datumROdjenjaVeciOdDanasnjeg": "Datum rodjenja mora biti manji od sistemskog datuma",
+      "radnikSamoCifre": "Radnik broj mora sadržati samo cifre",
+      "lboSamoCIfre": "LBO mora sadržati samo cifre",
+      "lbo11Cifara": "LBO mora imati tačno 11 cifara",
+      "ogranicenjeCeoBroj": "Mora biti ceo broj",
+      "ogranicenjeBroj": "Mora biti broj",
+      "max4PreDecimale": "Maksimalno 4 cifre pre decimale",
+      "max12PreDecimale": "Maksimalno 12 cifre pre decimale",
+      "dozovljeno2Decimale": "Dozvoljene su najviše 2 decimale",
+      "dozovljeno3Decimale": "Dozvoljene su najviše 3 decimale"
+
+    }
 }

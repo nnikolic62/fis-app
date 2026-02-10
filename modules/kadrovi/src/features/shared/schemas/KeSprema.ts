@@ -1,34 +1,34 @@
 import { z } from "zod";
-
-export const requiredString = (max: number, requiredMsg = "Obavezno") =>
-  z.string().trim().min(1, requiredMsg).max(max, `Polje može imati maksimalno ${max} karaktera.`);
+import { notRequiredString, requiredString } from "./keRadnik";
+import { i18n } from "@repo/i18n-config";
+import { KADROVI_NS } from "../../../config/i18n";
 
 export const optionalInt20 = z
   .number()
-  .int("Mora biti ceo broj.")
+  .int(i18n.t(`${KADROVI_NS}:errors.ogranicenjeCeoBroj`))
   .min(0)
   .max(99)
   .optional();
 
 export const optionalNumber73 = z
   .number()
-  .refine((v) => Number.isFinite(v), "Mora biti broj.")
-  .refine((v) => Math.abs(v) < 10000, "Maksimalno 4 cifre pre decimale.")
+  .refine((v) => Number.isFinite(v), i18n.t(`${KADROVI_NS}:errors.ogranicenjeBroj`))
+  .refine((v) => Math.abs(v) < 10000, i18n.t(`${KADROVI_NS}:errors.max4PreDecimale`))
   .refine((v) => Number.isInteger(v * 1000), "Dozvoljene su najviše 3 decimale.")
   .optional();
 
 export const optionalNumber62 = z
   .number()
-  .refine((v) => Number.isFinite(v), "Mora biti broj.")
-  .refine((v) => Math.abs(v) < 10000, "Maksimalno 4 cifre pre decimale.")
-  .refine((v) => Number.isInteger(v * 100), "Dozvoljene su najviše 2 decimale.")
+  .refine((v) => Number.isFinite(v), i18n.t(`${KADROVI_NS}:errors.ogranicenjeBroj`))
+  .refine((v) => Math.abs(v) < 10000, i18n.t(`${KADROVI_NS}:errors.max4PreDecimale`))
+  .refine((v) => Number.isInteger(v * 100), i18n.t(`${KADROVI_NS}:errors.dozovljeno2Decimale`))
   .optional();
 
 export const number142 = z
   .number()
-  .refine((v) => Number.isFinite(v), "Mora biti broj.")
-  .refine((v) => Math.abs(v) < 1e12, "Previše cifara (max 12 pre decimale).")
-  .refine((v) => Number.isInteger(v * 100), "Dozvoljene su najviše 2 decimale.");
+  .refine((v) => Number.isFinite(v), i18n.t(`${KADROVI_NS}:errors.ogranicenjeBroj`))
+  .refine((v) => Math.abs(v) < 1e12, i18n.t(`${KADROVI_NS}:errors.max12PreDecimale`))
+  .refine((v) => Number.isInteger(v * 100), i18n.t(`${KADROVI_NS}:errors.dozovljeno2Decimale`));
 
 export const optionalNumber142 = number142.optional();
 
@@ -44,11 +44,11 @@ export const keSpremaSchema = z.object({
   startOsnovniMax: optionalNumber62,
   startKorektivniMin: optionalNumber62,
   startKorektivniMax: optionalNumber62,
-  spremabrZaOd: z.string().trim().max(3, "Polje može imati maksimalno 3 karaktera.").optional(),
+  spremabrZaOd: notRequiredString(3),
   daniZaGo: optionalInt20,
   minOsnZaPorez: optionalNumber142,
-  spremabrZaRadi: z.string().trim().max(3, "Polje može imati maksimalno 3 karaktera.").optional(),
-  sifraZaTrezor: z.string().trim().max(2, "Polje može imati maksimalno 2 karaktera.").optional(),
+  spremabrZaRadi: notRequiredString(3),
+  sifraZaTrezor: notRequiredString(2),
 });
 
 export type KeSprema = z.infer<typeof keSpremaSchema>;

@@ -1,7 +1,6 @@
 import { z } from "zod";
+import { requiredString } from "./keRadnik";
 
-export const requiredString = (max: number, requiredMsg = "Obavezno") =>
-  z.string().trim().min(1, requiredMsg).max(max, `Polje može imati maksimalno ${max} karaktera.`);
 
 export const keVeraSchema = z.object({
   verabr: requiredString(3),

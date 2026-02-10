@@ -1,7 +1,6 @@
 import { z } from "zod";
+import { notRequiredString, requiredString } from "./keRadnik";
 
-export const requiredString = (max: number, requiredMsg = "Obavezno") =>
-  z.string().trim().min(1, requiredMsg).max(max, `Polje može imati maksimalno ${max} karaktera.`);
 
 export const optionalInt10 = z
   .number()
@@ -70,29 +69,34 @@ export const keStazSchema = z.object({
   opsbrRada: requiredString(5),
   obrJedinica: requiredString(12),
 
-  resbr: z.string().trim().max(12, "Polje može imati maksimalno 12 karaktera.").optional(),
+  resbr: notRequiredString(12) 
+,
   datotp: z.date().optional(),
-  vrstaObraz: z.string().trim().max(3, "Polje može imati maksimalno 3 karaktera.").optional(),
+  vrstaObraz: notRequiredString(3) 
+,
   scrLevel: optionalInt10, // u bazi default 3
   dnevniFondSati: optionalNumber42,
-  poUgovoru: z.string().trim().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
+  poUgovoru: notRequiredString(1) 
+,
   stOsnovDev: optionalNumber135,
-  osnZaradaJePoGrupi: z.string().trim().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
-  grupabr: z.string().trim().max(4, "Polje može imati maksimalno 4 karaktera.").optional(),
+  osnZaradaJePoGrupi: notRequiredString(1) 
+,
+  grupabr: notRequiredString(4) 
+,
   osnovnaZarada: optionalNumber155,
   povecanje: optionalNumber122,
   fiksniDeo: optionalNumber122,
   idValute: optionalInt30,
-  skracenoRv: z.string().trim().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
-  zavod: z.string().trim().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
-  strajk: z.string().trim().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
-  visak: z.string().trim().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
-  opsbrLokacija: z.string().trim().max(5, "Polje može imati maksimalno 5 karaktera.").optional(),
-  JjeNetoStOsnov: z.string().trim().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
-  osnZaradaJeUOpsegu: z.string().trim().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
+  skracenoRv: notRequiredString(1),
+  zavod: notRequiredString(1),
+  strajk: notRequiredString(1),
+  visak: notRequiredString(1),
+  opsbrLokacija: notRequiredString(5),
+  JjeNetoStOsnov: notRequiredString(1),
+  osnZaradaJeUOpsegu: notRequiredString(1),
   idVRsteUgovora: optionalInt30,
-  ustanova: z.string().trim().max(8, "Polje može imati maksimalno 8 karaktera.").optional(),
-  zamenjenRadnik: z.string().trim().max(6, "Polje može imati maksimalno 6 karaktera.").optional(),
+  ustanova: notRequiredString(8),
+  zamenjenRadnik: notRequiredString(6),
   rbrAneksa: optionalInt40,
 });
 

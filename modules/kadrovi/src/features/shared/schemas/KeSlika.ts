@@ -1,11 +1,12 @@
 import { z } from "zod";
+import { requiredString } from "./keRadnik";
+import { KADROVI_NS } from "../../../config/i18n";
+import { i18n } from "@repo/i18n-config";
 
-export const requiredString = (max: number, requiredMsg = "Obavezno") =>
-  z.string().trim().min(1, requiredMsg).max(max, `Polje može imati maksimalno ${max} karaktera.`);
 
 export const optionalInt30 = z
   .number()
-  .int("Mora biti ceo broj.")
+  .int(i18n.t(`${KADROVI_NS}:errors.ogranicenjeCeoBroj`))
   .min(0)
   .max(999)
   .optional();

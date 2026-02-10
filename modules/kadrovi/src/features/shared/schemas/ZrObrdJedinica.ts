@@ -1,18 +1,18 @@
 import { z } from "zod";
-
-export const requiredString = (max: number, requiredMsg = "Obavezno") =>
-  z.string().trim().min(1, requiredMsg).max(max, `Polje može imati maksimalno ${max} karaktera.`);
+import { notRequiredString, requiredString } from "./keRadnik";
+import { KADROVI_NS } from "../../../config/i18n";
+import { i18n } from "@repo/i18n-config";
 
 export const optionalInt10 = z
   .number()
-  .int("Mora biti ceo broj.")
+  .int(i18n.t(`${KADROVI_NS}:errors.ogranicenjeBroj`))
   .min(0)
   .max(9)
   .optional();
 
 export const optionalInt20 = z
   .number()
-  .int("Mora biti ceo broj.")
+  .int(i18n.t(`${KADROVI_NS}:errors.ogranicenjeBroj`))
   .min(0)
   .max(99)
   .optional();
@@ -22,27 +22,27 @@ export const zrObrJedinicaSchema = z.object({
   naziv: requiredString(100),
   tip: requiredString(1),
 
-  slika: z.string().trim().max(10, "Polje može imati maksimalno 10 karaktera.").optional(),
-  orgbr: z.string().trim().max(12, "Polje može imati maksimalno 12 karaktera.").optional(),
+  slika: notRequiredString(10),
+  orgbr: notRequiredString(12),
   scrLevel: optionalInt10, // u bazi default 3
-  pib: z.string().trim().max(10, "Polje može imati maksimalno 10 karaktera.").optional(),
-  sifraDelatnosti: z.string().trim().max(10, "Polje može imati maksimalno 10 karaktera.").optional(),
-  maticniBroj: z.string().trim().max(13, "Polje može imati maksimalno 13 karaktera.").optional(),
-  ziroRacun: z.string().trim().max(30, "Polje može imati maksimalno 30 karaktera.").optional(),
-  partija: z.string().trim().max(30, "Polje može imati maksimalno 30 karaktera.").optional(),
-  korbrBanke: z.string().trim().max(8, "Polje može imati maksimalno 8 karaktera.").optional(),
-  partijaBanke: z.string().trim().max(20, "Polje može imati maksimalno 20 karaktera.").optional(),
-  deoHoldinga: z.string().trim().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
-  opsbrSedista: z.string().trim().max(5, "Polje može imati maksimalno 5 karaktera.").optional(),
-  registarskiBroj: z.string().trim().max(30, "Polje može imati maksimalno 30 karaktera.").optional(),
-  zaZbirRekapit: z.string().trim().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
-  korbr: z.string().trim().max(8, "Polje može imati maksimalno 8 karaktera.").optional(),
-  vpo: z.string().trim().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
-  orgSinonim: z.string().trim().max(12, "Polje može imati maksimalno 12 karaktera.").optional(),
-  relacija: z.string().trim().max(5, "Polje može imati maksimalno 5 karaktera.").optional(),
-  podrucje: z.string().trim().max(255, "Polje može imati maksimalno 255 karaktera.").optional(),
-  adresa: z.string().trim().max(50, "Polje može imati maksimalno 50 karaktera.").optional(),
-  ojPlacaAu: z.string().trim().max(12, "Polje može imati maksimalno 12 karaktera.").optional(),
+  pib: notRequiredString(10),
+  sifraDelatnosti: notRequiredString(10),
+  maticniBroj: notRequiredString(13),
+  ziroRacun: notRequiredString(30),
+  partija: notRequiredString(30),
+  korbrBanke: notRequiredString(8),
+  partijaBanke: notRequiredString(20),
+  deoHoldinga: notRequiredString(1),
+  opsbrSedista: notRequiredString(5),
+  registarskiBroj: notRequiredString(30),
+  zaZbirRekapit: notRequiredString(1),
+  korbr: notRequiredString(8),
+  vpo: notRequiredString(1),
+  orgSinonim: notRequiredString(12),
+  relacija: notRequiredString(5),
+  podrucje: notRequiredString(255),
+  adresa: notRequiredString(50),
+  ojPlacaAu: notRequiredString(12),
   idSeta: optionalInt20,
 });
 

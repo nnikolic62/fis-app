@@ -1,18 +1,20 @@
 import { z } from "zod";
+import { notRequiredString, requiredString } from "./keRadnik";
 
-export const requiredString = (max: number, requiredMsg = "Obavezno") =>
-  z.string().trim().min(1, requiredMsg).max(max, `Polje može imati maksimalno ${max} karaktera.`);
 
 export const keRadnikImovinaSchema = z.object({
   radbr: requiredString(6),
   imovina: requiredString(3),
   rbr: requiredString(2),
 
-  opis: z.string().trim().max(50, "Polje može imati maksimalno 50 karaktera.").optional(),
-  vrednost: z.string().trim().max(20, "Polje može imati maksimalno 20 karaktera.").optional(),
+  opis: notRequiredString(50) 
+,
+  vrednost: notRequiredString(20) 
+,
   vaziOd: z.date().optional(),
   vaziDo: z.date().optional(),
-  napomena: z.string().trim().max(1000, "Polje može imati maksimalno 1000 karaktera.").optional(),
+  napomena: notRequiredString(1000) 
+,
 });
 
 export type KeRadnikImovina = z.infer<typeof keRadnikImovinaSchema>;

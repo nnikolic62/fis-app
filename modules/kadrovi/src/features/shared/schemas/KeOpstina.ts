@@ -1,11 +1,12 @@
 import { z } from "zod";
+import { notRequiredString, requiredString } from "./keRadnik";
+import { i18n } from "@repo/i18n-config";
+import { KADROVI_NS } from "../../../config/i18n";
 
-export const requiredString = (max: number, requiredMsg = "Obavezno") =>
-  z.string().trim().min(1, requiredMsg).max(max, `Polje može imati maksimalno ${max} karaktera.`);
 
 export const optionalInt20 = z
   .number()
-  .int("Mora biti ceo broj.")
+  .int(i18n.t(`${KADROVI_NS}:errors.ogranicenjeCeoBroj`))
   .min(0)
   .max(99)
   .optional();
@@ -14,14 +15,14 @@ export const keOpstinaSchema = z.object({
   opsbr: requiredString(5),
   opsnaz: requiredString(25),
 
-  ptt: z.string().trim().max(5, "Polje može imati maksimalno 5 karaktera.").optional(),
-  sdkBroj: z.string().trim().max(10, "Polje može imati maksimalno 10 karaktera.").optional(),
-  sdkSifra: z.string().trim().max(5, "Polje može imati maksimalno 5 karaktera.").optional(),
-  idPodrucneJedinice: z.string().trim().max(5, "Polje može imati maksimalno 5 karaktera.").optional(),
-  pioFilijalaRef: z.string().trim().max(5, "Polje može imati maksimalno 5 karaktera.").optional(),
+  ptt: notRequiredString(5),
+  sdkBroj: notRequiredString(10),
+  sdkSifra: notRequiredString(5),
+  idPodrucneJedinice: notRequiredString(5),
+  pioFilijalaRef: notRequiredString(5),
   idRegiona: optionalInt20,
-  teritorijaGrada: z.string().trim().max(5, "Polje može imati maksimalno 5 karaktera.").optional(),
-  staraOpsbr: z.string().trim().max(5, "Polje može imati maksimalno 5 karaktera.").optional(), // VARCHAR2(5 BYTE)
+  teritorijaGrada: notRequiredString(5),
+  staraOpsbr: notRequiredString(5),
 });
 
 export type KeOpstina = z.infer<typeof keOpstinaSchema>;
