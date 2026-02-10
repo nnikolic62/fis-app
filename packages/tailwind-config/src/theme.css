@@ -97,6 +97,15 @@
   }
 }
 
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -223,6 +232,132 @@
 
   .container {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* ── DataTable ─────────────────────────────────────────── */
+
+  .table-wrapper {
+    @apply overflow-x-auto rounded-lg border border-slate-200;
+  }
+
+  .table-wrapper table {
+    @apply w-full border-collapse text-sm;
+  }
+
+  .table-wrapper thead {
+    @apply bg-slate-50;
+  }
+
+  .table-wrapper thead th {
+    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500;
+    @apply border-b border-slate-200;
+    @apply whitespace-nowrap select-none;
+  }
+
+  .table-wrapper tbody tr {
+    @apply border-b border-slate-100 bg-white transition-colors;
+  }
+
+  .table-wrapper tbody tr:last-child {
+    @apply border-b-0;
+  }
+
+  .table-wrapper tbody tr:hover {
+    @apply bg-slate-50/70;
+  }
+
+  .table-wrapper tbody tr.row-selected {
+    @apply bg-brand-50;
+  }
+
+  .table-wrapper tbody td {
+    @apply px-4 py-3 text-slate-700 whitespace-nowrap;
+  }
+
+  .row-actions-header {
+    @apply w-20 text-right;
+  }
+
+  .row-actions {
+    @apply text-right;
+  }
+
+  .row-actions button {
+    @apply inline-flex items-center justify-center rounded-md p-1.5 text-slate-400 transition-colors;
+    @apply hover:bg-slate-100 hover:text-slate-600;
+  }
+
+  /* ── DataTable Toolbar ─────────────────────────────────── */
+
+  .table-toolbar {
+    @apply flex items-center justify-between gap-4 px-1 py-3;
+  }
+
+  .table-toolbar-left {
+    @apply flex items-center gap-2;
+  }
+
+  .table-toolbar-right {
+    @apply flex items-center gap-2;
+  }
+
+  .selection-info {
+    @apply rounded-md bg-brand-50 px-2.5 py-1 text-xs font-medium text-brand-700;
+  }
+
+  /* ── DataTable Pagination ──────────────────────────────── */
+
+  .table-pagination {
+    @apply flex items-center justify-between gap-4 px-1 py-3 text-sm;
+  }
+
+  .pagination-info {
+    @apply text-slate-500;
+  }
+
+  .pagination-controls {
+    @apply flex items-center gap-1.5;
+  }
+
+  .pagination-button {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-md border border-slate-200 bg-white text-xs font-medium text-slate-600 transition-colors;
+    @apply hover:bg-slate-50 hover:text-slate-900;
+    @apply disabled:pointer-events-none disabled:opacity-40;
+  }
+
+  .pagination-page-info {
+    @apply px-2 text-sm text-slate-600;
+  }
+
+  .page-size-select {
+    @apply ml-2 h-8 rounded-md border border-slate-200 bg-white px-2 text-xs text-slate-600 transition-colors;
+    @apply hover:border-slate-300;
+    @apply focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200;
+  }
+
+  /* ── DataTable Loading Skeleton ────────────────────────── */
+
+  .skeleton {
+    @apply h-4 w-full rounded-md bg-slate-100;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+  }
+
+  /* ── DataTable Empty State ─────────────────────────────── */
+
+  .table-empty {
+    @apply py-12 text-center;
+  }
+
+  .empty-state {
+    @apply flex flex-col items-center gap-3;
+  }
+
+  .empty-state .empty-icon {
+    @apply h-10 w-10 text-slate-300;
+  }
+
+  .empty-state p {
+    @apply text-sm text-slate-400;
   }
 }
 

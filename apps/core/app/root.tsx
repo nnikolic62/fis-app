@@ -8,9 +8,12 @@ import {
 } from "react-router";
 import { initI18n, LANGUAGES } from "@repo/i18n-config";
 import { initApiClient } from "@repo/api-client";
+import { createQueryClient } from "@repo/api-client/create-query-client";
+import { QueryProvider } from "@repo/api-client/query-provider";
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { useState } from "react";
 
 // Initialize API client
 initApiClient(import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api");
@@ -38,7 +41,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  const [queryClient] = useState(() =>
+    createQueryClient()
+  );
+  return (
+    <QueryProvider client={queryClient}>
+      <Outlet />
+    </QueryProvider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

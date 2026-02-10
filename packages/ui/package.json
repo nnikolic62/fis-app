@@ -4,9 +4,10 @@
   "type": "module",
   "private": true,
   "exports": {
-     "./sidebar/types": "./src/sidebar/types.ts",
-     "./pageHeader/*": "./src/pageHeader/*.tsx",
-      "./newComponents/*": "./src/newComponents/*.tsx",
+    "./sidebar/types": "./src/sidebar/types.ts",
+    "./pageHeader/*": "./src/pageHeader/*.tsx",
+    "./newComponents/*": "./src/newComponents/*.tsx",
+    "./data-table/*": "./src/data-table/*.tsx",
     "./*": "./src/*.tsx"
   },
   "scripts": {
@@ -26,6 +27,7 @@
   "dependencies": {
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-select": "^2.1.2",
+    "@tanstack/react-table": "^8.21.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   }
