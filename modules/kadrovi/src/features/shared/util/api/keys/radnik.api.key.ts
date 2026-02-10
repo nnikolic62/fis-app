@@ -1,5 +1,5 @@
 import type { PaginationParams } from '@repo/types';
-import { Radnik } from '../../../schemas/radnik';
+import { Radnik } from '../../../schemas/keRadnik';
 
 /**
  * Query key factory for zapisnik

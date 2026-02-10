@@ -1,5 +1,5 @@
 import { FormProvider, useForm } from "react-hook-form"
-import { Radnik, RadnikSchema } from "../shared/schemas/radnik";
+import { Radnik, keRadnikSchema } from "../shared/schemas/keRadnik";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PageWithHeader } from "@repo/ui/pageHeader/pageWithHeader";
 import { Button } from "@repo/ui/button";
@@ -113,8 +113,8 @@ export default function RadnikPodaciPage() {
   }), []);
   const methods = useForm<RadnikFilter>({
     mode: "onBlur",
-    defaultValues,
-    resolver: zodResolver(RadnikSchema),
+    // defaultValues,
+    resolver: zodResolver(keRadnikSchema),
   });
   return (
     <FormProvider {...methods}>

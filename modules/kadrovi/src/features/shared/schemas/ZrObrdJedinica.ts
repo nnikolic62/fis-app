@@ -17,7 +17,7 @@ export const optionalInt20 = z
   .max(99)
   .optional();
 
-export const ZrObrJedinicaSchema = z.object({
+export const zrObrJedinicaSchema = z.object({
   obrJedinica: requiredString(12),
   naziv: requiredString(100),
   tip: requiredString(1),
@@ -46,4 +46,4 @@ export const ZrObrJedinicaSchema = z.object({
   idSeta: optionalInt20,
 });
 
-export type ZrObrJedinica = z.infer<typeof ZrObrJedinicaSchema>;
+export type ZrObrJedinica = z.infer<typeof zrObrJedinicaSchema>;

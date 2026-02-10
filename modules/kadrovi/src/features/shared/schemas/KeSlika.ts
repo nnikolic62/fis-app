@@ -14,7 +14,7 @@ export const longRawSchema = z
   .union([z.string(), z.instanceof(Uint8Array)])
   .optional();
 
-export const KeSlikaSchema = z.object({
+export const keSlikaSchema = z.object({
   slika: requiredString(6),
   nazivSlike: requiredString(20),
   tipSlike: requiredString(10),
@@ -24,4 +24,4 @@ export const KeSlikaSchema = z.object({
 //   slika: longRawSchema,
 });
 
-export type KeSlika = z.infer<typeof KeSlikaSchema>;
+export type KeSlika = z.infer<typeof keSlikaSchema>;

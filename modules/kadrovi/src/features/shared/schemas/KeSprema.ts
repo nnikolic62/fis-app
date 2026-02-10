@@ -32,7 +32,7 @@ export const number142 = z
 
 export const optionalNumber142 = number142.optional();
 
-export const KeSpremaSchema = z.object({
+export const keSpremaSchema = z.object({
   spremabr: requiredString(3),
   spremanaz: requiredString(40),
   stepen: requiredString(6),
@@ -51,4 +51,4 @@ export const KeSpremaSchema = z.object({
   sifraZaTrezor: z.string().trim().max(2, "Polje može imati maksimalno 2 karaktera.").optional(),
 });
 
-export type KeSprema = z.infer<typeof KeSpremaSchema>;
+export type KeSprema = z.infer<typeof keSpremaSchema>;
