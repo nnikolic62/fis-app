@@ -4,8 +4,12 @@ import { Card } from "@repo/ui/card";
 import { FormInput } from "@repo/ui/formComponents/FormInput";
 import { FormLabel } from "@repo/ui/formComponents/FormLabel";
 import { SuitcaseIcon } from "@phosphor-icons/react";
+import { useFormContext } from "react-hook-form";
+import { Radnik } from "../../shared/schemas/radnik";
 
 export function RasporedjenCard() {
+  const { register } = useFormContext<Radnik>();
+
   return (
     <Card
       title="Rasporedjen u preduzecu"
@@ -23,6 +27,7 @@ export function RasporedjenCard() {
                 containerClassName="basis-1/3"
                 placeholder="Sifra"
                 label={undefined}
+                {...register("obrJedinica")}
               />
               <FormInput
                 id="obrJedinica"
@@ -39,6 +44,7 @@ export function RasporedjenCard() {
                 containerClassName="basis-1/3"
                 placeholder="Sifra"
                 label={undefined}
+                {...register("organizacionaJedinica")}
               />
               <FormInput
                 id="ojRadnika"
@@ -55,6 +61,7 @@ export function RasporedjenCard() {
                 containerClassName="basis-1/3"
                 placeholder="Sifra"
                 label={undefined}
+                {...register("spremabr")}
               />
               <FormInput
                 id="sprema"
@@ -69,7 +76,11 @@ export function RasporedjenCard() {
         {/* Drugi red */}
         <div className="flex gap-3 mb-2">
           <div className="flex-1">
-            <FormInput label="Prvi datum dolaska" placeholder="Polje 1" />
+            <FormInput
+              label="Prvi datum dolaska"
+              placeholder="Polje 1"
+            //   {...register("datumDol")}
+            />
           </div>
           <div className="flex-1">
             <FormInput
@@ -81,6 +92,7 @@ export function RasporedjenCard() {
             <FormInput
               label="Poslednji datum odlaska"
               placeholder="Polje 3"
+            //   {...register("datumOdl")}
             />
           </div>
         </div>

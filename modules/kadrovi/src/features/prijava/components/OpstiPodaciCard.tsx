@@ -8,8 +8,12 @@ import { FormSelect } from "@repo/ui/formComponents/formSelect";
 import { FormDatePicker } from "@repo/ui/formComponents/formDatePicker";
 import { FormLabel } from "@repo/ui/formComponents/FormLabel";
 import { GlobeIcon } from "@phosphor-icons/react";
+import { Controller, useFormContext } from "react-hook-form";
+import { Radnik } from "../../shared/schemas/radnik";
 
 export function OpstiPodaciCard() {
+  const { control, register } = useFormContext<Radnik>();
+
   return (
     <Card
       title="Opsti podaci"
@@ -21,7 +25,18 @@ export function OpstiPodaciCard() {
         {/* Prvi red */}
         <div className="flex gap-10 mb-2">
           <div className="">
-            <FormDatePicker label="Datum rodjenja" placeholder="dd.mm.yyyy" />
+            <Controller
+              control={control}
+              name="datRodj"
+              render={({ field }) => (
+                <FormDatePicker
+                  label="Datum rodjenja"
+                  placeholder="dd.mm.yyyy"
+                  value={field.value ? String(field.value) : ""}
+                  onValueChange={field.onChange}
+                />
+              )}
+            />
           </div>
           <div className="flex items-end gap-1">
             <div className="flex items-end gap-1">
@@ -56,6 +71,7 @@ export function OpstiPodaciCard() {
                 containerClassName="basis-1/5"
                 placeholder=""
                 label={undefined}
+                {...register("opsrbr")}
               />
               <FormInput
                 containerClassName="basis-4/5"
@@ -72,6 +88,7 @@ export function OpstiPodaciCard() {
                 containerClassName="basis-1/5"
                 placeholder=""
                 label={undefined}
+                {...register("opsbrRada")}
               />
               <FormInput
                 containerClassName="basis-4/5"
@@ -87,32 +104,48 @@ export function OpstiPodaciCard() {
           <div className="flex-1 basis-1/2">
             <FormLabel label="Nacionalnost" htmlFor="nacionalnost" />
             <div className="flex items-end w-full">
-              <FormSelect
-                id="nacionalnost"
-                label={undefined}
-                containerClassName="w-full"
-                placeholder="Nacionalnost"
-                options={[
-                  { value: "srpska", label: "Srpska" },
-                  { value: "hrvatska", label: "Hrvatska" },
-                  { value: "bosanska", label: "Bosanska" },
-                ]}
+              <Controller
+                control={control}
+                name="nacbr"
+                render={({ field }) => (
+                  <FormSelect
+                    id="nacionalnost"
+                    label={undefined}
+                    containerClassName="w-full"
+                    placeholder="Nacionalnost"
+                    value={field.value ?? ""}
+                    onValueChange={field.onChange}
+                    options={[
+                      { value: "SR", label: "Srpska" },
+                      { value: "HR", label: "Hrvatska" },
+                      { value: "BO", label: "Bosanska" },
+                    ]}
+                  />
+                )}
               />
             </div>
           </div>
           <div className="flex-1 basis-1/2">
             <FormLabel label="Veroispovest" htmlFor="veroispovest" />
             <div className="flex items-end w-full">
-              <FormSelect
-                id="veroispovest"
-                label={undefined}
-                containerClassName="w-full"
-                placeholder="Veroispovest"
-                options={[
-                  { value: "pravoslavna", label: "Pravoslavna" },
-                  { value: "katolicka", label: "Katolicka" },
-                  { value: "islam", label: "Islam" },
-                ]}
+              <Controller
+                control={control}
+                name="verabr"
+                render={({ field }) => (
+                  <FormSelect
+                    id="veroispovest"
+                    label={undefined}
+                    containerClassName="w-full"
+                    placeholder="Veroispovest"
+                    value={field.value ?? ""}
+                    onValueChange={field.onChange}
+                    options={[
+                      { value: "PR", label: "Pravoslavna" },
+                      { value: "KA", label: "Katolicka" },
+                      { value: "IS", label: "Islam" },
+                    ]}
+                  />
+                )}
               />
             </div>
           </div>
@@ -126,6 +159,7 @@ export function OpstiPodaciCard() {
                 containerClassName="flex-1 basis-1/6"
                 placeholder=""
                 label={undefined}
+                {...register("slavabr")}
               />
               <FormInput
                 id="verskiPraznik"
@@ -143,12 +177,23 @@ export function OpstiPodaciCard() {
           <div className="w-2/5">
             <FormLabel label="Status" htmlFor="status" />
             <div className="flex items-end w-full">
-              <FormSelect
-                id="status"
-                label={undefined}
-                containerClassName="w-full"
-                placeholder="Status"
-                options={[]}
+              <Controller
+                control={control}
+                name="statusbr"
+                render={({ field }) => (
+                  <FormSelect
+                    id="status"
+                    label={undefined}
+                    containerClassName="w-full"
+                    placeholder="Status"
+                    value={field.value ?? ""}
+                    onValueChange={field.onChange}
+                    options={[
+                      { value: "A", label: "Aktivan"},
+                      { value: "N", label: "Neaktivan" },
+                    ]}
+                  />
+                )}
               />
             </div>
           </div>
@@ -159,17 +204,57 @@ export function OpstiPodaciCard() {
           <div className="w-3/5">
             <FormLabel label="Bračno stanje" htmlFor="bracnoStanje" />
             <div className="mt-1 flex flex-wrap gap-4">
-              <FormRadio name="bracnoStanje" label="Neoženjen" />
-              <FormRadio name="bracnoStanje" label="Oženjen" />
-              <FormRadio name="bracnoStanje" label="Razveden" />
-              <FormRadio name="bracnoStanje" label="Udovac" />
+              <FormRadio
+                label="Neoženjen"
+                value="N"
+                {...register("bracnoStanje")}
+              />
+              <FormRadio
+                label="Oženjen"
+                value="O"
+                {...register("bracnoStanje")}
+              />
+              <FormRadio
+                label="Razveden"
+                value="R"
+                {...register("bracnoStanje")}
+              />
+              <FormRadio
+                label="Udovac"
+                value="U"
+                {...register("bracnoStanje")}
+              />
             </div>
           </div>
           <div className="w-2/5">
             <FormLabel label="Ostalo" htmlFor="ostalo" />
             <div className="mt-1 flex flex-row gap-8">
-              <FormCheckbox label="Stranac" />
-              <FormCheckbox label="Samohrani roditelj" />
+              <Controller
+                control={control}
+                name="jeStranac"
+                render={({ field }) => (
+                  <FormCheckbox
+                    label="Stranac"
+                    checked={field.value === "1"}
+                    onChange={(event) =>
+                      field.onChange(event.target.checked ? "1" : undefined)
+                    }
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name="samohran"
+                render={({ field }) => (
+                  <FormCheckbox
+                    label="Samohrani roditelj"
+                    checked={field.value === "1"}
+                    onChange={(event) =>
+                      field.onChange(event.target.checked ? "1" : undefined)
+                    }
+                  />
+                )}
+              />
             </div>
           </div>
         </div>

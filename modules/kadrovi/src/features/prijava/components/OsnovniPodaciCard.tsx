@@ -31,13 +31,18 @@ export function OsnovniPodaciCard() {
             label="St. broj"
             placeholder="St. broj"
             containerClassName="w-24"
+            {...register("stevbr")}
           />
         </div>
 
         {/* Drugi red */}
         <div className="flex gap-3 mb-2">
           <div className="flex-1 basis-1/2">
-            <FormInput label="Prezime" placeholder="Prezime" />
+            <FormInput
+              label="Prezime"
+              placeholder="Prezime"
+              {...register("preizme")}
+            />
           </div>
           <div className="flex-1 basis-1/2">
             <div className="flex gap-2 items-end">
@@ -45,8 +50,12 @@ export function OsnovniPodaciCard() {
                 containerClassName="flex-[4]"
                 placeholder="Ime roditelja"
                 label="Ime roditelja"
+                {...register("roditelj")}
               />
-              <FormInput containerClassName="flex-[1]" />
+              <FormInput
+                containerClassName="flex-[1]"
+                {...register("srSlovo")}
+              />
             </div>
           </div>
         </div>
@@ -59,11 +68,13 @@ export function OsnovniPodaciCard() {
                 containerClassName="flex-[2]"
                 label="Ime"
                 placeholder="Ime"
+                {...register("ime")}
               />
               <FormInput
                 containerClassName="flex-[1]"
                 label="Titula"
                 placeholder="Titula"
+                {...register("titula")}
               />
             </div>
           </div>
@@ -71,6 +82,7 @@ export function OsnovniPodaciCard() {
             <FormInput
               label="Devojacko prezime"
               placeholder="Devojacko prezime"
+              {...register("devPrez")}
             />
           </div>
         </div>
@@ -78,10 +90,14 @@ export function OsnovniPodaciCard() {
         {/* Cetvrti red */}
         <div className="flex gap-3 mb-2">
           <div className="flex-1 basis-1/2">
-            <FormInput label="Maticni broj" placeholder="Maticni broj" />
+            <FormInput
+              label="Maticni broj"
+              placeholder="Maticni broj"
+              {...register("licniBr")}
+            />
           </div>
           <div className="flex-1 basis-1/2">
-            <FormInput label="LBO" placeholder="LBO" />
+            <FormInput label="LBO" placeholder="LBO" {...register("lbo")} />
           </div>
         </div>
 
@@ -90,8 +106,17 @@ export function OsnovniPodaciCard() {
           <div className="w-full">
             <FormLabel label="Pol" htmlFor="pol-muski" />
             <div className="mt-1 flex gap-6">
-              <FormRadio id="pol-muski" name="pol" label="Muski" />
-              <FormRadio name="pol" label="Zenski" />
+              <FormRadio
+                id="pol-muski"
+                label="Muski"
+                value="M"
+                {...register("pol")}
+              />
+              <FormRadio
+                label="Zenski"
+                value="Z"
+                {...register("pol")}
+              />
             </div>
           </div>
         </div>

@@ -4,8 +4,12 @@ import { Card } from "@repo/ui/card";
 import { FormInput } from "@repo/ui/formComponents/FormInput";
 import { FormLabel } from "@repo/ui/formComponents/FormLabel";
 import { MapPinIcon } from "@phosphor-icons/react";
+import { useFormContext } from "react-hook-form";
+import { Radnik } from "../../shared/schemas/radnik";
 
 export function MestoBoravkaCard() {
+  const { register } = useFormContext<Radnik>();
+
   return (
     <Card
       title="Mesto boravka"
@@ -23,6 +27,7 @@ export function MestoBoravkaCard() {
                 containerClassName="basis-1/4"
                 placeholder="Sifra"
                 label={undefined}
+                {...register("opsbr")}
               />
               <FormInput
                 id="opstina"
@@ -44,6 +49,7 @@ export function MestoBoravkaCard() {
                 containerClassName="basis-1/4"
                 placeholder="Sifra"
                 label={undefined}
+                {...register("mzbr")}
               />
               <FormInput
                 id="mz"
@@ -58,7 +64,11 @@ export function MestoBoravkaCard() {
         {/* Treci red */}
         <div className="flex gap-3 mb-2">
           <div className="flex-1">
-            <FormInput label="Adresa" placeholder="Adresa" />
+            <FormInput
+              label="Adresa"
+              placeholder="Adresa"
+              {...register("adresa")}
+            />
           </div>
         </div>
 
@@ -70,11 +80,13 @@ export function MestoBoravkaCard() {
                 label="Telefon"
                 placeholder="Telefon"
                 containerClassName="basis-1/3"
+                {...register("telefon")}
               />
               <FormInput
                 label="Mail"
                 placeholder="Mail"
                 containerClassName="basis-2/3"
+                {...register("mail")}
               />
             </div>
           </div>

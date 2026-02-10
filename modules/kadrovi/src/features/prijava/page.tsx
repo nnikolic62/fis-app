@@ -17,7 +17,14 @@ export default function PrijavaPage({ onBack }: EmployeeRegistrationProps) {
   const methods = useForm<Radnik>({
     mode: "onBlur",
     resolver: zodResolver(keRadnikSchema),
+    defaultValues: {
+      datum: new Date(),
+    },
   });
+  const onSubmit = (data: Radnik) => {
+    console.log("Radnik submit:", data);
+  };
+
   return (
     <FormProvider {...methods}>
       <PageWithHeader
@@ -35,15 +42,23 @@ export default function PrijavaPage({ onBack }: EmployeeRegistrationProps) {
           </>
         }
       >
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mb-4">
-          <OsnovniPodaciCard />
-          <OpstiPodaciCard />
-        </div>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mb-4">
+            <OsnovniPodaciCard />
+            <OpstiPodaciCard />
+          </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 mb-4">
-          <MestoBoravkaCard />
-          <RasporedjenCard />
-        </div>
+          <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 mb-4">
+            <MestoBoravkaCard />
+            <RasporedjenCard />
+          </div>
+
+          <div className="flex justify-end">
+            <Button type="submit" variant="primary">
+              Submit
+            </Button>
+          </div>
+        </form>
       </PageWithHeader>
     </FormProvider>
   );
