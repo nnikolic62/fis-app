@@ -10,6 +10,8 @@ import { Table, ColumnDef, TableOptions, Row } from "@tanstack/react-table";
 import { DataTableLoading } from "./DataTableLoading";
 import { DataTableEmpty } from "./DataTableEmpty";
 import { DataTablePagination } from "./DataTablePagination";
+import { createSelectColumn } from "./select-column";
+import { useMemo } from "react";
 
 type DataTableProps<TData> = {
   data: TData[];
@@ -39,15 +41,22 @@ export function DataTable<TData>({
   isLoading,
   emptyMessage = "No results.",
 }: DataTableProps<TData>) {
+  const finalColumns = useMemo(() => {
+    if (!tableOptions?.enableRowSelection) return columns;
+  
+    return [createSelectColumn<TData>(), ...columns];
+  }, [columns, tableOptions?.enableRowSelection]);
+
   const table = useReactTable({
     data,
-    columns,
+    columns: finalColumns,
 
     getCoreRowModel: getCoreRowModel(),
     ...(enablePagination && { getPaginationRowModel: getPaginationRowModel() }),
 
     ...tableOptions,
   });
+
 
   return (
     <div>
