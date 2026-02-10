@@ -5,7 +5,7 @@ export const requiredString = (max: number, requiredMsg = "Obavezno") =>
   z.string().trim().min(1, requiredMsg).max(max, `Polje može imati maksimalno ${max} karaktera.`)
 
 
-export const KeOpstinaSchema = z.object({
+export const keOpstinaSchema = z.object({
   opsbr: requiredString(5),
   opsnaz: requiredString(25),
 
@@ -19,4 +19,4 @@ export const KeOpstinaSchema = z.object({
   staraOpsbr: z.string().trim().max(5, "Polje može imati maksimalno 5 karaktera.").optional(),
 });
 
-export type KeOpstina = z.infer<typeof KeOpstinaSchema>;
+export type KeOpstina = z.infer<typeof keOpstinaSchema>;

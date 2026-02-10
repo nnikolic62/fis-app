@@ -1,4 +1,4 @@
-import { Radnik } from "../../shared/schemas/radnik";
+import { Radnik } from "../../shared/schemas/keRadnik";
 import { getApiClient } from "@repo/api-client";
 import { API_ENDPOINTS } from "../../shared/util/api/endpoints";
 import { PaginationParams, PaginationResponse } from "@repo/types";

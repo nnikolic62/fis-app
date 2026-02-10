@@ -2,7 +2,7 @@ import { Button } from "@repo/ui/button";
 import { PageWithHeader } from "@repo/ui/pageHeader/pageWithHeader";
 import { FloppyDiskIcon, XIcon } from "@phosphor-icons/react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Radnik, RadnikSchema } from "../shared/schemas/radnik";
+import { Radnik, keRadnikSchema } from "../shared/schemas/keRadnik";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { OsnovniPodaciCard } from "./components/OsnovniPodaciCard";
 import { OpstiPodaciCard } from "./components/OpstiPodaciCard";
@@ -16,7 +16,7 @@ type EmployeeRegistrationProps = {
 export default function PrijavaPage({ onBack }: EmployeeRegistrationProps) {
   const methods = useForm<Radnik>({
     mode: "onBlur",
-    resolver: zodResolver(RadnikSchema),
+    resolver: zodResolver(keRadnikSchema),
   });
   return (
     <FormProvider {...methods}>

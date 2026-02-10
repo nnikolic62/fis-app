@@ -56,7 +56,7 @@ export const optionalNumber155 = z
   .refine((v) => Number.isInteger(v * 100000), "Dozvoljene su najviše 5 decimala.")
   .optional();
 
-export const KeStazSchema = z.object({
+export const keStazSchema = z.object({
   radbr: requiredString(6),
   trbr: requiredString(3),
   orgbr: requiredString(12),
@@ -96,4 +96,4 @@ export const KeStazSchema = z.object({
   rbrAneksa: optionalInt40,
 });
 
-export type KeStaz = z.infer<typeof KeStazSchema>;
+export type KeStaz = z.infer<typeof keStazSchema>;

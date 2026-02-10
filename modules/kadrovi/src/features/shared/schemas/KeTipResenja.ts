@@ -24,7 +24,7 @@ export const optionalNumber73 = z
   .refine((v) => Number.isInteger(v * 1000), "Dozvoljene su najviše 3 decimale.")
   .optional();
 
-export const KeTipResenjaSchema = z.object({
+export const keTipResenjaSchema = z.object({
   trbr: requiredString(3),
 
   trnaz: z.string().trim().max(45, "Polje može imati maksimalno 45 karaktera.").optional(),
@@ -55,4 +55,4 @@ export const KeTipResenjaSchema = z.object({
   minTrajanje: optionalInt30,
 });
 
-export type KeTipResenja = z.infer<typeof KeTipResenjaSchema>;
+export type KeTipResenja = z.infer<typeof keTipResenjaSchema>;

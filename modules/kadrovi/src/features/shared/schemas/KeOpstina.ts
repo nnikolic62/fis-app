@@ -10,7 +10,7 @@ export const optionalInt20 = z
   .max(99)
   .optional();
 
-export const KeOpstinaSchema = z.object({
+export const keOpstinaSchema = z.object({
   opsbr: requiredString(5),
   opsnaz: requiredString(25),
 
@@ -24,4 +24,4 @@ export const KeOpstinaSchema = z.object({
   staraOpsbr: z.string().trim().max(5, "Polje može imati maksimalno 5 karaktera.").optional(), // VARCHAR2(5 BYTE)
 });
 
-export type KeOpstina = z.infer<typeof KeOpstinaSchema>;
+export type KeOpstina = z.infer<typeof keOpstinaSchema>;

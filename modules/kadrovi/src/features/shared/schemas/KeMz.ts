@@ -10,7 +10,7 @@ export const optionalInt60 = z
   .max(999999)
   .optional();
 
-export const KeMzSchema = z.object({
+export const keMzSchema = z.object({
   mzbr: requiredString(4),
   opsbr: requiredString(5),
   mznaziv: requiredString(25),
@@ -19,4 +19,4 @@ export const KeMzSchema = z.object({
   idMesta: optionalInt60,
 });
 
-export type KeMz = z.infer<typeof KeMzSchema>;
+export type KeMz = z.infer<typeof keMzSchema>;

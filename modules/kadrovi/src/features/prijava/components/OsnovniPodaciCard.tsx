@@ -6,7 +6,7 @@ import { FormRadio } from "@repo/ui/formComponents/formRadio";
 import { FormLabel } from "@repo/ui/formComponents/FormLabel";
 import { UserIcon } from "@phosphor-icons/react/User";
 import { useFormContext } from "react-hook-form";
-import { Radnik } from "../../shared/schemas/radnik";
+import { Radnik } from "../../shared/schemas/keRadnik";
 
 export function OsnovniPodaciCard() {
   const { register } = useFormContext<Radnik>();
