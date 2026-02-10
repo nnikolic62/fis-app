@@ -1,49 +1,74 @@
 import { z } from "zod";
 
+const startOfDay = (value: Date) => new Date(value.getFullYear(), value.getMonth(), value.getDate());
+const isBeforeSysDate = (value?: Date) =>
+    !value || value < startOfDay(new Date());
 
-export const radnikSchema = z.object({
-    radBr: z.string().length(6, "Polje može imati maksimalno 6 karaktera.").min(1, "Obavezno"),
-    organizacionaJedinica: z.string().length(12, "Polje može imati maksimalno 12 karaktera.").optional(),
-    preizme: z.string().length(100, "Polje može imati maksimalno 100 karaktera.").min(1, "Obavezno"),
-    ime: z.string().length(100, "Polje može imati maksimalno 100 karaktera.").min(1, "Obavezno"),
-    srSlovo: z.string().length(2, "Polje može imati maksimalno 2 karaktera.").optional(),
-    roditelj: z.string().length(20, "Polje može imati maksimalno 20 karaktera.").optional(),
-    devPrez: z.string().length(20, "Polje može imati maksimalno 20 karaktera.").optional(),
-    datRodj: z.date().optional(),
-    pol: z.string().length(1, "Polje može imati maksimalno 1 karaktera.").min(1, "Obavezno"),
-    licniBr: z.string().length(13, "Polje može imati maksimalno 13 karaktera.").optional(),
-    opsrBr: z.string().length(5, "Polje može imati maksimalno 5 karaktera.").optional(),
-    opsBr: z.string().length(5, "Polje može imati maksimalno 5 karaktera.").min(1, "Obavezno"),
-    mzBr: z.string().length(4, "Polje može imati maksimalno 4 karaktera.").min(1, "Obavezno"),
-    adresa: z.string().length(40, "Polje može imati maksimalno 40 karaktera.").optional(),
-    telefon: z.string().length(30, "Polje može imati maksimalno 30 karaktera.").optional(),
-    statusBr: z.string().length(1, "Polje može imati maksimalno 1 karaktera.").min(1, "Obavezno"),
-    spremaBr: z.string().length(3, "Polje može imati maksimalno 3 karaktera.").min(1, "Obavezno"),
-    veraBr: z.string().length(3, "Polje može imati maksimalno 3 karaktera.").optional(),
-    nacBr: z.string().length(3, "Polje može imati maksimalno 3 karaktera.").optional(),
-    slavaBr: z.string().length(3, "Polje može imati maksimalno 3 karaktera.").optional(),
+export const datRodjSchema = z.date()
+    .optional()
+    .refine(isBeforeSysDate, "Datum rodjenja mora biti manji od sistemskog datuma.");
+
+export const requiredString = (max: number, requiredMsg = "Obavezno") =>
+  z.string().trim().min(1, requiredMsg).max(max, `Polje može imati maksimalno ${max} karaktera.`);
+
+
+export const radbrSchema = z.string()
+    .min(1, "Obavezno")
+    .regex(/^\d+$/, "Radnik broj mora sadržati samo cifre.")
+    .transform((v) => v.trim())
+    .transform((v) => v.replace(/\s+/g, "")) // skida whitespace u unutrasnjosti stringa
+    .transform((v) => v.replace(/^0+/, "")) // skida nule sa pocetka stringa (ovo je bilo u fisu)
+
+
+// U validaciji polja treba jos proveriti da li postoji lbo u bazi ako postoji vraca error da postoji
+export const lboSchema = z.string()                  
+    .trim()
+    .regex(/^\d+$/, "LBO mora sadržati samo cifre.")
+    .length(11, "LBO mora imati tačno 11 cifara.")
+    .optional()
+
+export const RadnikSchema = z.object({
+    radbr: radbrSchema,
+    organizacionaJedinica: z.string().max(12, "Polje može imati maksimalno 12 karaktera.").optional(),
+    preizme: requiredString(100),
+    ime: requiredString(100),
+    srSlovo: z.string().max(2, "Polje može imati maksimalno 2 karaktera.").optional(),
+    roditelj: z.string().max(20, "Polje može imati maksimalno 20 karaktera.").optional(),
+    devPrez: z.string().max(20, "Polje može imati maksimalno 20 karaktera.").optional(),
+    datRodj: datRodjSchema,
+    pol: requiredString(1),
+    licniBr: z.string().max(13, "Polje može imati maksimalno 13 karaktera.").optional(),
+    opsrbr: z.string().max(5, "Polje može imati maksimalno 5 karaktera.").optional(),
+    opsbr: requiredString(5),
+    mzbr: requiredString(4),
+    adresa: z.string().max(40, "Polje može imati maksimalno 40 karaktera.").optional(),
+    telefon: z.string().max(30, "Polje može imati maksimalno 30 karaktera.").optional(),
+    statusbr: requiredString(1),
+    spremabr: requiredString(3),
+    verabr: z.string().max(3, "Polje može imati maksimalno 3 karaktera.").optional(),
+    nacbr: z.string().max(3, "Polje može imati maksimalno 3 karaktera.").optional(),
+    slavabr: z.string().max(3, "Polje može imati maksimalno 3 karaktera.").optional(),
     datumDol: z.date().optional(),
     datumOdl: z.date().optional(),
-    bracnoStanje: z.string().length(1, "Polje može imati maksimalno 1 karaktera.").optional(),
-    slika: z.string().length(6, "Polje može imati maksimalno 6 karaktera.").optional(),
-    zastareo: z.string().length(1, "Polje može imati maksimalno 1 karaktera.").optional(),
+    bracnoStanje: z.string().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
+    slika: z.string().max(6, "Polje može imati maksimalno 6 karaktera.").optional(),
+    zastareo: z.string().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
     datum: z.date(),
-    radBrRef: z.string().length(6, "Polje može imati maksimalno 6 karaktera.").optional(),
-    spremaBrInt: z.string().length(3, "Polje može imati maksimalno 3 karaktera.").optional(),
-    opsBrRada: z.string().length(5, "Polje može imati maksimalno 5 karaktera.").optional(),
-    username: z.string().length(30, "Polje može imati maksimalno 30 karaktera.").optional(),
+    radbrref: z.string().max(6, "Polje može imati maksimalno 6 karaktera.").optional(),
+    spremabrInt: z.string().max(3, "Polje može imati maksimalno 3 karaktera.").optional(),
+    opsbrRada: z.string().max(5, "Polje može imati maksimalno 5 karaktera.").optional(),
+    username: z.string().max(30, "Polje može imati maksimalno 30 karaktera.").optional(),
     nadzor: z.number().optional(),
-    obrJedinica: z.string().length(12, "Polje može imati maksimalno 12 karaktera.").optional(),
-    stevBr: z.string().length(6, "Polje može imati maksimalno 6 karaktera.").optional(),
-    sortniPojam: z.string().length(50, "Polje može imati maksimalno 50 karaktera.").optional(),
-    samohran: z.string().length(1, "Polje može imati maksimalno 1 karaktera.").optional(),
-    titula: z.string().length(10, "Polje može imati maksimalno 10 karaktera.").optional(),
-    lbo: z.string().length(11, "Polje može imati maksimalno 11 karaktera.").optional(),
-    mail: z.string().length(255, "Polje može imati maksimalno 255 karaktera.").optional(),
-    externalUsername: z.string().length(255, "Polje može imati maksimalno 255 karaktera.").optional(),
-    jeStranac: z.string().length(1, "Polje može imati maksimalno 1 karaktera.").optional(),
-    brojLk: z.string().length(50, "Polje može imati maksimalno 50 karaktera.").optional(),
+    obrJedinica: z.string().max(12, "Polje može imati maksimalno 12 karaktera.").optional(),
+    stevbr: z.string().max(6, "Polje može imati maksimalno 6 karaktera.").optional(),
+    sortniPojam: z.string().max(50, "Polje može imati maksimalno 50 karaktera.").optional(),
+    samohran: z.string().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
+    titula: z.string().max(10, "Polje može imati maksimalno 10 karaktera.").optional(),
+    lbo: lboSchema,
+    mail: z.email().max(255, "Polje može imati maksimalno 255 karaktera.").optional(),
+    externalUsername: z.string().max(255, "Polje može imati maksimalno 255 karaktera.").optional(),
+    jeStranac: z.string().max(1, "Polje može imati maksimalno 1 karaktera.").optional(),
+    brojlk: z.string().max(50, "Polje može imati maksimalno 50 karaktera.").optional(),
 });
 
-
-export type Radnik = z.infer<typeof radnikSchema>;
+export type Radnik = z.infer<typeof RadnikSchema>;
