@@ -1,18 +1,22 @@
 import { FormProvider, useForm } from "react-hook-form"
-import { Radnik, keRadnikSchema } from "../shared/schemas/keRadnik";
+import { keRadnikSchema } from "../shared/schemas/keRadnik";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PageWithHeader } from "@repo/ui/pageHeader/pageWithHeader";
 import { Button } from "@repo/ui/button";
 import { XIcon } from "@phosphor-icons/react/dist/ssr/X";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { FormInput } from "@repo/ui/formComponents/FormInput";
 import { FormSelect } from "@repo/ui/formComponents/formSelect";
 import { FormDatePicker } from "@repo/ui/formComponents/formDatePicker";
-import { Card } from "@repo/ui/card";
 import { DataTable } from "@repo/ui/data-table/DataTable";
-import { MedalIcon } from "@phosphor-icons/react/dist/ssr/Medal";
 import { ColumnDef, RowSelectionState } from "@tanstack/react-table";
-
+import FilterFormLayout from "../../layouts/filter-form-layout";
+import { Tabs } from "@repo/ui/tabs";
+import { TabsList } from "@repo/ui/tabs";
+import { TabsTrigger } from "@repo/ui/tabs";
+import { BuildingsIcon } from "@phosphor-icons/react/dist/ssr/Buildings";
+import { CubeIcon } from "@phosphor-icons/react/dist/ssr/Cube";
+import { UserIcon } from "@phosphor-icons/react/dist/ssr/User";
 type RadnikFilter = {
   radBr: string;
   prezime: string;
@@ -31,7 +35,7 @@ const dummyData: RadnikFilter[] = [
     ime: "Marko",
     status: [{ key: "1", value: "Aktivan" }],
     orgjed: 1,
-    datumDolaska: new Date(),
+    datumDolaska: new Date("2025-01-15"),
   },
   {
     radBr: "1234567891",
@@ -40,7 +44,7 @@ const dummyData: RadnikFilter[] = [
     ime: "Marko",
     status: [{ key: "1", value: "Aktivan" }],
     orgjed: 1,
-    datumDolaska: new Date(),
+    datumDolaska: new Date("2025-02-20"),
   },
   {
     radBr: "1234567892",
@@ -49,7 +53,7 @@ const dummyData: RadnikFilter[] = [
     ime: "Marko",
     status: [{ key: "1", value: "Aktivan" }],
     orgjed: 1,
-    datumDolaska: new Date(),
+    datumDolaska: new Date("2025-03-10"),
   },
   {
     radBr: "1234567893",
@@ -58,7 +62,7 @@ const dummyData: RadnikFilter[] = [
     ime: "Marko",
     status: [{ key: "1", value: "Aktivan" }],
     orgjed: 1,
-    datumDolaska: new Date(),
+    datumDolaska: new Date("2025-04-05"),
   },
   {
     radBr: "1234567894",
@@ -67,7 +71,7 @@ const dummyData: RadnikFilter[] = [
     ime: "Marko",
     status: [{ key: "1", value: "Aktivan" }],
     orgjed: 1,
-    datumDolaska: new Date(),
+    datumDolaska: new Date("2025-05-18"),
   },
 ]
 const dummyColumns: ColumnDef<RadnikFilter>[] = [
@@ -101,6 +105,8 @@ const dummyColumns: ColumnDef<RadnikFilter>[] = [
     accessorKey: "datumDolaska",
   },
 ]
+
+type Activity = 'porodica' | 'obrazovanje' | 'vestine';
 export default function RadnikPodaciPage() {
   const defaultValues: RadnikFilter = useMemo(() => ({
     radBr: "",
@@ -111,10 +117,11 @@ export default function RadnikPodaciPage() {
     orgjed: 0,
     datumDolaska: undefined,
   }), []);
+  const [activeEntity, setActiveEntity] = useState<Activity>('porodica');
   const methods = useForm<RadnikFilter>({
     mode: "onBlur",
     // defaultValues,
-    resolver: zodResolver(keRadnikSchema),
+    // resolver: zodResolver(keRadnikSchema),
   });
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
@@ -124,7 +131,7 @@ export default function RadnikPodaciPage() {
       .filter((key) => rowSelection[key])
       .map((key) => dummyData[parseInt(key)]);
   }, [rowSelection]);
-  
+
   return (
     <FormProvider {...methods}>
       <PageWithHeader
@@ -138,7 +145,7 @@ export default function RadnikPodaciPage() {
           </>
         }
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-6 p-4 bg-white rounded-2xl shadow-sm border border-slate-200">
+        <FilterFormLayout>
           <FormInput
             label="Radni broj"
             containerClassName="lg:col-span-1"
@@ -175,21 +182,37 @@ export default function RadnikPodaciPage() {
             containerClassName="lg:col-span-2"
             {...methods.register("datumDolaska")}
           />
-        </div>
-          <DataTable
-            data={dummyData}
-            columns={dummyColumns}
-            enablePagination
-            manualPagination
-            rowCount={dummyData.length}
-            emptyMessage="Nema rezultata"
-            tableOptions={{
-              enableRowSelection: true,
-              enableMultiRowSelection: false,
-              state: { rowSelection },
-              onRowSelectionChange: setRowSelection,
-            }}
-          />
+        </FilterFormLayout>
+        <DataTable
+          data={dummyData}
+          columns={dummyColumns}
+          enablePagination
+          manualPagination
+          rowCount={dummyData.length}
+          emptyMessage="Nema rezultata"
+          tableOptions={{
+            enableRowSelection: true,
+            enableMultiRowSelection: false,
+            state: { rowSelection },
+            onRowSelectionChange: setRowSelection,
+          }}
+        />
+        <Tabs value={activeEntity} onValueChange={(value) => setActiveEntity(value as Activity)}>
+            <TabsList>
+              <TabsTrigger className="flex items-center gap-2" value="porodica">
+                <BuildingsIcon  />
+                Porodica
+              </TabsTrigger>
+              <TabsTrigger className="flex items-center gap-2" value="obrazovanje">
+                <CubeIcon />
+                Obrazovanje
+              </TabsTrigger>
+              <TabsTrigger className="flex items-center gap-2" value="vestine">
+                <UserIcon />
+                Vestine
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
       </PageWithHeader>
     </FormProvider>
   );

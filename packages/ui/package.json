@@ -15,6 +15,10 @@
     "generate:component": "turbo gen react-component",
     "check-types": "tsc --noEmit"
   },
+  "peerDependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
@@ -28,7 +32,7 @@
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-select": "^2.1.2",
     "@tanstack/react-table": "^8.21.3",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.6.0"
   }
 }

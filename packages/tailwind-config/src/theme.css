@@ -237,7 +237,7 @@
   /* ── DataTable ─────────────────────────────────────────── */
 
   .table-wrapper {
-    @apply overflow-x-auto rounded-lg border border-slate-200;
+    @apply overflow-x-auto rounded-xl border border-slate-200;
   }
 
   .table-wrapper table {
