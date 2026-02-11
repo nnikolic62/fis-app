@@ -28,8 +28,9 @@ export function AppHeader({
   rightSlot,
 }: AppHeaderProps) {
   return (
-    <header className="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-6 shrink-0">
+    <header className="bg-white border-b border-slate-200 h-16 flex items-center justify-between pl-3 pr-6 shrink-0">
       <div className="flex items-center gap-4 min-w-0">
+        {leftSlot}
 
         <div className="flex items-center gap-3 shrink-0">
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
@@ -38,7 +39,6 @@ export function AppHeader({
           <span className="text-xl font-bold text-slate-800">{appTitle}</span>
         </div>
 
-        {leftSlot}
 
         {showSearch ? (
           <div className="hidden md:block w-xs max-w-full ml-15">

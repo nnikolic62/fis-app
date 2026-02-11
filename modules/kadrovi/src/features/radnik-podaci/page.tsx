@@ -11,13 +11,14 @@ import FilterFormLayout from "../../layouts/filter-form-layout";
 import { Tabs, TabsContent } from "@repo/ui/tabs";
 import { TabsList } from "@repo/ui/tabs";
 import { TabsTrigger } from "@repo/ui/tabs";
-import { BuildingsIcon } from "@phosphor-icons/react/dist/ssr/Buildings";
-import { CubeIcon } from "@phosphor-icons/react/dist/ssr/Cube";
-import { UserIcon } from "@phosphor-icons/react/dist/ssr/User";
 import PorodicaRadnika from "./components/PorodicaRadnika";
 import ObrazovanjeRadnika from "./components/ObrazovanjeRadnika";
 import Vestine from "./components/Vestine";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr/MagnifyingGlass";
+import { UsersIcon } from "@phosphor-icons/react/dist/ssr/Users";
+import { GraduationCapIcon } from "@phosphor-icons/react/dist/ssr/GraduationCap";
+import { StarIcon } from "@phosphor-icons/react/dist/ssr/Star";
+
 type RadnikFilter = {
   radBr: string;
   prezime: string;
@@ -138,7 +139,6 @@ export default function RadnikPodaciPage() {
     <FormProvider {...methods}>
       <PageWithHeader
         title="Radnik Podaci"
-        subtitle="Podaci o radniku"
       >
         <FilterFormLayout>
           <FormInput
@@ -198,39 +198,39 @@ export default function RadnikPodaciPage() {
           }}
         />
         <Tabs value={activeEntity} onValueChange={(value) => setActiveEntity(value as Activity)}>
-            <TabsList>
-              <TabsTrigger className="flex items-center gap-2" value="porodica">
-                <BuildingsIcon  />
-                Porodica
-              </TabsTrigger>
-              <TabsTrigger className="flex items-center gap-2" value="obrazovanje">
-                <CubeIcon />
-                Obrazovanje
-              </TabsTrigger>
-              <TabsTrigger className="flex items-center gap-2" value="vestine">
-                <UserIcon />
-                Vestine
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
-
-          <div className="flex-1 overflow-hidden px-6 pb-6">
-        <Tabs
-          className="h-full flex flex-col"
-          value={activeEntity}
-          onValueChange={(value) => setActiveEntity(value as Activity)}
-        >
-          <TabsContent className="flex-1 mt-0 overflow-hidden" value="porodica">
-            <PorodicaRadnika />
-          </TabsContent>
-          <TabsContent className="flex-1 mt-0 overflow-hidden" value="obrazovSanje">
-            <ObrazovanjeRadnika />
-          </TabsContent>
-          <TabsContent className="flex-1 mt-0 overflow-hidden" value="vestine">
-            <Vestine />
-          </TabsContent>
+          <TabsList>
+            <TabsTrigger className="flex items-center gap-2" value="porodica">
+              <UsersIcon />
+              Porodica
+            </TabsTrigger>
+            <TabsTrigger className="flex items-center gap-2" value="obrazovanje">
+              <GraduationCapIcon />
+              Obrazovanje
+            </TabsTrigger>
+            <TabsTrigger className="flex items-center gap-2" value="vestine">
+              <StarIcon />
+              Vestine
+            </TabsTrigger>
+          </TabsList>
         </Tabs>
-      </div>
+
+        <div className="flex-1 overflow-hidden px-6 pb-6">
+          <Tabs
+            className="h-full flex flex-col"
+            value={activeEntity}
+            onValueChange={(value) => setActiveEntity(value as Activity)}
+          >
+            <TabsContent className="flex-1 mt-0 overflow-hidden" value="porodica">
+              <PorodicaRadnika />
+            </TabsContent>
+            <TabsContent className="flex-1 mt-0 overflow-hidden" value="obrazovSanje">
+              <ObrazovanjeRadnika />
+            </TabsContent>
+            <TabsContent className="flex-1 mt-0 overflow-hidden" value="vestine">
+              <Vestine />
+            </TabsContent>
+          </Tabs>
+        </div>
       </PageWithHeader>
     </FormProvider>
   );

@@ -26,12 +26,14 @@ export function OsnovniPodaciCard() {
             placeholder="ID"
             containerClassName="w-16"
             errorClassName="w-max"
+            disabled
             {...register("radbr")}
           />
           <FormInput
             label="St. broj"
             placeholder="St. broj"
-            containerClassName="w-24"
+            containerClassName="w-16"
+            errorClassName="w-max -ml-31"
             {...register("stevbr")}
           />
         </div>

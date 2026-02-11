@@ -1,8 +1,6 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useNavigate } from "react-router";
-
 import { PageHeader, type PageHeaderProps } from "./header";
 
 export type PageWithHeaderProps = PageHeaderProps & {
@@ -17,12 +15,10 @@ export function PageWithHeader({
   contentClassName = "",
   ...headerProps
 }: PageWithHeaderProps) {
-  const navigate = useNavigate();
-  const backAction = headerProps.backAction ?? (() => navigate(-1));
 
   return (
-    <div className={`min-h-screen py-5 ${className}`}>
-      <PageHeader {...headerProps} backAction={backAction} />
+    <div className={`min-h-screen py-2 ${className}`}>
+      <PageHeader {...headerProps} />
       <main className={`max-w-7xl mx-auto pt-3 lg:pt-5 ${contentClassName}`}>
         {children}
       </main>

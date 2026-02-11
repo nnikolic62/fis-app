@@ -6,10 +6,7 @@ import {
 import { AppHeader } from "@repo/ui/appHeader";
 import { Button } from "@repo/ui/button";
 import { NavRouteItem } from "@repo/ui/sidebar/types";
-import {
-  CaretLeftIcon,
-  CaretRightIcon,
-} from "@phosphor-icons/react";
+import { ListIcon } from "@phosphor-icons/react/List";
 import { navigationItems } from "../navigation/nav-items";
 import "../config/i18n";
 
@@ -50,16 +47,12 @@ export default function RootLayout({ children, onNavigate }: RootLayoutProps) {
             type="button"
             variant="ghost"
             size="sm"
-            className="p-2 w-9 h-9"
+            className="w-9 h-9"
             onClick={handleToggleSidebar}
             aria-label={isSidebarOpen ? "Zatvori sidebar" : "Otvori sidebar"}
             title={isSidebarOpen ? "Zatvori sidebar" : "Otvori sidebar"}
           >
-            {isSidebarOpen ? (
-              <CaretLeftIcon size={18} />
-            ) : (
-              <CaretRightIcon size={18} />
-            )}
+            <ListIcon size={18} />
           </Button>
         }
       />

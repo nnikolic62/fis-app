@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { SidebarItem } from "./sidebarItem";
 import type { AppSidebarNavItem, SidebarItemOnSelect } from "./types";
@@ -28,6 +28,11 @@ export function AppSidebar({
   const toggleMenu = (id: string) => {
     setOpenMenus((prev) => ({ ...prev, [id]: !prev[id] }));
   };
+
+  useEffect(() => {
+    const width = open ? '240px' : '64px';
+    document.documentElement.style.setProperty('--sidebar-offset', width);
+  }, [open]);
 
   return (
     <aside
