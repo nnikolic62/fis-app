@@ -5,7 +5,7 @@ import { FormInput } from "@repo/ui/formComponents/FormInput";
 import { FormLabel } from "@repo/ui/formComponents/FormLabel";
 import { MapPinIcon } from "@phosphor-icons/react";
 import { useFormContext } from "react-hook-form";
-import { Radnik } from "../../shared/schemas/radnik";
+import { Radnik } from "../../shared/schemas/keRadnik";
 
 export function MestoBoravkaCard() {
   const { register } = useFormContext<Radnik>();

@@ -25,6 +25,7 @@ export function OsnovniPodaciCard() {
             label="ID"
             placeholder="ID"
             containerClassName="w-16"
+            errorClassName="w-max"
             {...register("radbr")}
           />
           <FormInput
@@ -112,10 +113,11 @@ export function OsnovniPodaciCard() {
                 value="M"
                 {...register("pol")}
               />
-              <FormRadio
-                label="Zenski"
-                value="Z"
-                {...register("pol")}
+              <FormRadio 
+                id="pol-zenski"
+                label="Zenski" 
+                value="Z" 
+                {...register("pol")} 
               />
             </div>
           </div>

@@ -8,11 +8,14 @@ import { FormSelect } from "@repo/ui/formComponents/formSelect";
 import { FormDatePicker } from "@repo/ui/formComponents/formDatePicker";
 import { FormLabel } from "@repo/ui/formComponents/FormLabel";
 import { GlobeIcon } from "@phosphor-icons/react";
-import { Controller, useFormContext } from "react-hook-form";
-import { Radnik } from "../../shared/schemas/radnik";
+import { Controller, useFormContext, useWatch } from "react-hook-form";
+import { Radnik } from "../../shared/schemas/keRadnik";
 
 export function OpstiPodaciCard() {
   const { control, register } = useFormContext<Radnik>();
+
+  const pol = useWatch({ control, name: "pol" });
+  const isZenski = pol === "Z";
 
   return (
     <Card
@@ -205,22 +208,22 @@ export function OpstiPodaciCard() {
             <FormLabel label="Bračno stanje" htmlFor="bracnoStanje" />
             <div className="mt-1 flex flex-wrap gap-4">
               <FormRadio
-                label="Neoženjen"
+                label={isZenski ? "Neudata" : "Neoženjen"}
                 value="N"
                 {...register("bracnoStanje")}
               />
               <FormRadio
-                label="Oženjen"
+                label={isZenski ? "Udata" : "Oženjen"}
                 value="O"
                 {...register("bracnoStanje")}
               />
               <FormRadio
-                label="Razveden"
+                label={isZenski ? "Razvedena" : "Razveden"}
                 value="R"
                 {...register("bracnoStanje")}
               />
               <FormRadio
-                label="Udovac"
+                label={isZenski ? "Udovica" : "Udovac"}
                 value="U"
                 {...register("bracnoStanje")}
               />

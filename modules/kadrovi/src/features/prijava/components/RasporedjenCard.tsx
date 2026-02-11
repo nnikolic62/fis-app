@@ -4,11 +4,12 @@ import { Card } from "@repo/ui/card";
 import { FormInput } from "@repo/ui/formComponents/FormInput";
 import { FormLabel } from "@repo/ui/formComponents/FormLabel";
 import { SuitcaseIcon } from "@phosphor-icons/react";
-import { useFormContext } from "react-hook-form";
-import { Radnik } from "../../shared/schemas/radnik";
+import { Controller, useFormContext } from "react-hook-form";
+import { Radnik } from "../../shared/schemas/keRadnik";
+import { FormDatePicker } from "@repo/ui/formComponents/formDatePicker";
 
 export function RasporedjenCard() {
-  const { register } = useFormContext<Radnik>();
+  const { register, control } = useFormContext<Radnik>();
 
   return (
     <Card
@@ -76,23 +77,45 @@ export function RasporedjenCard() {
         {/* Drugi red */}
         <div className="flex gap-3 mb-2">
           <div className="flex-1">
-            <FormInput
-              label="Prvi datum dolaska"
-              placeholder="Polje 1"
-            //   {...register("datumDol")}
+            <Controller
+              control={control}
+              name="datumDol"
+              render={({ field }) => (
+                <FormDatePicker
+                  label="Prvi datum dolaska"
+                  placeholder="dd.mm.yyyy"
+                  value={field.value ? String(field.value) : ""}
+                  onValueChange={field.onChange}
+                />
+              )}
             />
           </div>
           <div className="flex-1">
-            <FormInput
-              label="Poslednji datum dolaska"
-              placeholder="Polje 2"
+           <Controller
+              control={control}
+              name="datumDol"
+              render={({ field }) => (
+                <FormDatePicker
+                  label="Prvi datum dolaska(ovo fali)"
+                  placeholder="dd.mm.yyyy"
+                  value={field.value ? String(field.value) : ""}
+                  onValueChange={field.onChange}
+                />
+              )}
             />
           </div>
           <div className="flex-1">
-            <FormInput
-              label="Poslednji datum odlaska"
-              placeholder="Polje 3"
-            //   {...register("datumOdl")}
+            <Controller
+              control={control}
+              name="datumOdl"
+              render={({ field }) => (
+                <FormDatePicker
+                  label="Poslednji datum odlaska"
+                  placeholder="dd.mm.yyyy"
+                  value={field.value ? String(field.value) : ""}
+                  onValueChange={field.onChange}
+                />
+              )}
             />
           </div>
         </div>

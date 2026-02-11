@@ -11,6 +11,7 @@ type FormInputProps = Omit<
   label?: string;
   containerClassName?: string;
   inputClassName?: string;
+  errorClassName?: string;
   disabled?: boolean;
   required?: boolean;
 };
@@ -21,6 +22,7 @@ export const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
       label,
       containerClassName = "",
       inputClassName = "",
+      errorClassName = "",
       id,
       disabled = false,
       required = false,
@@ -35,7 +37,10 @@ export const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
   const { formState: { errors } } = useFormContext();
   
   const fieldName = rest.name;
-  const fieldError = fieldName && typeof fieldName === 'string' ? errors[fieldName] : undefined;
+  const fieldError = fieldName && typeof fieldName === "string" ? errors[fieldName] : undefined;
+  const borderStyles = fieldError
+    ? "border-red-500 focus:border-red-500 focus:ring-red-200"
+    : "border-slate-200 focus:border-blue-500 focus:ring-blue-200";
 
   return (
     <div className={containerClassName}>
@@ -50,14 +55,14 @@ export const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
       <input
         id={inputId}
         ref={ref}
-        className={`${inputSpacing} block w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-0 placeholder:text-slate-400 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 ${inputClassName}`}
+        className={`${inputSpacing} block w-full rounded-lg border bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-0 placeholder:text-slate-400 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 ${borderStyles} ${inputClassName}`}
         disabled={disabled}
         {...rest}
       />
       {fieldError && (
           <p
             id={`${inputId}-error`}
-            className="pl-1 text-xs text-red-600 flex items-center gap-1"
+            className={`pl-1 text-xxs text-red-600 flex items-center gap-1 ${errorClassName}`}
             role="alert"
           >
             <svg
