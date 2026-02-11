@@ -32,6 +32,12 @@ export const lboSchema = z.string()
     .length(11, i18n.t(`${KADROVI_NS}:errors.lbo11Cifara`))
     .optional()
 
+export const licniBrSchema = z.string()
+    .trim()
+    .regex(/^\d+$/, i18n.t(`${KADROVI_NS}:errors.licniBrSamoCIfre`))
+    .length(13, i18n.t(`${KADROVI_NS}:errors.licniBr13Cifara`))
+    .optional()
+
 export const keRadnikSchema = z.object({
     radbr: radbrSchema,
     organizacionaJedinica: notRequiredString(12),
@@ -42,7 +48,7 @@ export const keRadnikSchema = z.object({
     devPrez: notRequiredString(20),
     datRodj: datRodjSchema,
     pol: requiredString(1),
-    licniBr: notRequiredString(13),
+    licniBr: licniBrSchema,
     opsrbr: notRequiredString(5),
     opsbr: requiredString(5),
     mzbr: requiredString(4),
@@ -58,7 +64,7 @@ export const keRadnikSchema = z.object({
     bracnoStanje: notRequiredString(1),
     slika: notRequiredString(6),
     zastareo: notRequiredString(1),
-    datum: z.date(),
+    datum: z.date(i18n.t(`${KADROVI_NS}:errors.obavezno`)),
     radbrref: notRequiredString(6),
     spremabrInt: notRequiredString(3),
     opsbrRada: notRequiredString(5),
@@ -70,7 +76,7 @@ export const keRadnikSchema = z.object({
     samohran: notRequiredString(1),
     titula: notRequiredString(10),
     lbo: lboSchema,
-    mail: z.email().max(255, `${i18n.t(`${KADROVI_NS}:errors.ogranicenjePolja`)} 255 ${i18n.t(`${KADROVI_NS}:errors.karaktera`)}`).optional(),
+    mail: z.email(i18n.t(`${KADROVI_NS}:errors.obavezno`)).max(255, `${i18n.t(`${KADROVI_NS}:errors.ogranicenjePolja`)} 255 ${i18n.t(`${KADROVI_NS}:errors.karaktera`)}`).optional(),
     externalUsername: notRequiredString(255),
     jeStranac: notRequiredString(1),
     brojlk: notRequiredString(50),

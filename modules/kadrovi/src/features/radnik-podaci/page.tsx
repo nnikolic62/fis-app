@@ -1,22 +1,23 @@
 import { FormProvider, useForm } from "react-hook-form"
-import { keRadnikSchema } from "../shared/schemas/keRadnik";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { PageWithHeader } from "@repo/ui/pageHeader/pageWithHeader";
 import { Button } from "@repo/ui/button";
-import { XIcon } from "@phosphor-icons/react/dist/ssr/X";
 import { useMemo, useState } from "react";
 import { FormInput } from "@repo/ui/formComponents/FormInput";
 import { FormSelect } from "@repo/ui/formComponents/formSelect";
-import { FormDatePicker } from "@repo/ui/formComponents/formDatePicker";
+import { formatDisplayDate, FormDatePicker } from "@repo/ui/formComponents/formDatePicker";
 import { DataTable } from "@repo/ui/data-table/DataTable";
 import { ColumnDef, RowSelectionState } from "@tanstack/react-table";
 import FilterFormLayout from "../../layouts/filter-form-layout";
-import { Tabs } from "@repo/ui/tabs";
+import { Tabs, TabsContent } from "@repo/ui/tabs";
 import { TabsList } from "@repo/ui/tabs";
 import { TabsTrigger } from "@repo/ui/tabs";
 import { BuildingsIcon } from "@phosphor-icons/react/dist/ssr/Buildings";
 import { CubeIcon } from "@phosphor-icons/react/dist/ssr/Cube";
 import { UserIcon } from "@phosphor-icons/react/dist/ssr/User";
+import PorodicaRadnika from "./components/PorodicaRadnika";
+import ObrazovanjeRadnika from "./components/ObrazovanjeRadnika";
+import Vestine from "./components/Vestine";
+import { MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr/MagnifyingGlass";
 type RadnikFilter = {
   radBr: string;
   prezime: string;
@@ -103,6 +104,7 @@ const dummyColumns: ColumnDef<RadnikFilter>[] = [
   {
     header: "Datum dolaska",
     accessorKey: "datumDolaska",
+    cell: ({ getValue }) => formatDisplayDate(getValue() as Date || "")
   },
 ]
 
@@ -137,13 +139,6 @@ export default function RadnikPodaciPage() {
       <PageWithHeader
         title="Radnik Podaci"
         subtitle="Podaci o radniku"
-        actions={
-          <>
-            <Button variant="secondary" icon={<XIcon size={16} />}>
-              Odustani
-            </Button>
-          </>
-        }
       >
         <FilterFormLayout>
           <FormInput
@@ -169,7 +164,7 @@ export default function RadnikPodaciPage() {
           <FormSelect
             label="Status"
             options={[]}
-            containerClassName="lg:col-span-3"
+            containerClassName="lg:col-span-2"
             {...methods.register("status")}
           />
           <FormInput
@@ -182,6 +177,11 @@ export default function RadnikPodaciPage() {
             containerClassName="lg:col-span-2"
             {...methods.register("datumDolaska")}
           />
+          <div className="lg:col-span-1 flex items-end">
+            <Button variant="primary" icon={<MagnifyingGlassIcon size={16} />}>
+              Pretraga
+            </Button>
+          </div>
         </FilterFormLayout>
         <DataTable
           data={dummyData}
@@ -213,6 +213,24 @@ export default function RadnikPodaciPage() {
               </TabsTrigger>
             </TabsList>
           </Tabs>
+
+          <div className="flex-1 overflow-hidden px-6 pb-6">
+        <Tabs
+          className="h-full flex flex-col"
+          value={activeEntity}
+          onValueChange={(value) => setActiveEntity(value as Activity)}
+        >
+          <TabsContent className="flex-1 mt-0 overflow-hidden" value="porodica">
+            <PorodicaRadnika />
+          </TabsContent>
+          <TabsContent className="flex-1 mt-0 overflow-hidden" value="obrazovSanje">
+            <ObrazovanjeRadnika />
+          </TabsContent>
+          <TabsContent className="flex-1 mt-0 overflow-hidden" value="vestine">
+            <Vestine />
+          </TabsContent>
+        </Tabs>
+      </div>
       </PageWithHeader>
     </FormProvider>
   );

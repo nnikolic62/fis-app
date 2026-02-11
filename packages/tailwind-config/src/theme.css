@@ -42,6 +42,10 @@
   --animate-slide-in-up: slide-in-up 0.3s ease-out;
   --animate-slide-in-down: slide-in-down 0.3s ease-out;
   --animate-scale-in: scale-in 0.2s ease-out;
+
+  --text-xxs: 0.625rem;
+  --text-xxs--line-height: 0.875rem;
+
 }
 
 /* Animation keyframes */

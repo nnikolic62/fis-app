@@ -101,6 +101,20 @@
       "statusClanaPorodice": "Статус члана породице",
       "Status": "Status"
     },
+    "obrazovanje": {
+      "vrsteSkola": "Врсте школа",
+      "nazivSkole": "Назив школе",
+      "sprema": "Спрема",
+      "smer": "Смер",
+      "stepen": "Степен",
+      "brojDiplome": "Број дипломе",
+      "datumUpisa": "Датум уписа",
+      "datumDiplomiranja": "Датум дипломирања",
+      "prosek": "Просек",
+      "internaSprema": "Интерна спрема",
+      "zanimanje": "Занимање",
+      "skolaUstanova": "Школа - установа"
+    },
     "errors": {
       "ogranicenjePolja": "Поље може имати максимално",
       "karaktera": "карактера",
@@ -112,8 +126,14 @@
       "ogranicenjeCeoBroj": "Мора бити цео број",
       "ogranicenjeBroj": "Мора бити број",
       "max4PreDecimale": "Максимално 4 цифара пре децимале",
+      "max7PreDecimale": "Максимално 7 цифара пре децимале",
+      "max8PreDecimale": "Максимално 8 цифара пре децимале",
+      "max10PreDecimale": "Максимално 10 цифара пре децимале",
       "max12PreDecimale": "Максимално 12 цифара пре децимале",
       "dozovljeno2Decimale": "Дозвољене су највише 2 децимале",
-      "dozovljeno3Decimale": "Дозвољене су највише 3 децимале"
+      "dozovljeno3Decimale": "Дозвољене су највише 3 децимале",
+      "dozovljeno5Decimale": "Дозвољене су највише 5 децимале",
+      "licniBrSamoCIfre": "Матични број мора садржати само цифре",
+      "licniBr13Cifara": "Матични број мора садржати 13 цифара"
     }
 }

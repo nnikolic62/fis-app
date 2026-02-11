@@ -15,7 +15,7 @@ import { useMemo } from "react";
 
 type DataTableProps<TData> = {
   data: TData[];
-  columns: ColumnDef<TData>[];
+  columns: ColumnDef<TData, any>[];
 
   tableOptions?: Partial<TableOptions<TData>>;
 
