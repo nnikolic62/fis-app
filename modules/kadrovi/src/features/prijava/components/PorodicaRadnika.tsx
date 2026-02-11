@@ -1,13 +1,13 @@
 import { DataTable } from "@repo/ui/data-table/DataTable";
 import { KePorod } from "../../shared/schemas/kePorod";
 import { FormProvider, useForm } from "react-hook-form";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, RowSelectionState } from "@tanstack/react-table";
 import { i18n, useTranslation } from "@repo/i18n-config";
 import { KADROVI_NS } from "../../../config/i18n";
 import { FormInput } from "@repo/ui/formComponents/formInput";
 import { FormCheckbox } from "@repo/ui/formComponents/formCheckbox";
 import { FormSelect } from "@repo/ui/formComponents/formSelect";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { formatDisplayDate, FormDatePicker } from "@repo/ui/formComponents/formDatePicker";
 
 
@@ -233,10 +233,16 @@ export default function PorodicaRadnika({data}: PorodicaProps) {
   const methods = useForm<KePorod>({
     mode: "onBlur"
   })
-  const [selectedRow, setSelectedRow] = useState<KePorod | undefined>(undefined);
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
   const rows = data ?? porodicaRadnikaDummy;
 
   const getRowId = (row: KePorod) => `${row.radbr}-${row.rbr}`;
+
+  const selectedRow = useMemo(() => {
+    const selectedKey = Object.keys(rowSelection).find((key) => rowSelection[key]);
+    if (!selectedKey) return undefined;
+    return rows.find((row) => getRowId(row) === selectedKey);
+  }, [rowSelection, rows]);
 
     return (
         <FormProvider {...methods}>
@@ -246,9 +252,10 @@ export default function PorodicaRadnika({data}: PorodicaProps) {
             tableOptions={{
               enableRowSelection: true,
               enableMultiRowSelection: false,
-              getRowId
+              getRowId,
+              state: { rowSelection },
+              onRowSelectionChange: setRowSelection,
             }}
-            onSelectedRowsChange={(selectedRows) => setSelectedRow(selectedRows[0])}
           />
           <div className="flex gap-3 mb-2 mx-auto">
             <FormDatePicker

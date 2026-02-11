@@ -11,7 +11,7 @@ import { DataTableLoading } from "./DataTableLoading";
 import { DataTableEmpty } from "./DataTableEmpty";
 import { DataTablePagination } from "./DataTablePagination";
 import { createSelectColumn } from "./select-column";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 
 type DataTableProps<TData> = {
   data: TData[];
@@ -27,7 +27,6 @@ type DataTableProps<TData> = {
   rowCount?: number;
   isLoading?: boolean;
   emptyMessage?: string;
-  onSelectedRowsChange?: (rows: TData[]) => void;
 };
 
 export function DataTable<TData>({
@@ -41,7 +40,6 @@ export function DataTable<TData>({
   rowCount,
   isLoading,
   emptyMessage = "No results.",
-  onSelectedRowsChange,
 }: DataTableProps<TData>) {
   const finalColumns = useMemo(() => {
     if (!tableOptions?.enableRowSelection) return columns;
@@ -58,15 +56,6 @@ export function DataTable<TData>({
 
     ...tableOptions,
   });
-
-  const rowSelectionState = table.getState().rowSelection;
-  useEffect(() => {
-    if (!onSelectedRowsChange) return;
-    const selectedRows = table
-      .getSelectedRowModel()
-      .rows.map((row) => row.original);
-    onSelectedRowsChange(selectedRows);
-  }, [onSelectedRowsChange, rowSelectionState, table]);
 
   return (
     <div>

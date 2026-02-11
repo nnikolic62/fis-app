@@ -4,14 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { PageWithHeader } from "@repo/ui/pageHeader/pageWithHeader";
 import { Button } from "@repo/ui/button";
 import { XIcon } from "@phosphor-icons/react/dist/ssr/X";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FormInput } from "@repo/ui/formComponents/FormInput";
 import { FormSelect } from "@repo/ui/formComponents/formSelect";
 import { FormDatePicker } from "@repo/ui/formComponents/formDatePicker";
 import { Card } from "@repo/ui/card";
 import { DataTable } from "@repo/ui/data-table/DataTable";
 import { MedalIcon } from "@phosphor-icons/react/dist/ssr/Medal";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, RowSelectionState } from "@tanstack/react-table";
 
 type RadnikFilter = {
   radBr: string;
@@ -116,6 +116,15 @@ export default function RadnikPodaciPage() {
     // defaultValues,
     resolver: zodResolver(keRadnikSchema),
   });
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+  // Derive selected data rows from the selection state
+  const selectedRows = useMemo(() => {
+    return Object.keys(rowSelection)
+      .filter((key) => rowSelection[key])
+      .map((key) => dummyData[parseInt(key)]);
+  }, [rowSelection]);
+  
   return (
     <FormProvider {...methods}>
       <PageWithHeader
@@ -177,6 +186,8 @@ export default function RadnikPodaciPage() {
             tableOptions={{
               enableRowSelection: true,
               enableMultiRowSelection: false,
+              state: { rowSelection },
+              onRowSelectionChange: setRowSelection,
             }}
           />
       </PageWithHeader>
