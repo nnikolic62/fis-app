@@ -1,58 +1,43 @@
 import { z } from "zod";
 import { notRequiredString, requiredString } from "./keRadnik";
+import { optionalInt10 } from "./zrObrdJedinica";
+import { i18n } from "@repo/i18n-config";
+import { KADROVI_NS } from "../../../config/i18n";
+import { optionalInt30 } from "./keSlika";
+import { optionalNumber42 } from "./keSkole";
 
 
-export const optionalInt10 = z
-  .number()
-  .int("Mora biti ceo broj.")
-  .min(0)
-  .max(9)
-  .optional();
-
-export const int20 = z.number().int("Mora biti ceo broj.").min(0).max(99);
+export const int20 = z.number().int(i18n.t(`${KADROVI_NS}:errors.ogranicenjeCeoBroj`)).min(0).max(99);
 export const optionalInt20 = int20.optional();
 
-export const optionalInt30 = z
-  .number()
-  .int("Mora biti ceo broj.")
-  .min(0)
-  .max(999)
-  .optional();
 
 export const optionalInt40 = z
   .number()
-  .int("Mora biti ceo broj.")
+  .int(i18n.t(`${KADROVI_NS}:errors.ogranicenjeCeoBroj`))
   .min(0)
   .max(9999)
   .optional();
 
-export const optionalNumber42 = z
-  .number()
-  .refine((v) => Number.isFinite(v), "Mora biti broj.")
-  .refine((v) => Math.abs(v) < 100, "Maksimalno 2 cifre pre decimale.")
-  .refine((v) => Number.isInteger(v * 100), "Dozvoljene su najviše 2 decimale.")
-  .optional();
-
 export const optionalNumber122 = z
   .number()
-  .refine((v) => Number.isFinite(v), "Mora biti broj.")
-  .refine((v) => Math.abs(v) < 1e10, "Previše cifara (max 10 pre decimale).")
-  .refine((v) => Number.isInteger(v * 100), "Dozvoljene su najviše 2 decimale.")
+  .refine((v) => Number.isFinite(v), i18n.t(`${KADROVI_NS}:errors.ogranicenjeBroj`))
+  .refine((v) => Math.abs(v) < 1e10, i18n.t(`${KADROVI_NS}:errors.max10PreDecimale`))
+  .refine((v) => Number.isInteger(v * 100), i18n.t(`${KADROVI_NS}:errors.dozovljeno2Decimale`))
   .optional();
 
 export const number135 = z
   .number()
-  .refine((v) => Number.isFinite(v), "Mora biti broj.")
-  .refine((v) => Math.abs(v) < 1e8, "Previše cifara (max 8 pre decimale).")
-  .refine((v) => Number.isInteger(v * 100000), "Dozvoljene su najviše 5 decimala.");
+  .refine((v) => Number.isFinite(v), i18n.t(`${KADROVI_NS}:errors.ogranicenjeBroj`))
+  .refine((v) => Math.abs(v) < 1e8, i18n.t(`${KADROVI_NS}:errors.max8PreDecimale`))
+  .refine((v) => Number.isInteger(v * 100000), i18n.t(`${KADROVI_NS}:errors.dozovljeno5Decimale`));
 
 export const optionalNumber135 = number135.optional();
 
 export const optionalNumber155 = z
   .number()
-  .refine((v) => Number.isFinite(v), "Mora biti broj.")
-  .refine((v) => Math.abs(v) < 1e10, "Previše cifara (max 10 pre decimale).")
-  .refine((v) => Number.isInteger(v * 100000), "Dozvoljene su najviše 5 decimala.")
+  .refine((v) => Number.isFinite(v), i18n.t(`${KADROVI_NS}:errors.ogranicenjeBroj`))
+  .refine((v) => Math.abs(v) < 1e10, i18n.t(`${KADROVI_NS}:errors.max10PreDecimale`))
+  .refine((v) => Number.isInteger(v * 100000), i18n.t(`${KADROVI_NS}:errors.dozovljeno5Decimale`))
   .optional();
 
 export const keStazSchema = z.object({

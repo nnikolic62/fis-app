@@ -14,7 +14,7 @@ export const optionalNumber73 = z
   .number()
   .refine((v) => Number.isFinite(v), i18n.t(`${KADROVI_NS}:errors.ogranicenjeBroj`))
   .refine((v) => Math.abs(v) < 10000, i18n.t(`${KADROVI_NS}:errors.max4PreDecimale`))
-  .refine((v) => Number.isInteger(v * 1000), "Dozvoljene su najviše 3 decimale.")
+  .refine((v) => Number.isInteger(v * 1000), i18n.t(`${KADROVI_NS}:errors.dozovljeno3Decimale`))
   .optional();
 
 export const optionalNumber62 = z

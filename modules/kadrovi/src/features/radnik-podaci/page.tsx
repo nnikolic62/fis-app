@@ -7,7 +7,7 @@ import { XIcon } from "@phosphor-icons/react/dist/ssr/X";
 import { useEffect, useMemo, useState } from "react";
 import { FormInput } from "@repo/ui/formComponents/FormInput";
 import { FormSelect } from "@repo/ui/formComponents/formSelect";
-import { FormDatePicker } from "@repo/ui/formComponents/formDatePicker";
+import { formatDisplayDate, FormDatePicker } from "@repo/ui/formComponents/formDatePicker";
 import { Card } from "@repo/ui/card";
 import { DataTable } from "@repo/ui/data-table/DataTable";
 import { MedalIcon } from "@phosphor-icons/react/dist/ssr/Medal";
@@ -99,6 +99,7 @@ const dummyColumns: ColumnDef<RadnikFilter>[] = [
   {
     header: "Datum dolaska",
     accessorKey: "datumDolaska",
+    cell: ({ getValue }) => formatDisplayDate(getValue() as Date || "")
   },
 ]
 export default function RadnikPodaciPage() {
@@ -114,7 +115,7 @@ export default function RadnikPodaciPage() {
   const methods = useForm<RadnikFilter>({
     mode: "onBlur",
     // defaultValues,
-    resolver: zodResolver(keRadnikSchema),
+    // resolver: zodResolver(keRadnikSchema),
   });
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
