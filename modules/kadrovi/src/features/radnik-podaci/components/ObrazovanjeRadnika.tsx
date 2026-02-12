@@ -273,9 +273,7 @@ export default function ObrazovanjeRadnika() {
             <FormInput
               containerClassName="flex-[4]"  
             />
-            
             </div>
-
         </div>
 
       </FormProvider>

@@ -115,6 +115,33 @@
       "zanimanje": "Занимање",
       "skolaUstanova": "Школа - установа"
     },
+    "vestine": {
+      "vestinaStraniJezik": "Вештина - страни језик",
+      "stepen": "Степен",
+      "datumUpisa":"Датум уписа",
+      "datumZavrsetka": "Датум завршетка",
+      "mestoLokacija": "Место - локација курса",
+      "skola": "Школа",
+      "organizator": "Организатор",
+      "trajanje": "Трајање",
+      "cena": "Цена",
+      "planiraniDatum": "Планирани датум",
+      "datumVaznosti": "Датум важности сертификата"
+    },
+    "dokumenta": {
+      "ustanova": "Установа",
+      "tipDokumenta": "Тип документа",
+      "broj": "Број",
+      "nacin": "Начин",
+      "procenat": "Проценат",
+      "dinarskiIznos": "Динарски износ",
+      "platu": "плату",
+      "prioritetZaAkontaciju": "Приоритет за аконтацију",
+      "naknada": "Накнада",
+      "brojRacunaJePartija": "Број рачуна је партија",
+      "vaziOd": "Важи од", 
+      "vaziDo": "Важи до"
+    },
     "errors": {
       "ogranicenjePolja": "Поље може имати максимално",
       "karaktera": "карактера",
