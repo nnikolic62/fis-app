@@ -9,6 +9,8 @@ import { Radnik } from "../../shared/schemas/keRadnik";
 import { FormDatePicker } from "@repo/ui/formComponents/formDatePicker";
 import { SelectPopup, SelectPopupItem } from "@repo/ui/SelectPopup";
 import { useState } from "react";
+import { useTranslation } from "@repo/i18n-config";
+import { KADROVI_NS } from "../../../config/i18n";
 
 // Mock podaci za obracunske jedinice
 const mockObrJedinice: SelectPopupItem[] = [
@@ -30,6 +32,7 @@ const mockOJRadnika: SelectPopupItem[] = [
 ];
 
 export function RasporedjenCard() {
+  const { t } = useTranslation(KADROVI_NS);
   const { register, control, setValue } = useFormContext<Radnik>();
   const [isObrJedinicaPopupOpen, setIsObrJedinicaPopupOpen] = useState(false);
   const [isOJRadnikaPopupOpen, setIsOJRadnikaPopupOpen] = useState(false);
@@ -77,7 +80,7 @@ export function RasporedjenCard() {
   return (
     <>
     <Card
-      title="Rasporedjen u preduzecu"
+      title={t("prijava.rasporedjenje.title")}
       icon={<SuitcaseIcon size={20} />}
       className="lg:col-span-4"
       noPadding
@@ -86,11 +89,11 @@ export function RasporedjenCard() {
         {/* Prvi red */}
         <div className="flex gap-3 mb-2">
           <div className="flex-1">
-            <FormLabel label="Obr. jedinica" htmlFor="obrJedinica" />
+            <FormLabel label={t("prijava.rasporedjenje.obrJedinica")} htmlFor="obrJedinica" />
             <div className="flex gap-2 mt-1">
               <FormInput
                 containerClassName="basis-2/5"
-                placeholder="Sifra"
+                placeholder={t("prijava.opstiPodaci.sifra")}
                 label={undefined}
                 {...register("obrJedinica")}
                 onBlur={handleObrJedinicaBlur}
@@ -100,7 +103,7 @@ export function RasporedjenCard() {
               <FormInput
                 id="obrJedinica"
                 containerClassName="basis-3/5"
-                placeholder="Naziv"
+                placeholder={t("prijava.rasporedjenje.naziv")}
                 label={undefined}
                 value={obrJedinicaNaziv}
                 readOnly
@@ -109,11 +112,11 @@ export function RasporedjenCard() {
             </div>
           </div>
           <div className="flex-1">
-            <FormLabel label="Oj radnika" htmlFor="ojRadnika" />
+            <FormLabel label={t("prijava.rasporedjenje.organizacionaJedinica")} htmlFor="ojRadnika" />
             <div className="flex gap-2 mt-1">
               <FormInput
                 containerClassName="basis-2/5"
-                placeholder="Sifra"
+                placeholder={t("prijava.opstiPodaci.sifra")}
                 label={undefined}
                 {...register("organizacionaJedinica")}
                 onBlur={handleOJRadnikaBlur}
@@ -123,7 +126,7 @@ export function RasporedjenCard() {
               <FormInput
                 id="ojRadnika"
                 containerClassName="basis-3/5"
-                placeholder="Naziv"
+                placeholder={t("prijava.rasporedjenje.organizacionaJedinica")}
                 label={undefined}
                 value={ojRadnikaNaziv}
                 readOnly
@@ -132,18 +135,18 @@ export function RasporedjenCard() {
             </div>
           </div>
           <div className="flex-1">
-            <FormLabel label="Sprema" htmlFor="sprema" />
+            <FormLabel label={t("prijava.rasporedjenje.sprema")} htmlFor="sprema" />
             <div className="flex gap-2 mt-1">
               <FormInput
                 containerClassName="basis-1/3"
-                placeholder="Sifra"
+                placeholder={t("prijava.opstiPodaci.sifra")}
                 label={undefined}
                 {...register("spremabr")}
               />
               <FormInput
                 id="sprema"
                 containerClassName="basis-2/3"
-                placeholder="Naziv"
+                placeholder={t("prijava.rasporedjenje.sprema")}
                 label={undefined}
               />
             </div>
@@ -158,8 +161,8 @@ export function RasporedjenCard() {
               name="datumDol"
               render={({ field }) => (
                 <FormDatePicker
-                  label="Prvi datum dolaska"
-                  placeholder="dd.mm.yyyy"
+                  label={t("prijava.rasporedjenje.datumPrijave")}
+                  placeholder={t("prijava.placeholders.datePicker")}
                   value={field.value ? String(field.value) : ""}
                   onValueChange={field.onChange}
                 />
@@ -172,8 +175,8 @@ export function RasporedjenCard() {
               name="datumDol"
               render={({ field }) => (
                 <FormDatePicker
-                  label="Prvi datum dolaska(ovo fali)"
-                  placeholder="dd.mm.yyyy"
+                  label={t("prijava.rasporedjenje.datumPrijave")}
+                  placeholder={t("prijava.placeholders.datePicker")}
                   value={field.value ? String(field.value) : ""}
                   onValueChange={field.onChange}
                 />
@@ -186,8 +189,8 @@ export function RasporedjenCard() {
               name="datumOdl"
               render={({ field }) => (
                 <FormDatePicker
-                  label="Poslednji datum odlaska"
-                  placeholder="dd.mm.yyyy"
+                  label={t("prijava.rasporedjenje.datumOdjave")}
+                  placeholder={t("prijava.placeholders.datePicker")}
                   value={field.value ? String(field.value) : ""}
                   onValueChange={field.onChange}
                 />
@@ -200,36 +203,36 @@ export function RasporedjenCard() {
         <div className="flex gap-3 mb-2">
           <div className="flex-1">
             <label className="block text-sm font-medium text-gray-700 text-center -ml-10">
-              Ukupni staz
+              {t("prijava.rasporedjenje.radniStaz.ukupniStaz")}
             </label>
             <div className="mt-1 space-y-2">
               <div className="flex items-end gap-2">
                 <span className="block text-sm font-medium text-gray-700 mr-2 mb-2 w-24 text-right">
-                  Penzioni staz
+                  {t("prijava.rasporedjenje.radniStaz.penzionskiStaz")}
                 </span>
                 <FormInput
-                  label="God."
-                  placeholder="God."
+                  label={t("prijava.opstiPodaci.godine")}
+                  placeholder={t("prijava.opstiPodaci.godine")}
                   containerClassName="w-13"
                 />
                 <FormInput
-                  label="Mes."
-                  placeholder="Mes."
+                  label={t("prijava.opstiPodaci.meseci")}
+                  placeholder={t("prijava.opstiPodaci.meseci")}
                   containerClassName="w-13"
                 />
               </div>
               <div className="flex items-end gap-2">
                 <span className="block text-sm font-medium text-gray-700 mr-2 mb-2 w-24 text-right">
-                  Vremenski staz
+                  {t("prijava.rasporedjenje.radniStaz.vremenskiStaz")}
                 </span>
                 <FormInput
-                  label="God."
-                  placeholder="God."
+                  label={t("prijava.opstiPodaci.godine")}
+                  placeholder={t("prijava.opstiPodaci.godine")}
                   containerClassName="w-13"
                 />
                 <FormInput
-                  label="Mes."
-                  placeholder="Mes."
+                  label={t("prijava.opstiPodaci.meseci")}
+                  placeholder={t("prijava.opstiPodaci.meseci")}
                   containerClassName="w-13"
                 />
               </div>
@@ -237,36 +240,36 @@ export function RasporedjenCard() {
           </div>
           <div className="flex-1">
             <label className="block text-sm font-medium text-gray-700 text-center -ml-10">
-              Staz u preduzecu
+              {t("prijava.rasporedjenje.radniStaz.stazUPreduzecu")}
             </label>
             <div className="mt-1 space-y-2">
               <div className="flex items-end gap-2">
                 <span className="block text-sm font-medium text-gray-700 mr-2 mb-2 w-24 text-right">
-                  Penzioni staz
+                  {t("prijava.rasporedjenje.radniStaz.penzionskiStaz")}
                 </span>
                 <FormInput
-                  label="God."
-                  placeholder="God."
+                  label={t("prijava.opstiPodaci.godine")}
+                  placeholder={t("prijava.opstiPodaci.godine")}
                   containerClassName="w-13"
                 />
                 <FormInput
-                  label="Mes."
-                  placeholder="Mes."
+                  label={t("prijava.opstiPodaci.meseci")}
+                  placeholder={t("prijava.opstiPodaci.meseci")}
                   containerClassName="w-13"
                 />
               </div>
               <div className="flex items-end gap-2">
                 <span className="block text-sm font-medium text-gray-700 mr-2 mb-2 w-24 text-right">
-                  Vremenski staz
+                  {t("prijava.rasporedjenje.radniStaz.vremenskiStaz")}
                 </span>
                 <FormInput
-                  label="God."
-                  placeholder="God."
+                  label={t("prijava.opstiPodaci.godine")}
+                  placeholder={t("prijava.opstiPodaci.godine")}
                   containerClassName="w-13"
                 />
                 <FormInput
-                  label="Mes."
-                  placeholder="Mes."
+                  label={t("prijava.opstiPodaci.meseci")}
+                  placeholder={t("prijava.opstiPodaci.meseci")}
                   containerClassName="w-13"
                 />
               </div>
@@ -274,36 +277,36 @@ export function RasporedjenCard() {
           </div>
           <div className="flex-1">
             <label className="block text-sm font-medium text-gray-700 text-center -ml-10">
-              Prethodni staz
+              {t("prijava.rasporedjenje.radniStaz.prethodniStaz")}
             </label>
             <div className="mt-1 space-y-2">
               <div className="flex items-end gap-2">
                 <span className="block text-sm font-medium text-gray-700 mr-2 mb-2 w-24 text-right">
-                  Penzioni staz
+                  {t("prijava.rasporedjenje.radniStaz.penzionskiStaz")}
                 </span>
                 <FormInput
-                  label="God."
-                  placeholder="God."
+                  label={t("prijava.opstiPodaci.godine")}
+                  placeholder={t("prijava.opstiPodaci.godine")}
                   containerClassName="w-13"
                 />
                 <FormInput
-                  label="Mes."
-                  placeholder="Mes."
+                  label={t("prijava.opstiPodaci.meseci")}
+                  placeholder={t("prijava.opstiPodaci.meseci")}
                   containerClassName="w-13"
                 />
               </div>
               <div className="flex items-end gap-2">
                 <span className="block text-sm font-medium text-gray-700 mr-2 mb-2 w-24 text-right">
-                  Vremenski staz
+                  {t("prijava.rasporedjenje.radniStaz.vremenskiStaz")}
                 </span>
                 <FormInput
-                  label="God."
-                  placeholder="God."
+                  label={t("prijava.opstiPodaci.godine")}
+                  placeholder={t("prijava.opstiPodaci.godine")}
                   containerClassName="w-13"
                 />
                 <FormInput
-                  label="Mes."
-                  placeholder="Mes."
+                  label={t("prijava.opstiPodaci.meseci")}
+                  placeholder={t("prijava.opstiPodaci.meseci")}
                   containerClassName="w-13"
                 />
               </div>
@@ -318,8 +321,8 @@ export function RasporedjenCard() {
       onClose={() => setIsObrJedinicaPopupOpen(false)}
       items={mockObrJedinice}
       onSelect={handleObrJedinicaSelect}
-      title="Izbor obračunske jedinice"
-      searchPlaceholder="Pretraži obračunske jedinice..."
+      title={t("prijava.rasporedjenje.selectPopups.obrJedinica.title")}
+      searchPlaceholder={t("prijava.rasporedjenje.selectPopups.obrJedinica.searchPlaceholder")}
     />
 
     <SelectPopup
@@ -327,8 +330,8 @@ export function RasporedjenCard() {
       onClose={() => setIsOJRadnikaPopupOpen(false)}
       items={mockOJRadnika}
       onSelect={handleOJRadnikaSelect}
-      title="Izbor organizacione jedinice radnika"
-      searchPlaceholder="Pretraži organizacione jedinice..."
+      title={t("prijava.rasporedjenje.selectPopups.oj.title")}
+      searchPlaceholder={t("prijava.rasporedjenje.selectPopups.oj.searchPlaceholder")}
     />
     </>
   );

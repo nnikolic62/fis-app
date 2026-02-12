@@ -3,11 +3,19 @@ import { prijavaApi } from './prijava.api';
 import type { PaginationParams } from '@repo/types';
 import { Radnik } from '../../shared/schemas/keRadnik';
 import { radnikKeys } from '../../shared/util/api/keys/radnik.api.key';
+import { sifarniciKeys } from '../../shared/util/api/keys/sifarnici.api.key';
 
 const DEFAULT_PARAMS: PaginationParams<Radnik> = {
   page: 1,
   pageSize: 10,
 };
+
+export function useGetVera() {
+  return useQuery({
+    queryKey: sifarniciKeys.vera,
+    queryFn: () => prijavaApi.getSifarniciVera(),
+  });
+}
 
 export function useGetRadnici(params: PaginationParams<Radnik>) {
   const queryParams = { ...DEFAULT_PARAMS, ...params };

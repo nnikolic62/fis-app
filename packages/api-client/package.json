@@ -6,6 +6,7 @@
   "exports": {
     ".": "./src/api-client.ts",
     "./create-query-client": "./src/create-query-client.ts",
+    "./set-token-provider": "./src/set-token-provider.ts",
     "./query-provider": "./src/query-provider.tsx"
   },
   "peerDependencies": {

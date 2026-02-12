@@ -6,6 +6,7 @@ export function createSelectColumn<T>() {
     return columnHelper.display({
         id: "select",
         cell: ({ row }) => (
+            <div className="flex items-center justify-center">
             <input
                 type="checkbox"
                 checked={row.getIsSelected()}
@@ -29,6 +30,8 @@ export function createSelectColumn<T>() {
   "
                 onChange={row.getToggleSelectedHandler()}
             />
+            <span className="text-sm text-slate-700">X</span>
+            </div>
         ),
         enableSorting: false,
         enableHiding: false,

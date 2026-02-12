@@ -6,7 +6,7 @@ import { FormInput } from "@repo/ui/formComponents/FormInput";
 import { FormSelect } from "@repo/ui/formComponents/formSelect";
 import { formatDisplayDate, FormDatePicker } from "@repo/ui/formComponents/formDatePicker";
 import { DataTable } from "@repo/ui/data-table/DataTable";
-import { ColumnDef, RowSelectionState } from "@tanstack/react-table";
+import { ColumnDef, createColumnHelper, RowSelectionState } from "@tanstack/react-table";
 import FilterFormLayout from "../../layouts/filter-form-layout";
 import { Tabs, TabsContent } from "@repo/ui/tabs";
 import { TabsList } from "@repo/ui/tabs";
@@ -19,6 +19,8 @@ import { UsersIcon } from "@phosphor-icons/react/dist/ssr/Users";
 import { GraduationCapIcon } from "@phosphor-icons/react/dist/ssr/GraduationCap";
 import { StarIcon } from "@phosphor-icons/react/dist/ssr/Star";
 import { IdentificationCardIcon } from "@phosphor-icons/react/dist/ssr/IdentificationCard";
+import { EyeIcon } from "@phosphor-icons/react/dist/ssr/Eye";
+import { IconButton } from "@repo/ui/IconButton";
 
 type RadnikFilter = {
   radBr: string;
@@ -77,8 +79,45 @@ const dummyData: RadnikFilter[] = [
     datumDolaska: new Date("2025-05-18"),
   },
 ]
-const dummyColumns: ColumnDef<RadnikFilter>[] = [
+const columnHelper = createColumnHelper<RadnikFilter>();
 
+const selectColumn = columnHelper.display({
+    id: "select",
+    cell: ({ row }) => (
+        <div className="flex items-center justify-center gap-2 pl-0">
+        <input
+            type="checkbox"
+            checked={row.getIsSelected()}
+            disabled={!row.getCanSelect()}
+            ref={(input) => {
+                if (input) {
+                    input.indeterminate = row.getIsSomeSelected();
+                }
+            }}
+            className="
+                        relative h-5 w-5 cursor-pointer appearance-none rounded-full border-2 border-slate-300 bg-white
+                        transition-all duration-200
+
+                        focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2
+                        
+                        checked:border-brand-600
+                        
+                        before:content-[''] before:absolute before:inset-1 before:rounded-full before:bg-brand-600
+                        before:scale-0 before:transition-transform before:duration-200
+                        checked:before:scale-100
+"
+            onChange={row.getToggleSelectedHandler()}
+        />
+        <IconButton className="cursor-pointer">
+          <EyeIcon size={18} className="text-slate-400" />
+        </IconButton>
+        </div>
+    ),
+    enableSorting: false,
+    enableHiding: false,
+});
+const dummyColumns: ColumnDef<RadnikFilter>[] = [
+  selectColumn,
   {
     header: "Radni broj",
     accessorKey: "radBr",
@@ -143,6 +182,11 @@ export default function RadnikPodaciPage() {
         title="Radnik Podaci"
       >
         <FilterFormLayout>
+        <div className="lg:col-span-1 flex items-end">
+            <Button variant="primary" icon={<MagnifyingGlassIcon size={16} />}>
+              Pretraga
+            </Button>
+          </div>
           <FormInput
             label="Radni broj"
             containerClassName="lg:col-span-1"
@@ -179,11 +223,6 @@ export default function RadnikPodaciPage() {
             containerClassName="lg:col-span-2"
             {...methods.register("datumDolaska")}
           />
-          <div className="lg:col-span-1 flex items-end">
-            <Button variant="primary" icon={<MagnifyingGlassIcon size={16} />}>
-              Pretraga
-            </Button>
-          </div>
         </FilterFormLayout>
         <DataTable
           data={dummyData}
@@ -192,11 +231,6 @@ export default function RadnikPodaciPage() {
           manualPagination
           rowCount={dummyData.length}
           emptyMessage="Nema rezultata"
-          topToolbar={(table) => (
-            <Button variant="secondary" disabled={!hasSelectedRows} icon={<IdentificationCardIcon size={16} />}>
-              Pregled
-            </Button>
-          )}
           tableOptions={{
             enableRowSelection: true,
             enableMultiRowSelection: false,

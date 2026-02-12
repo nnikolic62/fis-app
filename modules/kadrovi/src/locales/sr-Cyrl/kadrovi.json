@@ -87,6 +87,138 @@
       "vrste-odsustva": "Врсте одсуства"
     }
   },
+  "prijava": {
+    "pageTitle": "Пријава / Одјава Радника",
+    "buttons": {
+      "cancel": "Одустани",
+      "save": "Сачувај",
+      "submit": "Submit"
+    },
+    "osnovniPodaci": {
+      "title": "Основни подаци",
+      "id": "ID",
+      "stBroj": "Ст. број",
+      "prezime": "Презиме",
+      "ime": "Име",
+      "imeRoditelja": "Име родитеља",
+      "titula": "Титула",
+      "devojackoPrezime": "Девојачко презиме",
+      "maticniBroj": "Матични број",
+      "lbo": "ЛБО",
+      "pol": "Пол",
+      "muski": "Мушки",
+      "zenski": "Женски"
+    },
+    "opstiPodaci": {
+      "title": "Општи подаци",
+      "datumRodjenja": "Датум рођења",
+      "starost": "Старост",
+      "godine": "Год.",
+      "meseci": "Мес.",
+      "opstinaRodjenja": "Општина рођења",
+      "sifra": "Шифра",
+      "opstinaRada": "Општина рада",
+      "nacionalnost": "Националност",
+      "veroispovest": "Вероисповест",
+      "verskiPraznik": "Верски празник",
+      "bracnoStanje": {
+        "label": "Брачно стање",
+        "neozenjen": "Неожењен",
+        "neudata": "Неудата",
+        "ozenjen": "Ожењен",
+        "udata": "Удата",
+        "razveden": "Разведен",
+        "razvedena": "Разведена",
+        "udovac": "Удовац",
+        "udovica": "Удовица"
+      },
+      "opsteInformacije": {
+        "label": "Остало",
+        "stranac": "Странац",
+        "samohran": "Самохрани родитељ",
+        "invalid": "Инвалид"
+      },
+      "brojLicneKarte": "Број личне карте",
+      "kategorijaRadnika": "Категорија радника",
+      "status": "Статус",
+      "kategorija": "Категорија",
+      "selectPopups": {
+        "opstinaRodjenja": {
+          "title": "Избор општине рођења",
+          "searchPlaceholder": "Претражи општине..."
+        },
+        "opstinaRada": {
+          "title": "Избор општине рада",
+          "searchPlaceholder": "Претражи општине..."
+        },
+        "verskiPraznik": {
+          "title": "Избор верског празника",
+          "searchPlaceholder": "Претражи верске празнике..."
+        },
+        "kategorija": {
+          "title": "Избор категорије",
+          "searchPlaceholder": "Претражи категорије..."
+        }
+      }
+    },
+    "mestoBoravka": {
+      "title": "Место боравка",
+      "adresa": "Адреса",
+      "mesto": "Место",
+      "telefon": "Телефон",
+      "email": "E-mail",
+      "externalUsername": "External Username",
+      "mz": "МЗ",
+      "naziv": "Назив",
+      "selectPopups": {
+        "opstina": {
+          "title": "Избор општине",
+          "searchPlaceholder": "Претражи општине..."
+        },
+        "mz": {
+          "title": "Избор МЗ",
+          "searchPlaceholder": "Претражи МЗ..."
+        }
+      }
+    },
+    "rasporedjenje": {
+      "title": "Распоређење",
+      "datumPrijave": "Датум пријаве",
+      "datumOdjave": "Датум одјаве",
+      "organizacionaJedinica": "ОЈ",
+      "radnoMesto": "Радно место",
+      "sprema": "Спрема",
+      "internaSprema": "Интерна спрема",
+      "obrJedinica": "Обр. јединица",
+      "naziv": "Назив",
+      "radniStaz": {
+        "ukupniStaz": "Укупни стаж",
+        "stazUPreduzecu": "Стаж у предузећу",
+        "prethodniStaz": "Претходни стаж",
+        "penzionskiStaz": "Пензионски стаж",
+        "vremenskiStaz": "Временски стаж"
+      },
+      "selectPopups": {
+        "obrJedinica": {
+          "title": "Избор обрачунске јединице",
+          "searchPlaceholder": "Претражи обрачунске јединице..."
+        },
+        "oj": {
+          "title": "Избор организационе јединице радника",
+          "searchPlaceholder": "Претражи организационе јединице..."
+        }
+      }
+    },
+    "ostalo": {
+      "usernameRadnika": "Username радника",
+      "referent": "Референт",
+      "imeSPrezime": "Име С. Презиме",
+      "sortniPojam": "Сортни појам"
+    },
+    "placeholders": {
+      "datePicker": "дд.мм.гггг"
+    }
+  },
   "pregled-radnika": {
       "prezime": "Презиме",
       "srednjeSlovo": "Средње слово",

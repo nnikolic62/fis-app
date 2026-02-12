@@ -5,20 +5,19 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useNavigate,
 } from "react-router";
 import { initI18n, LANGUAGES } from "@repo/i18n-config";
-import { initApiClient } from "@repo/api-client";
+import { initApiClient, setTokenProvider } from "@repo/api-client";
 import { createQueryClient } from "@repo/api-client/create-query-client";
 import { QueryProvider } from "@repo/api-client/query-provider";
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-// Initialize API client
-initApiClient(import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api");
+initApiClient(import.meta.env.VITE_API_URL);
 
-// Initialize i18n with Serbian Latin as default
 initI18n(LANGUAGES.SR_LATN);
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -44,6 +43,20 @@ export default function App() {
   const [queryClient] = useState(() =>
     createQueryClient()
   );
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setTokenProvider(() => localStorage.getItem("token"));
+
+    const handleAuthExpired = () => {
+      localStorage.removeItem("token");
+      navigate("/login");
+    };
+
+    window.addEventListener("auth:expired", handleAuthExpired);
+    return () => window.removeEventListener("auth:expired", handleAuthExpired);
+  }, []);
+
   return (
     <QueryProvider client={queryClient}>
       <Outlet />

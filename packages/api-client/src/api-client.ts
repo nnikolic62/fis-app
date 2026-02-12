@@ -2,6 +2,12 @@ import axios, { type AxiosInstance } from 'axios';
 
 let apiClient: AxiosInstance;
 
+let getToken: (() => string | null) | null = null;
+
+export function setTokenProvider(fn: () => string | null) {
+  getToken = fn;
+}
+
 export function initApiClient(baseURL: string) {
   apiClient = axios.create({
     baseURL,
@@ -12,7 +18,7 @@ export function initApiClient(baseURL: string) {
 
   apiClient.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem('token');
+      const token = getToken?.();
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }

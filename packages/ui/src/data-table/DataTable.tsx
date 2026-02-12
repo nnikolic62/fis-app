@@ -41,15 +41,15 @@ export function DataTable<TData>({
   isLoading,
   emptyMessage = "No results.",
 }: DataTableProps<TData>) {
-  const finalColumns = useMemo(() => {
-    if (!tableOptions?.enableRowSelection) return columns;
+  // const finalColumns = useMemo(() => {
+  //   if (!tableOptions?.enableRowSelection) return columns;
   
-    return [createSelectColumn<TData>(), ...columns];
-  }, [columns, tableOptions?.enableRowSelection]);
+  //   return [createSelectColumn<TData>(), ...columns];
+  // }, [columns, tableOptions?.enableRowSelection]);
 
   const table = useReactTable({
     data,
-    columns: finalColumns,
+    columns: columns,
 
     getCoreRowModel: getCoreRowModel(),
     ...(enablePagination && { getPaginationRowModel: getPaginationRowModel() }),

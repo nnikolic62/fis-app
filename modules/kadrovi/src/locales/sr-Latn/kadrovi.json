@@ -87,6 +87,138 @@
       "vrste-odsustva": "Vrste odsustva"
     }
   },
+  "prijava": {
+    "pageTitle": "Prijava / Odjava Radnika",
+    "buttons": {
+      "cancel": "Odustani",
+      "save": "Sačuvaj",
+      "submit": "Submit"
+    },
+    "osnovniPodaci": {
+      "title": "Osnovni podaci",
+      "id": "ID",
+      "stBroj": "St. broj",
+      "prezime": "Prezime",
+      "ime": "Ime",
+      "imeRoditelja": "Ime roditelja",
+      "titula": "Titula",
+      "devojackoPrezime": "Devojačko prezime",
+      "maticniBroj": "Matični broj",
+      "lbo": "LBO",
+      "pol": "Pol",
+      "muski": "Muški",
+      "zenski": "Ženski"
+    },
+    "opstiPodaci": {
+      "title": "Opšti podaci",
+      "datumRodjenja": "Datum rođenja",
+      "starost": "Starost",
+      "godine": "God.",
+      "meseci": "Mes.",
+      "opstinaRodjenja": "Opstina rođenja",
+      "sifra": "Šifra",
+      "opstinaRada": "Opština rada",
+      "nacionalnost": "Nacionalnost",
+      "veroispovest": "Veroispovest",
+      "verskiPraznik": "Verski praznik",
+      "bracnoStanje": {
+        "label": "Bračno stanje",
+        "neozenjen": "Neoženjen",
+        "neudata": "Neudata",
+        "ozenjen": "Oženjen",
+        "udata": "Udata",
+        "razveden": "Razveden",
+        "razvedena": "Razvedena",
+        "udovac": "Udovac",
+        "udovica": "Udovica"
+      },
+      "opsteInformacije": {
+        "label": "Ostalo",
+        "stranac": "Stranac",
+        "samohran": "Samohrani roditelj",
+        "invalid": "Invalid"
+      },
+      "brojLicneKarte": "Broj lične karte",
+      "kategorijaRadnika": "Kategorija radnika",
+      "status": "Status",
+      "kategorija": "Kategorija",
+      "selectPopups": {
+        "opstinaRodjenja": {
+          "title": "Izbor opštine rođenja",
+          "searchPlaceholder": "Pretraži opštine..."
+        },
+        "opstinaRada": {
+          "title": "Izbor opštine rada",
+          "searchPlaceholder": "Pretraži opštine..."
+        },
+        "verskiPraznik": {
+          "title": "Izbor verskog praznika",
+          "searchPlaceholder": "Pretraži verske praznike..."
+        },
+        "kategorija": {
+          "title": "Izbor kategorije",
+          "searchPlaceholder": "Pretraži kategorije..."
+        }
+      }
+    },
+    "mestoBoravka": {
+      "title": "Mesto boravka",
+      "adresa": "Adresa",
+      "mesto": "Mesto",
+      "telefon": "Telefon",
+      "email": "E-mail",
+      "externalUsername": "External Username",
+      "mz": "MZ",
+      "naziv": "Naziv",
+      "selectPopups": {
+        "opstina": {
+          "title": "Izbor opštine",
+          "searchPlaceholder": "Pretraži opštine..."
+        },
+        "mz": {
+          "title": "Izbor MZ",
+          "searchPlaceholder": "Pretraži MZ..."
+        }
+      }
+    },
+    "rasporedjenje": {
+      "title": "Raspoređenje",
+      "datumPrijave": "Datum prijave",
+      "datumOdjave": "Datum odjave",
+      "organizacionaJedinica": "OJ",
+      "radnoMesto": "Radno mesto",
+      "sprema": "Sprema",
+      "internaSprema": "Interna sprema",
+      "obrJedinica": "Obr. jedinica",
+      "naziv": "Naziv",
+      "radniStaz": {
+        "ukupniStaz": "Ukupni staž",
+        "stazUPreduzecu": "Staž u preduzecu",
+        "prethodniStaz": "Prethodni staž",
+        "penzionskiStaz": "Penzioni staž",
+        "vremenskiStaz": "Vremenski staž"
+      },
+      "selectPopups": {
+        "obrJedinica": {
+          "title": "Izbor obračunske jedinice",
+          "searchPlaceholder": "Pretraži obračunske jedinice..."
+        },
+        "oj": {
+          "title": "Izbor organizacione jedinice radnika",
+          "searchPlaceholder": "Pretraži organizacione jedinice..."
+        }
+      }
+    },
+    "ostalo": {
+      "usernameRadnika": "Username radnika",
+      "referent": "Referent",
+      "imeSPrezime": "Ime S. Prezime",
+      "sortniPojam": "Sortni pojam"
+    },
+    "placeholders": {
+      "datePicker": "dd.mm.yyyy"
+    }
+  },
     "pregled-radnika": {
       "prezime": "Prezime",
       "srednjeSlovo": "Srednje slovo",

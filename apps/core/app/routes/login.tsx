@@ -1,4 +1,5 @@
 import { ArrowRightIcon, EnvelopeSimpleIcon, LockIcon, ShieldCheckIcon } from "@phosphor-icons/react";
+import { Link } from "react-router";
 
 const LoginInput = ({ label, placeholder, type = "text", icon }: { label: string; placeholder: string; type?: string; icon: React.ReactNode }) => (
   <div className="space-y-1.5">
@@ -86,10 +87,13 @@ export default function LoginPage() {
               </a>
             </div>
 
-            <button className="w-full bg-blue-600 text-white py-3.5 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20 hover:shadow-blue-600/40 flex items-center justify-center gap-2 group active:scale-[0.98]">
+            <Link 
+              to="/kadrovi" 
+              className="w-full bg-blue-600 text-white py-3.5 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20 hover:shadow-blue-600/40 flex items-center justify-center gap-2 group active:scale-[0.98]"
+            >
               Prijavi se
               <ArrowRightIcon size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+            </Link>
           </form>
 
           <div className="mt-10 pt-6 border-t border-slate-100 text-center">

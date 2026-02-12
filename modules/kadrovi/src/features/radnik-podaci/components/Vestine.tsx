@@ -2,23 +2,26 @@ import { DataTable } from "@repo/ui/data-table/DataTable";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { Vestina } from "../../shared/schemas/keGrupaVestina";
 import { KADROVI_NS } from "../../../config/i18n";
-import { i18n } from "@repo/i18n-config";
+import { i18n, TFunction, useTranslation } from "@repo/i18n-config";
 import ObrazovanjeRadnika from "./ObrazovanjeRadnika";
 import VestineDodatno from "./VestineDodatno";
 import VestineOstalo from "./VestineOstalo";
+import { useMemo } from "react";
 
 const columnHelper = createColumnHelper<Vestina>();
 
-export const vestineColumns = [
-    columnHelper.accessor("grupaVestina", {
-        header: i18n.t(`${KADROVI_NS}:vestine.vestinaStraniJezik`),
-        cell: (info) => info.getValue(),
-    }),
-    columnHelper.accessor("vestina", {
-        header: "",
-        cell: (info) => info.getValue(),
-    })
-]
+export const getVestineColumns = (t: TFunction) => {
+    return [
+        columnHelper.accessor("grupaVestina", {
+            header: t(`${KADROVI_NS}:vestine.vestinaStraniJezik`),
+            cell: (info) => info.getValue(),
+        }),
+        columnHelper.accessor("vestina", {
+            header: "",
+            cell: (info) => info.getValue(),
+        })
+    ]
+}
 
 export const keGrupaVestinaMock: Vestina[] = [
   { grupaVestina: "0001", vestina: "0101" },
@@ -38,6 +41,8 @@ export const keGrupaVestinaMock: Vestina[] = [
 
 
 export default function Vestine () {
+  const { t } = useTranslation(KADROVI_NS);
+  const vestineColumns = useMemo(() => getVestineColumns(t), [t]);
     return(
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
       <div className="lg:col-span-1">

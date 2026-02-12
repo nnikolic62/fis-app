@@ -62,7 +62,7 @@ export const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
         <input
           id={inputId}
           ref={ref}
-          className={`${inputSpacing} block w-full rounded-lg border bg-white px-2 ${paddingRight} py-2 text-sm text-slate-900 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-0 placeholder:text-slate-400 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 ${borderStyles} ${inputClassName}`}
+          className={`${inputSpacing} block w-full rounded-lg border bg-white px-2 ${paddingRight} py-2 text-sm text-slate-900 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-0 placeholder:text-slate-400 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500 disabled:border-slate-300 ${borderStyles} ${inputClassName}`}
           disabled={disabled}
           {...rest}
         />
