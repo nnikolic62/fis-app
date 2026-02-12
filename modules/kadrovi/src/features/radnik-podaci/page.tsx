@@ -14,10 +14,14 @@ import { TabsTrigger } from "@repo/ui/tabs";
 import PorodicaRadnika from "./components/PorodicaRadnika";
 import ObrazovanjeRadnika from "./components/ObrazovanjeRadnika";
 import Vestine from "./components/Vestine";
+import PrethodniStaz from "./components/PrethodniStaz";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr/MagnifyingGlass";
 import { UsersIcon } from "@phosphor-icons/react/dist/ssr/Users";
 import { GraduationCapIcon } from "@phosphor-icons/react/dist/ssr/GraduationCap";
 import { StarIcon } from "@phosphor-icons/react/dist/ssr/Star";
+import { BriefcaseIcon } from "@phosphor-icons/react/dist/ssr/Briefcase";
+import { ClockClockwiseIcon } from "@phosphor-icons/react/dist/ssr/ClockClockwise";
+import PriznatiStaz from "./components/PriznatiStaz";
 
 type RadnikFilter = {
   radBr: string;
@@ -109,7 +113,7 @@ const dummyColumns: ColumnDef<RadnikFilter>[] = [
   },
 ]
 
-type Activity = 'porodica' | 'obrazovanje' | 'vestine';
+type Activity = 'porodica' | 'obrazovanje' | 'vestine' | 'prethodniStaz' | 'priznatStaz';
 export default function RadnikPodaciPage() {
   const defaultValues: RadnikFilter = useMemo(() => ({
     radBr: "",
@@ -198,7 +202,7 @@ export default function RadnikPodaciPage() {
           }}
         />
         <Tabs value={activeEntity} onValueChange={(value) => setActiveEntity(value as Activity)}>
-          <TabsList>
+          <TabsList className="">
             <TabsTrigger className="flex items-center gap-2" value="porodica">
               <UsersIcon />
               Porodica
@@ -210,6 +214,14 @@ export default function RadnikPodaciPage() {
             <TabsTrigger className="flex items-center gap-2" value="vestine">
               <StarIcon />
               Vestine
+            </TabsTrigger>
+            <TabsTrigger className="flex items-center gap-2" value="prethodniStaz">
+              <BriefcaseIcon />
+              Prethodni staž
+            </TabsTrigger>
+            <TabsTrigger className="flex items-center gap-2" value="priznatStaz">
+              <ClockClockwiseIcon />
+              Priznati staž
             </TabsTrigger>
           </TabsList>
         </Tabs>
@@ -228,6 +240,12 @@ export default function RadnikPodaciPage() {
             </TabsContent>
             <TabsContent className="flex-1 mt-0 overflow-hidden" value="vestine">
               <Vestine />
+            </TabsContent>
+            <TabsContent className="flex-1 mt-0 overflow-hidden" value="prethodniStaz">
+              <PrethodniStaz />
+            </TabsContent>
+            <TabsContent className="flex-1 mt-0 overflow-hidden" value="priznatStaz">
+              <PriznatiStaz />
             </TabsContent>
           </Tabs>
         </div>
