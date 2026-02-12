@@ -12,6 +12,9 @@ import { Controller, useFormContext, useWatch } from "react-hook-form";
 import { Radnik } from "../../shared/schemas/keRadnik";
 import { SelectPopup, SelectPopupItem } from "@repo/ui/SelectPopup";
 import { useState } from "react";
+import { calculateAge } from "../../../utils/calculateAge";
+import { useTranslation } from "@repo/i18n-config";
+import { KADROVI_NS } from "../../../config/i18n";
 
 // Mock podaci za opstine
 const mockOpstine: SelectPopupItem[] = [
@@ -49,6 +52,7 @@ const mockKategorije: SelectPopupItem[] = [
 ];
 
 export function OpstiPodaciCard() {
+  const { t } = useTranslation(KADROVI_NS);
   const { control, register, setValue } = useFormContext<Radnik>();
   const [isOpstinaRodjPopupOpen, setIsOpstinaRodjPopupOpen] = useState(false);
   const [isOpstinaRadaPopupOpen, setIsOpstinaRadaPopupOpen] = useState(false);
@@ -61,9 +65,23 @@ export function OpstiPodaciCard() {
   const [verskiPraznikDatum, setVerskiPraznikDatum] = useState("");
   const [kategorijaNaziv, setKategorijaNaziv] = useState("");
   const [kategorijaSifra, setKategorijaSifra] = useState("");
+  
+  const [starostGodine, setStarostGodine] = useState("");
+  const [starostMeseci, setStarostMeseci] = useState("");
 
   const pol = useWatch({ control, name: "pol" });
   const isZenski = pol === "Z";
+
+  const handleDatumRodjenjaBlur = (dateString: string) => {
+    const age = calculateAge(dateString);
+    if (age) {
+      setStarostGodine(age.years.toString());
+      setStarostMeseci(age.months.toString());
+    } else {
+      setStarostGodine("");
+      setStarostMeseci("");
+    }
+  };
 
   const handleOpstinaRodjSelect = (item: SelectPopupItem) => {
     setValue("opsrbr", item.sifra);
@@ -148,7 +166,7 @@ export function OpstiPodaciCard() {
   return (
     <>
     <Card
-      title="Opsti podaci"
+      title={t("prijava.opstiPodaci.title")}
       icon={<GlobeIcon size={20} />}
       className="lg:col-span-3"
       noPadding
@@ -162,10 +180,14 @@ export function OpstiPodaciCard() {
               name="datRodj"
               render={({ field }) => (
                 <FormDatePicker
-                  label="Datum rodjenja"
-                  placeholder="dd.mm.yyyy"
+                  label={t("prijava.opstiPodaci.datumRodjenja")}
+                  placeholder={t("prijava.placeholders.datePicker")}
                   value={field.value ? String(field.value) : ""}
                   onValueChange={field.onChange}
+                  onBlur={() => {
+                    const currentValue = field.value ? String(field.value) : "";
+                    handleDatumRodjenjaBlur(currentValue);
+                  }}
                 />
               )}
             />
@@ -173,20 +195,24 @@ export function OpstiPodaciCard() {
           <div className="flex items-end gap-1">
             <div className="flex items-end gap-1">
               <span className="block text-sm font-medium text-gray-700 mb-2 mr-1">
-                Starost
+                {t("prijava.opstiPodaci.starost")}
               </span>
               <FormInput
-                label="God."
-                placeholder="God."
+                label={t("prijava.opstiPodaci.godine")}
+                placeholder={t("prijava.opstiPodaci.godine")}
+                value={starostGodine}
                 readOnly
+                disabled
                 containerClassName="w-13"
               />
             </div>
             <div className="flex flex-col justify-end">
               <FormInput
-                label="Mes."
-                placeholder="Mes."
+                label={t("prijava.opstiPodaci.meseci")}
+                placeholder={t("prijava.opstiPodaci.meseci")}
+                value={starostMeseci}
                 readOnly
+                disabled
                 containerClassName="w-13"
               />
             </div>
@@ -196,12 +222,12 @@ export function OpstiPodaciCard() {
         {/* Drugi red */}
         <div className="flex gap-3 mb-2">
           <div className="flex-1 basis-1/2">
-            <FormLabel label="Opstina rodenjna" htmlFor="opstinaRodjenja" />
+            <FormLabel label={t("prijava.opstiPodaci.opstinaRodjenja")} htmlFor="opstinaRodjenja" />
             <div className="flex gap-2 items-end">
               <FormInput
                 id="opstinaRodjenja"
                 containerClassName="basis-1/4"
-                placeholder=""
+                placeholder={t("prijava.opstiPodaci.sifra")}
                 label={undefined}
                 {...register("opsrbr")}
                 onBlur={handleOpstinaRodjBlur}
@@ -210,7 +236,7 @@ export function OpstiPodaciCard() {
               />
               <FormInput
                 containerClassName="basis-3/4"
-                placeholder="Opstina rodenjna"
+                placeholder={t("prijava.opstiPodaci.opstinaRodjenja")}
                 label={undefined}
                 value={opstinaRodjNaziv}
                 readOnly
@@ -219,12 +245,12 @@ export function OpstiPodaciCard() {
             </div>
           </div>
           <div className="flex-1 basis-1/2">
-            <FormLabel label="Opstina rada" htmlFor="opstinaRada" />
+            <FormLabel label={t("prijava.opstiPodaci.opstinaRada")} htmlFor="opstinaRada" />
             <div className="flex gap-2 items-end">
               <FormInput
                 id="opstinaRada"
                 containerClassName="basis-1/4"
-                placeholder=""
+                placeholder={t("prijava.opstiPodaci.sifra")}
                 label={undefined}
                 {...register("opsbrRada")}
                 onBlur={handleOpstinaRadaBlur}
@@ -233,7 +259,7 @@ export function OpstiPodaciCard() {
               />
               <FormInput
                 containerClassName="basis-3/4"
-                placeholder="Opstina rada"
+                placeholder={t("prijava.opstiPodaci.opstinaRada")}
                 label={undefined}
                 value={opstinaRadaNaziv}
                 readOnly
@@ -246,7 +272,7 @@ export function OpstiPodaciCard() {
         {/* Treci red */}
         <div className="flex gap-3 mb-2">
           <div className="flex-1 basis-1/2">
-            <FormLabel label="Nacionalnost" htmlFor="nacionalnost" />
+            <FormLabel label={t("prijava.opstiPodaci.nacionalnost")} htmlFor="nacionalnost" />
             <div className="flex items-end w-full">
               <Controller
                 control={control}
@@ -256,7 +282,7 @@ export function OpstiPodaciCard() {
                     id="nacionalnost"
                     label={undefined}
                     containerClassName="w-full"
-                    placeholder="Nacionalnost"
+                    placeholder={t("prijava.opstiPodaci.nacionalnost")}
                     value={field.value ?? ""}
                     onValueChange={field.onChange}
                     options={[
@@ -270,7 +296,7 @@ export function OpstiPodaciCard() {
             </div>
           </div>
           <div className="flex-1 basis-1/2">
-            <FormLabel label="Veroispovest" htmlFor="veroispovest" />
+            <FormLabel label={t("prijava.opstiPodaci.veroispovest")} htmlFor="veroispovest" />
             <div className="flex items-end w-full">
               <Controller
                 control={control}
@@ -280,7 +306,7 @@ export function OpstiPodaciCard() {
                     id="veroispovest"
                     label={undefined}
                     containerClassName="w-full"
-                    placeholder="Veroispovest"
+                    placeholder={t("prijava.opstiPodaci.veroispovest")}
                     value={field.value ?? ""}
                     onValueChange={field.onChange}
                     options={[
@@ -297,7 +323,7 @@ export function OpstiPodaciCard() {
         {/* Cetvrti red */}
         <div className="flex gap-3 mb-2">
           <div className="w-3/5 ">
-            <FormLabel label="Verski praznik" htmlFor="verskiPraznik" />
+              <FormLabel label={t("prijava.opstiPodaci.verskiPraznik")} htmlFor="verskiPraznik" />
             <div className="grid grid-cols-12 gap-2 items-end">
               <FormInput
                 containerClassName="col-span-2"
@@ -311,7 +337,7 @@ export function OpstiPodaciCard() {
               <FormInput
                 id="verskiPraznik"
                 containerClassName="col-span-7"
-                placeholder="Verski praznik"
+                placeholder={t("prijava.opstiPodaci.verskiPraznik")}
                 label={undefined}
                 value={verskiPraznikNaziv}
                 readOnly
@@ -328,7 +354,7 @@ export function OpstiPodaciCard() {
             </div>
           </div>
           <div className="w-2/5">
-            <FormLabel label="Status" htmlFor="status" />
+            <FormLabel label={t("prijava.opstiPodaci.status")} htmlFor="status" />
             <div className="flex items-end w-full">
               <Controller
                 control={control}
@@ -338,7 +364,7 @@ export function OpstiPodaciCard() {
                     id="status"
                     label={undefined}
                     containerClassName="w-full"
-                    placeholder="Status"
+                    placeholder={t("prijava.opstiPodaci.status")}
                     value={field.value ?? ""}
                     onValueChange={field.onChange}
                     options={[
@@ -355,39 +381,39 @@ export function OpstiPodaciCard() {
         {/* Peti red */}
         <div className="flex gap-3 mb-2">
           <div className="w-3/5">
-            <FormLabel label="Bračno stanje" htmlFor="bracnoStanje" />
+            <FormLabel label={t("prijava.opstiPodaci.bracnoStanje.label")} htmlFor="bracnoStanje" />
             <div className="mt-1 flex flex-wrap gap-4">
               <FormRadio
-                label={isZenski ? "Neudata" : "Neoženjen"}
+                label={isZenski ? t("prijava.opstiPodaci.bracnoStanje.neudata") : t("prijava.opstiPodaci.bracnoStanje.neozenjen")}
                 value="N"
                 {...register("bracnoStanje")}
               />
               <FormRadio
-                label={isZenski ? "Udata" : "Oženjen"}
+                label={isZenski ? t("prijava.opstiPodaci.bracnoStanje.udata") : t("prijava.opstiPodaci.bracnoStanje.ozenjen")}
                 value="O"
                 {...register("bracnoStanje")}
               />
               <FormRadio
-                label={isZenski ? "Razvedena" : "Razveden"}
+                label={isZenski ? t("prijava.opstiPodaci.bracnoStanje.razvedena") : t("prijava.opstiPodaci.bracnoStanje.razveden")}
                 value="R"
                 {...register("bracnoStanje")}
               />
               <FormRadio
-                label={isZenski ? "Udovica" : "Udovac"}
+                label={isZenski ? t("prijava.opstiPodaci.bracnoStanje.udovica") : t("prijava.opstiPodaci.bracnoStanje.udovac")}
                 value="U"
                 {...register("bracnoStanje")}
               />
             </div>
           </div>
           <div className="w-2/5">
-            <FormLabel label="Ostalo" htmlFor="ostalo" />
+            <FormLabel label={t("prijava.opstiPodaci.opsteInformacije.label")} htmlFor="ostalo" />
             <div className="mt-1 flex flex-row gap-8">
               <Controller
                 control={control}
                 name="jeStranac"
                 render={({ field }) => (
                   <FormCheckbox
-                    label="Stranac"
+                    label={t("prijava.opstiPodaci.opsteInformacije.stranac")}
                     checked={field.value === "1"}
                     onChange={(event) =>
                       field.onChange(event.target.checked ? "1" : undefined)
@@ -400,7 +426,7 @@ export function OpstiPodaciCard() {
                 name="samohran"
                 render={({ field }) => (
                   <FormCheckbox
-                    label="Samohrani roditelj"
+                    label={t("prijava.opstiPodaci.opsteInformacije.samohran")}
                     checked={field.value === "1"}
                     onChange={(event) =>
                       field.onChange(event.target.checked ? "1" : undefined)
@@ -415,11 +441,11 @@ export function OpstiPodaciCard() {
         {/* Sesti red */}
         <div className="flex gap-3 mb-2">
           <div className="w-full">
-            <FormLabel label="Kategorija" htmlFor="kategorija" />
+            <FormLabel label={t("prijava.opstiPodaci.kategorija")} htmlFor="kategorija" />
             <div className="flex gap-2 mt-1">
               <FormInput
                 containerClassName="basis-1/4"
-                placeholder=""
+                placeholder={t("prijava.opstiPodaci.sifra")}
                 label={undefined}
                 value={kategorijaSifra}
                 onChange={(e) => setKategorijaSifra(e.target.value)}
@@ -430,7 +456,7 @@ export function OpstiPodaciCard() {
               <FormInput
                 id="kategorija"
                 containerClassName="basis-3/4"
-                placeholder="Kategorija"
+                placeholder={t("prijava.opstiPodaci.kategorija")}
                 label={undefined}
                 value={kategorijaNaziv}
                 readOnly
@@ -447,8 +473,8 @@ export function OpstiPodaciCard() {
       onClose={() => setIsOpstinaRodjPopupOpen(false)}
       items={mockOpstine}
       onSelect={handleOpstinaRodjSelect}
-      title="Izbor opštine rođenja"
-      searchPlaceholder="Pretraži opštine..."
+      title={t("prijava.opstiPodaci.selectPopups.opstinaRodjenja.title")}
+      searchPlaceholder={t("prijava.opstiPodaci.selectPopups.opstinaRodjenja.searchPlaceholder")}
     />
 
     <SelectPopup
@@ -456,8 +482,8 @@ export function OpstiPodaciCard() {
       onClose={() => setIsOpstinaRadaPopupOpen(false)}
       items={mockOpstine}
       onSelect={handleOpstinaRadaSelect}
-      title="Izbor opštine rada"
-      searchPlaceholder="Pretraži opštine..."
+      title={t("prijava.opstiPodaci.selectPopups.opstinaRada.title")}
+      searchPlaceholder={t("prijava.opstiPodaci.selectPopups.opstinaRada.searchPlaceholder")}
     />
 
     <SelectPopup
@@ -465,8 +491,8 @@ export function OpstiPodaciCard() {
       onClose={() => setIsVerskiPraznikPopupOpen(false)}
       items={mockVerskiPraznici}
       onSelect={handleVerskiPraznikSelect}
-      title="Izbor verskog praznika"
-      searchPlaceholder="Pretraži verske praznike..."
+      title={t("prijava.opstiPodaci.selectPopups.verskiPraznik.title")}
+      searchPlaceholder={t("prijava.opstiPodaci.selectPopups.verskiPraznik.searchPlaceholder")}
       columns={{ sifra: "Šifra", naziv: "Naziv", dodatno: "Datum" }}
     />
 
@@ -475,8 +501,8 @@ export function OpstiPodaciCard() {
       onClose={() => setIsKategorijaPopupOpen(false)}
       items={mockKategorije}
       onSelect={handleKategorijaSelect}
-      title="Izbor kategorije"
-      searchPlaceholder="Pretraži kategorije..."
+      title={t("prijava.opstiPodaci.selectPopups.kategorija.title")}
+      searchPlaceholder={t("prijava.opstiPodaci.selectPopups.kategorija.searchPlaceholder")}
     />
     </>
   );

@@ -8,6 +8,8 @@ import { useFormContext } from "react-hook-form";
 import { Radnik } from "../../shared/schemas/keRadnik";
 import { SelectPopup, SelectPopupItem } from "@repo/ui/SelectPopup";
 import { useState } from "react";
+import { useTranslation } from "@repo/i18n-config";
+import { KADROVI_NS } from "../../../config/i18n";
 
 // Mock podaci za opstine
 const mockOpstine: SelectPopupItem[] = [
@@ -34,6 +36,7 @@ const mockMZ: SelectPopupItem[] = [
 ];
 
 export function MestoBoravkaCard() {
+  const { t } = useTranslation(KADROVI_NS);
   const { register, setValue } = useFormContext<Radnik>();
   const [isOpstinaPopupOpen, setIsOpstinaPopupOpen] = useState(false);
   const [isMZPopupOpen, setIsMZPopupOpen] = useState(false);
@@ -81,7 +84,7 @@ export function MestoBoravkaCard() {
   return (
     <>
     <Card
-      title="Mesto boravka"
+      title={t("prijava.mestoBoravka.title")}
       icon={<MapPinIcon size={20} />}
       className="lg:col-span-2"
       noPadding
@@ -90,11 +93,11 @@ export function MestoBoravkaCard() {
         {/* Prvi red */}
         <div className="flex gap-3 mb-2">
           <div className="flex-1">
-            <FormLabel label="Opstina" htmlFor="opstina" />
+            <FormLabel label={t("prijava.mestoBoravka.mesto")} htmlFor="opstina" />
             <div className="flex gap-2 mt-1">
               <FormInput
                 containerClassName="basis-1/3"
-                placeholder="Sifra"
+                placeholder={t("prijava.opstiPodaci.sifra")}
                 label={undefined}
                 {...register("opsbr")}
                 onBlur={handleOpstinaBlur}
@@ -104,7 +107,7 @@ export function MestoBoravkaCard() {
               <FormInput
                 id="opstina"
                 containerClassName="basis-2/3"
-                placeholder="Naziv"
+                placeholder={t("prijava.mestoBoravka.mesto")}
                 label={undefined}
                 value={opstinaNaziv}
                 readOnly
@@ -117,12 +120,12 @@ export function MestoBoravkaCard() {
         {/* Drugi red */}
         <div className="flex gap-3 mb-2">
           <div className="flex-1">
-            <FormLabel label="MZ" htmlFor="mz" />
+            <FormLabel label={t("prijava.mestoBoravka.mz")} htmlFor="mz" />
             <div className="flex gap-2 mt-1">
               <FormInput
                 id="mz"
                 containerClassName="basis-1/3"
-                placeholder="Sifra"
+                placeholder={t("prijava.opstiPodaci.sifra")}
                 label={undefined}
                 {...register("mzbr")}
                 onBlur={handleMZBlur}
@@ -132,7 +135,7 @@ export function MestoBoravkaCard() {
               <FormInput
                 id="mz"
                 containerClassName="basis-2/3"
-                placeholder="Naziv"
+                placeholder={t("prijava.mestoBoravka.naziv")}
                 label={undefined}
                 value={mzNaziv}
                 readOnly
@@ -146,8 +149,8 @@ export function MestoBoravkaCard() {
         <div className="flex gap-3 mb-2">
           <div className="flex-1">
             <FormInput
-              label="Adresa"
-              placeholder="Adresa"
+              label={t("prijava.mestoBoravka.adresa")}
+              placeholder={t("prijava.mestoBoravka.adresa")}
               {...register("adresa")}
             />
           </div>
@@ -158,14 +161,14 @@ export function MestoBoravkaCard() {
           <div className="flex-1">
             <div className="flex gap-2">
               <FormInput
-                label="Telefon"
-                placeholder="Telefon"
+                label={t("prijava.mestoBoravka.telefon")}
+                placeholder={t("prijava.mestoBoravka.telefon")}
                 containerClassName="basis-1/3"
                 {...register("telefon")}
               />
               <FormInput
-                label="Mail"
-                placeholder="Mail"
+                label={t("prijava.mestoBoravka.email")}
+                placeholder={t("prijava.mestoBoravka.email")}
                 containerClassName="basis-2/3"
                 {...register("mail")}
               />
@@ -180,8 +183,8 @@ export function MestoBoravkaCard() {
       onClose={() => setIsOpstinaPopupOpen(false)}
       items={mockOpstine}
       onSelect={handleOpstinaSelect}
-      title="Izbor opštine"
-      searchPlaceholder="Pretraži opštine..."
+      title={t("prijava.mestoBoravka.selectPopups.opstina.title")}
+      searchPlaceholder={t("prijava.mestoBoravka.selectPopups.opstina.searchPlaceholder")}
     />
 
     <SelectPopup
@@ -189,8 +192,8 @@ export function MestoBoravkaCard() {
       onClose={() => setIsMZPopupOpen(false)}
       items={mockMZ}
       onSelect={handleMZSelect}
-      title="Izbor MZ"
-      searchPlaceholder="Pretraži MZ..."
+      title={t("prijava.mestoBoravka.selectPopups.mz.title")}
+      searchPlaceholder={t("prijava.mestoBoravka.selectPopups.mz.searchPlaceholder")}
     />
     </>
   );

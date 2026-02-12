@@ -10,12 +10,15 @@ import { OsnovniPodaciCard } from "./components/OsnovniPodaciCard";
 import { OpstiPodaciCard } from "./components/OpstiPodaciCard";
 import { MestoBoravkaCard } from "./components/MestoBoravkaCard";
 import { RasporedjenCard } from "./components/RasporedjenCard";
+import { useTranslation } from "@repo/i18n-config";
+import { KADROVI_NS } from "../../config/i18n";
 
 type EmployeeRegistrationProps = {
   onBack?: () => void;
 };
 
 export default function PrijavaPage({ onBack }: EmployeeRegistrationProps) {
+  const { t } = useTranslation(KADROVI_NS);
   const methods = useForm<Radnik>({
     mode: "onBlur",
     resolver: zodResolver(keRadnikSchema),
@@ -31,16 +34,16 @@ export default function PrijavaPage({ onBack }: EmployeeRegistrationProps) {
   return (
     <FormProvider {...methods}>
       <PageWithHeader
-        title="Prijava / Odjava Radnika"
-        subtitle="Unos novog zaposlenog"
-        backAction={onBack}
+        title={t("prijava.pageTitle")}
+        // subtitle="Unos novog zaposlenog"
+        // backAction={onBack}
         actions={
           <>
             <Button variant="secondary" icon={<XIcon size={16} />}>
-              Odustani
+              {t("prijava.buttons.cancel")}
             </Button>
             <Button variant="primary" icon={<FloppyDiskIcon size={16} />}>
-              Sačuvaj
+              {t("prijava.buttons.save")}
             </Button>
           </>
         }
@@ -60,24 +63,24 @@ export default function PrijavaPage({ onBack }: EmployeeRegistrationProps) {
             <div className="flex gap-3 mb-2">
               <div className="flex-1 basis-1/2">
                 <FormInput
-                  label="Username radnika"
-                  placeholder="Username"
+                  label={t("prijava.ostalo.usernameRadnika")}
+                  placeholder={t("prijava.ostalo.usernameRadnika")}
                   {...methods.register("username")}
                 />
               </div>
               <div className="flex-1 basis-1/2">
-                <FormLabel label="Referent" htmlFor="referent-sifra" />
+                <FormLabel label={t("prijava.ostalo.referent")} htmlFor="referent-sifra" />
                 <div className="flex gap-2 items-end">
                   <FormInput
                     id="referent-sifra"
                     containerClassName="basis-1/4"
-                    placeholder="Sifra"
+                    placeholder={t("prijava.opstiPodaci.sifra")}
                     label={undefined}
                     {...methods.register("radbrref")}
                   />
                   <FormInput
                     containerClassName="basis-3/4"
-                    placeholder="Ime S. Prezime"
+                    placeholder={t("prijava.ostalo.imeSPrezime")}
                     label={undefined}
                   />
                 </div>
@@ -86,7 +89,7 @@ export default function PrijavaPage({ onBack }: EmployeeRegistrationProps) {
             <div className="flex gap-3">
               <div className="flex-1">
                 <FormInput
-                  label="Sortni pojam"
+                  label={t("prijava.ostalo.sortniPojam")}
                   placeholder=""
                   {...methods.register("sortniPojam")}
                 />
@@ -96,7 +99,7 @@ export default function PrijavaPage({ onBack }: EmployeeRegistrationProps) {
 
           <div className="flex justify-end">
             <Button type="submit" variant="primary">
-              Submit
+              {t("prijava.buttons.submit")}
             </Button>
           </div>
         </form>
