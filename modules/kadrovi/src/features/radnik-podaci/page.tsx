@@ -18,6 +18,7 @@ import { MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr/MagnifyingGl
 import { UsersIcon } from "@phosphor-icons/react/dist/ssr/Users";
 import { GraduationCapIcon } from "@phosphor-icons/react/dist/ssr/GraduationCap";
 import { StarIcon } from "@phosphor-icons/react/dist/ssr/Star";
+import { IdentificationCardIcon } from "@phosphor-icons/react/dist/ssr/IdentificationCard";
 
 type RadnikFilter = {
   radBr: string;
@@ -127,6 +128,7 @@ export default function RadnikPodaciPage() {
     // resolver: zodResolver(keRadnikSchema),
   });
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+  const hasSelectedRows = useMemo(() => Object.keys(rowSelection).length > 0, [rowSelection]);
 
   // Derive selected data rows from the selection state
   const selectedRows = useMemo(() => {
@@ -190,6 +192,11 @@ export default function RadnikPodaciPage() {
           manualPagination
           rowCount={dummyData.length}
           emptyMessage="Nema rezultata"
+          topToolbar={(table) => (
+            <Button variant="secondary" disabled={!hasSelectedRows} icon={<IdentificationCardIcon size={16} />}>
+              Pregled
+            </Button>
+          )}
           tableOptions={{
             enableRowSelection: true,
             enableMultiRowSelection: false,
@@ -223,7 +230,7 @@ export default function RadnikPodaciPage() {
             <TabsContent className="flex-1 mt-0 overflow-hidden" value="porodica">
               <PorodicaRadnika />
             </TabsContent>
-            <TabsContent className="flex-1 mt-0 overflow-hidden" value="obrazovSanje">
+            <TabsContent className="flex-1 mt-0 overflow-hidden" value="obrazovanje">
               <ObrazovanjeRadnika />
             </TabsContent>
             <TabsContent className="flex-1 mt-0 overflow-hidden" value="vestine">

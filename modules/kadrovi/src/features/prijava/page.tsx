@@ -10,6 +10,7 @@ import { OsnovniPodaciCard } from "./components/OsnovniPodaciCard";
 import { OpstiPodaciCard } from "./components/OpstiPodaciCard";
 import { MestoBoravkaCard } from "./components/MestoBoravkaCard";
 import { RasporedjenCard } from "./components/RasporedjenCard";
+import { useGetRadnici } from "./api/prijava.query";
 
 type EmployeeRegistrationProps = {
   onBack?: () => void;
@@ -23,6 +24,7 @@ export default function PrijavaPage({ onBack }: EmployeeRegistrationProps) {
       datum: new Date(),
     },
   });
+  const { data: radnici } = useGetRadnici({});
   
   const onSubmit = (data: Radnik) => {
     console.log("Radnik submit:", data);
@@ -32,8 +34,6 @@ export default function PrijavaPage({ onBack }: EmployeeRegistrationProps) {
     <FormProvider {...methods}>
       <PageWithHeader
         title="Prijava / Odjava Radnika"
-        subtitle="Unos novog zaposlenog"
-        backAction={onBack}
         actions={
           <>
             <Button variant="secondary" icon={<XIcon size={16} />}>

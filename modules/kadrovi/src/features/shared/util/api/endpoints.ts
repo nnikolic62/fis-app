@@ -6,4 +6,4 @@ export const API_ENDPOINTS = {
         update: '/radnik/:id',
         delete: '/radnik/:id',
     }
-}
+} as const;

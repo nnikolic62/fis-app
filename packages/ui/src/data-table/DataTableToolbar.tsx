@@ -10,15 +10,18 @@ export function DataTableToolbar<TData>({ children, table }: DataTableToolbarPro
 
   return (
     <div className="table-toolbar">
-      <div className="table-toolbar-left">
-        {selectedRows.length > 0 && (
+      {/* {selectedRows.length > 0 && (
+        <div className="table-toolbar-left">
           <div className="selection-info">
             {selectedRows.length} row(s) selected
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
-      <div className="table-toolbar-right">
+      <div className={`table-toolbar-${selectedRows.length > 0 ? 'right' : 'left'}`}>
+        {children}
+      </div> */}
+      <div className={`table-toolbar-left`}>
         {children}
       </div>
     </div>
