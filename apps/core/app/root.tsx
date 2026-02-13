@@ -20,6 +20,8 @@ initApiClient(import.meta.env.VITE_API_URL);
 
 initI18n(LANGUAGES.SR_LATN);
 
+setTokenProvider(() => localStorage.getItem("token"));
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang={LANGUAGES.SR_LATN}>

@@ -6,7 +6,8 @@ export const loginSchema = z.object({
 });
 
 export const authResponseSchema = z.object({
-  token: z.string(),
+  access_token: z.string(),
+  refresh_token: z.string(),
   user: z.object({
     id: z.number(),
     username: z.string(),

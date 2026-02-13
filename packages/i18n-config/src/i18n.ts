@@ -42,6 +42,7 @@ export function initI18n(defaultLanguage: Language = LANGUAGES.SR_LATN) {
     .use(initReactI18next)
     .init({
       resources,
+      supportedLngs: Object.values(LANGUAGES),
       fallbackLng: defaultLanguage,
       defaultNS: DEFAULT_NS,
       ns: [DEFAULT_NS],

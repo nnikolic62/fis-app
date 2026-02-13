@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowRightIcon, EnvelopeSimpleIcon, LockIcon, ShieldCheckIcon } from "@phosphor-icons/react";
 import { useNavigate } from "react-router";
 import { useLogin } from "~/auth/auth.query";
+import { setTokenProvider } from "@repo/api-client";
 
 const LoginInput = ({ label, placeholder, type = "text", icon, value, onChange }: { label: string; placeholder: string; type?: string; icon: React.ReactNode; value: string; onChange: (val: string) => void }) => (
   <div className="space-y-1.5">
@@ -28,7 +29,7 @@ export default function LoginPage() {
 
   const login = useLogin({
     onSuccess: (response) => {
-      localStorage.setItem('token', response.token);
+      localStorage.setItem('token', response.access_token);
       navigate("/kadrovi");
     },
   });

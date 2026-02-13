@@ -1,23 +1,34 @@
 import { z } from "zod";
-import { notRequiredString, requiredString } from "./keRadnik";
-import { KADROVI_NS } from "../../../config/i18n";
-import { i18n } from "@repo/i18n-config";
 
+export const keKategorijaSchema = z.object({
+  katbr: z.string(),
+  katnaz: z.string(),
 
+  plata: z.string(),
+  zavod: z.string(),
 
+  dodDaniOdmora: z
+    .number()
+    .min(0)
+    .max(365),
 
-export const keOpstinaSchema = z.object({
-  opsbr: requiredString(5),
-  opsnaz: requiredString(25),
+  procInv: z
+    .number()
+    .min(0)
+    .max(100),
 
-  ptt: notRequiredString(5),
-  sdkBroj: notRequiredString(10),
-  sdkSifra: notRequiredString(5),
-  idPodrucneJedinice: notRequiredString(5),
-  pioFilijalaRef: notRequiredString(5),
-  idRegiona: z.number().int(i18n.t(`${KADROVI_NS}:errors.ogranicenjeCeoBroj`)).min(0).max(99).optional(),
-  teritorijaGrada: notRequiredString(5),
-  staraOpsbr: notRequiredString(5),
+  invalid: z.string(),
+  procenatZaPripravnike: z
+    .number()
+    .min(0)
+    .max(100)
+    .optional(),
+
+  vrstaMinulogRada: z.string(),
+  ulaziUStaz: z.string(),
+  nemaZasnovanRadniOdnos: z.string(),
+  neUlaziUProsekZaPorodilje: z.string(),
+  jeInvalidZaPppPd: z.string(),
 });
 
-export type KeOpstina = z.infer<typeof keOpstinaSchema>;
+export type KeKategorija = z.infer<typeof keKategorijaSchema>;

@@ -7,13 +7,13 @@ import { SuitcaseIcon, MagnifyingGlassIcon } from "@phosphor-icons/react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Radnik } from "../../shared/schemas/keRadnik";
 import { FormDatePicker } from "@repo/ui/formComponents/formDatePicker";
-import { SelectPopup, SelectPopupItem } from "@repo/ui/SelectPopup";
+import { SelectDialog, SelectDialogItem } from "@repo/ui/SelectDialog";
 import { useState } from "react";
 import { useTranslation } from "@repo/i18n-config";
 import { KADROVI_NS } from "../../../config/i18n";
 
 // Mock podaci za obracunske jedinice
-const mockObrJedinice: SelectPopupItem[] = [
+const mockObrJedinice: SelectDialogItem[] = [
   { sifra: "001", naziv: "Centrala" },
   { sifra: "002", naziv: "Pogon 1" },
   { sifra: "003", naziv: "Pogon 2" },
@@ -22,7 +22,7 @@ const mockObrJedinice: SelectPopupItem[] = [
 ];
 
 // Mock podaci za organizacione jedinice radnika
-const mockOJRadnika: SelectPopupItem[] = [
+const mockOJRadnika: SelectDialogItem[] = [
   { sifra: "01", naziv: "Direkcija" },
   { sifra: "02", naziv: "Sektor administracije" },
   { sifra: "03", naziv: "Sektor razvoja" },
@@ -39,12 +39,12 @@ export function RasporedjenCard() {
   const [obrJedinicaNaziv, setObrJedinicaNaziv] = useState("");
   const [ojRadnikaNaziv, setOjRadnikaNaziv] = useState("");
 
-  const handleObrJedinicaSelect = (item: SelectPopupItem) => {
+  const handleObrJedinicaSelect = (item: SelectDialogItem) => {
     setValue("obrJedinica", item.sifra);
     setObrJedinicaNaziv(item.naziv);
   };
 
-  const handleOJRadnikaSelect = (item: SelectPopupItem) => {
+  const handleOJRadnikaSelect = (item: SelectDialogItem) => {
     setValue("organizacionaJedinica", item.sifra);
     setOjRadnikaNaziv(item.naziv);
   };
@@ -316,7 +316,7 @@ export function RasporedjenCard() {
       </div>
     </Card>
 
-    <SelectPopup
+    {/* <SelectDialog
       isOpen={isObrJedinicaPopupOpen}
       onClose={() => setIsObrJedinicaPopupOpen(false)}
       items={mockObrJedinice}
@@ -325,14 +325,14 @@ export function RasporedjenCard() {
       searchPlaceholder={t("prijava.rasporedjenje.selectPopups.obrJedinica.searchPlaceholder")}
     />
 
-    <SelectPopup
+    <SelectDialog
       isOpen={isOJRadnikaPopupOpen}
       onClose={() => setIsOJRadnikaPopupOpen(false)}
       items={mockOJRadnika}
       onSelect={handleOJRadnikaSelect}
       title={t("prijava.rasporedjenje.selectPopups.oj.title")}
       searchPlaceholder={t("prijava.rasporedjenje.selectPopups.oj.searchPlaceholder")}
-    />
+    /> */}
     </>
   );
 }

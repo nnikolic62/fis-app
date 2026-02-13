@@ -6,13 +6,13 @@ import { FormLabel } from "@repo/ui/formComponents/FormLabel";
 import { MapPinIcon, MagnifyingGlassIcon } from "@phosphor-icons/react";
 import { useFormContext } from "react-hook-form";
 import { Radnik } from "../../shared/schemas/keRadnik";
-import { SelectPopup, SelectPopupItem } from "@repo/ui/SelectPopup";
+import { SelectDialog, SelectDialogItem } from "@repo/ui/SelectDialog";
 import { useState } from "react";
 import { useTranslation } from "@repo/i18n-config";
 import { KADROVI_NS } from "../../../config/i18n";
 
 // Mock podaci za opstine
-const mockOpstine: SelectPopupItem[] = [
+const mockOpstine: SelectDialogItem[] = [
   { sifra: "001", naziv: "Beograd" },
   { sifra: "002", naziv: "Novi Sad" },
   { sifra: "003", naziv: "Niš" },
@@ -26,7 +26,7 @@ const mockOpstine: SelectPopupItem[] = [
 ];
 
 // Mock podaci za MZ
-const mockMZ: SelectPopupItem[] = [
+const mockMZ: SelectDialogItem[] = [
   { sifra: "01", naziv: "Centar" },
   { sifra: "02", naziv: "Karaburma" },
   { sifra: "03", naziv: "Voždovac" },
@@ -43,12 +43,12 @@ export function MestoBoravkaCard() {
   const [opstinaNaziv, setOpstinaNaziv] = useState("");
   const [mzNaziv, setMzNaziv] = useState("");
 
-  const handleOpstinaSelect = (item: SelectPopupItem) => {
+  const handleOpstinaSelect = (item: SelectDialogItem) => {
     setValue("opsbr", item.sifra);
     setOpstinaNaziv(item.naziv);
   };
 
-  const handleMZSelect = (item: SelectPopupItem) => {
+  const handleMZSelect = (item: SelectDialogItem) => {
     setValue("mzbr", item.sifra);
     setMzNaziv(item.naziv);
   };
@@ -178,7 +178,7 @@ export function MestoBoravkaCard() {
       </div>
     </Card>
 
-    <SelectPopup
+    {/* <SelectDialog
       isOpen={isOpstinaPopupOpen}
       onClose={() => setIsOpstinaPopupOpen(false)}
       items={mockOpstine}
@@ -187,14 +187,14 @@ export function MestoBoravkaCard() {
       searchPlaceholder={t("prijava.mestoBoravka.selectPopups.opstina.searchPlaceholder")}
     />
 
-    <SelectPopup
+    <SelectDialog
       isOpen={isMZPopupOpen}
       onClose={() => setIsMZPopupOpen(false)}
       items={mockMZ}
       onSelect={handleMZSelect}
       title={t("prijava.mestoBoravka.selectPopups.mz.title")}
       searchPlaceholder={t("prijava.mestoBoravka.selectPopups.mz.searchPlaceholder")}
-    />
+    /> */}
     </>
   );
 }

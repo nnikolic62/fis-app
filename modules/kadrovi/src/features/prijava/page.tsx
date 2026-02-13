@@ -29,12 +29,6 @@ export default function PrijavaPage({ onBack }: EmployeeRegistrationProps) {
     },
   });
 
-  const { data: vera } = useGetVera();
-
-  useEffect(() => {
-    console.log(vera);
-  }, [vera]);
-
   const onSubmit = (data: Radnik) => {
     console.log("Radnik submit:", data);
   };

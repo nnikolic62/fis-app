@@ -143,6 +143,8 @@
       "status": "Статус",
       "kategorija": "Категорија",
       "selectPopups": {
+        "naziv": "Назив",
+        "sifra": "Шифра",
         "opstinaRodjenja": {
           "title": "Избор општине рођења",
           "searchPlaceholder": "Претражи општине..."
@@ -153,7 +155,9 @@
         },
         "verskiPraznik": {
           "title": "Избор верског празника",
-          "searchPlaceholder": "Претражи верске празнике..."
+          "searchPlaceholder": "Претражи верске празнике...",
+          "nazivSlave": "Назив славе",
+          "datumSlave": "Датум славе"
         },
         "kategorija": {
           "title": "Избор категорије",
